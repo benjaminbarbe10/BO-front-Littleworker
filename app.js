@@ -2,41 +2,38 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
-
+//MongoDB
+const mongoose = require('mongoose');
+//DB connection 
+mongoose.connect('mongodb://localhost:27017/express-restful');
+//load all files in model
+const fs = require('fs');
+fs.readdirSync(__dirname + '/models').forEach(function (filename) {
+   if (~filename.indexOf('js')) require(__dirname + '/models/' + filename) 
+});
 //return piece of middleware
 app.use(express.json());
 
-const adverts = [
-    { id: 1, name: 'advert1' },
-    { id: 2, name: 'advert2' },
-    { id: 3, name: 'advert3' },
-];
 
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
 app.get('/api/adverts', (req, res) => {
-    res.send(adverts);
+    mongoose.model('adverts').find((err, adverts) => {
+        res.send(adverts)
+    });
 });
 
 //Manually asign ID because not Working with a Database
-app.post('/api/adverts', (req,res) => {
+app.post('/api/adverts', (req, res) => {
 
-    const result = validateAvert(req.body);
-
-    if(result.error) {
-        // 400 Bad Request
-        res.status(400).send(result.error.details[0].message);
-        return;
-    }
+    const { error } = validateAvert(req.body);
+    if (error) return res.status(400).send(result.error.details[0].message);
 
     const advert = {
-        id: adverts.length +1,
         name: req.body.name,
     }
-    adverts.push(advert);
-    res.send(advert);
 });
 
 //modif if not exist return 404 
@@ -44,29 +41,47 @@ app.post('/api/adverts', (req,res) => {
 app.put('/api/adverts/:id', (req, res) => {
     //exist else 404
     const advert = adverts.find(c => c.id === parseInt(req.params.id));
-    if (!advert) res.status(404).send('Not found');
+    if (!advert) return res.status(404).send('Not found');
+    //if not return, the code bellow will be executed
+    //same to do res.status(404).send('Not found'); NEWLINE return;
+
+
 
     //validation else 400
 
-    const {error} = validateAvert(req.body); //result.error
+    const { error } = validateAvert(req.body); //result.error
 
-    if (error) {
-        // 400 Bad Request
-        res.status(400).send(error.details[0].message);
-        return;
-    }
+    // 400 Bad Request
+    if (error) return res.status(400).send(error.details[0].message);
 
-    //update
+
+
+    //update 
     advert.name = req.body.name;
     //return the course
     res.send(advert);
 });
 
 app.get('/api/adverts/:id', (req, res) => {
-    const advert = adverts.find(c => c.id === parseInt(req.params.id));
-    if (!advert) res.status(404).send('Not found');
+
+    mongoose.model('adverts').findById(req.params.id, (err, advert) => {
+        if (!advert) return res.status(404).send('Not found');
+        res.send(advert)
+
+    });
+});
+
+app.delete('/api/adverts/:id', (req, res) => {
+    if (!advert) return res.status(404).send('Not found');
+
+    //delete
+    const index = adverts.indexOf(advert);
+    adverts.splice(index, 1);
+
     res.send(advert);
 });
+
+
 
 
 function validateAvert(advert) {
