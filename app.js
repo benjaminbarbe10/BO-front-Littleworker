@@ -17,16 +17,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/adverts', (req, res) => {
-    res.send([1, 2, 3]);
+    res.send(adverts);
 });
 
 //Manually asign ID because not Working with a Database
 app.post('/api/adverts', (req,res) => {
-    const schema ={
-        name: Joi.string().min(3).required()
-    };
 
-    const result = Joi.validate(req.body, schema);
+    const result = validateAvert(req.body);
 
     if(result.error) {
         // 400 Bad Request
@@ -42,13 +39,46 @@ app.post('/api/adverts', (req,res) => {
     res.send(advert);
 });
 
+//modif if not exist return 404 
+//if invalid validate return 400
+app.put('/api/adverts/:id', (req, res) => {
+    //exist else 404
+    const advert = adverts.find(c => c.id === parseInt(req.params.id));
+    if (!advert) res.status(404).send('Not found');
 
+    //validation else 400
+
+    const {error} = validateAvert(req.body); //result.error
+
+    if (error) {
+        // 400 Bad Request
+        res.status(400).send(error.details[0].message);
+        return;
+    }
+
+    //update
+    advert.name = req.body.name;
+    //return the course
+    res.send(advert);
+});
 
 app.get('/api/adverts/:id', (req, res) => {
     const advert = adverts.find(c => c.id === parseInt(req.params.id));
     if (!advert) res.status(404).send('Not found');
     res.send(advert);
 });
+
+
+function validateAvert(advert) {
+    const schema = {
+        name: Joi.string().min(3).required()
+    };
+
+    return Joi.validate(advert, schema);
+
+}
+
+
 
 // PORT | export PORT=portNumber
 const port = process.env.PORT || 3000;
