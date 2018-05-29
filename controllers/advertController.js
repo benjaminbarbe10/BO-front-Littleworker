@@ -53,7 +53,8 @@ exports.update = (req,res) => {
 
 function validateAvert(advert) {
     const schema = {
-        name: Joi.string().min(3).required()
+        name: Joi.string().min(3).required(),
+        surname: Joi.string().min(3).required(),
     };
 
     return Joi.validate(advert, schema);

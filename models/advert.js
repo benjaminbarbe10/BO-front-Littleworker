@@ -10,6 +10,10 @@ const AdvertSchema = new Schema({
         type: String,
         required: [true, 'name field is required']
     },
+    surname: {
+        type: String,
+        required: [true, 'surname field is required']
+    },
 },{
        versionKey: false,
 });
