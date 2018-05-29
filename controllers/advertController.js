@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 //
 
 exports.list = (req, res) => {
-    mongoose.model('advert').find((err, adverts) => {
+    Advert.find((err, adverts) => {
         res.send(adverts)
     });
 };
@@ -21,7 +21,7 @@ exports.post = (req, res) => {
 };
 
 exports.show = (req,res) => {
-    mongoose.model('advert').findById(req.params.id, (err, advert) => {
+    Advert.findById(req.params.id, (err, advert) => {
         if (!advert) return res.status(404).send('Not found');
         res.send(advert)
     });
@@ -29,20 +29,21 @@ exports.show = (req,res) => {
 
 exports.delete = (req,res) => {
     
-    mongoose.model('advert').findByIdAndRemove(req.params.id, (err, advert) => {
+    Advert.findByIdAndRemove(req.params.id, (err, advert) => {
         if (!advert) return res.status(404).send('Not found');
         res.send('Has been deleted');
     });
 }
 
 exports.update = (req,res) => {
-    mongoose.model('advert').findByIdAndUpdate(req.params.id,
-        {
-            name: req.body.name,
-        },
-         (err, advert) => {
+    Advert.findByIdAndUpdate(req.params.id, req.body , (err, advert) => {
         if (!advert) return res.status(404).send('Not found');
-        res.send(advert);
+        Advert.findOne({
+            _id: req.params.id,
+        }).then ( (advert) => {
+                    res.send(advert);
+
+        });
     });
 }
    
