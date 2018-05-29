@@ -31,8 +31,18 @@ exports.delete = (req,res) => {
     
     mongoose.model('advert').findByIdAndRemove(req.params.id, (err, advert) => {
         if (!advert) return res.status(404).send('Not found');
-        req.method = 'GET';
         res.send('Has been deleted');
+    });
+}
+
+exports.update = (req,res) => {
+    mongoose.model('advert').findByIdAndUpdate(req.params.id,
+        {
+            name: req.body.name,
+        },
+         (err, advert) => {
+        if (!advert) return res.status(404).send('Not found');
+        res.send(advert);
     });
 }
    

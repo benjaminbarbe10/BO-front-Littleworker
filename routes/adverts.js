@@ -15,4 +15,6 @@ router.get('/:id', advert_controller.show);
 
 router.delete('/:id', advert_controller.delete);
 
+router.put('/:id', advert_controller.update);
+
 module.exports = router;
