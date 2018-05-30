@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 exports.list = (req, res) => {
     Advert.find((err, adverts) => {
-        res.send(adverts)
+        res.json(adverts);
     });
 };
 
