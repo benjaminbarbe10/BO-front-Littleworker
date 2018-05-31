@@ -3,6 +3,5 @@
 //
 
 exports.home = (req, res) => {
-    res.send("HOMEPAGE");
-}
-    
+  res.send("HOMEPAGE");
+};
