@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 
 exports.list = (req, res) => {
   Advert.find((err, adverts) => {
-    if(err) res.send({ message: 'internal server error'})
+    if (err) res.send({ message: "internal server error" });
     res.json(adverts);
   });
 };
@@ -24,7 +24,7 @@ exports.post = (req, res) => {
 exports.show = (req, res) => {
   Advert.findById(req.params.id, (err, advert) => {
     if (!advert) return res.status(404).send("Not found");
-    res.send(advert);
+    res.json(advert);
   });
 };
 
