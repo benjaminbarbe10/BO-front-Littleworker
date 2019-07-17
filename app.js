@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const expressJWT = require('express-jwt');
 
 //AUTH
 const jwt = require('jsonwebtoken');
@@ -9,9 +10,9 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
 app.use(bodyParser.json());
-app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/auth']}));
+//app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/auth']}));
 
-var USERS = [
+const USERS = [
     { 'id': 1, 'username': 'jemma' },
     { 'id': 2, 'username': 'paul' },
     { 'id': 3, 'username': 'sebastian' },
@@ -31,6 +32,7 @@ mongoose.Promise = global.Promise;
 const adverts = require("./routes/adverts");
 const landings = require("./routes/landings");
 const shapers = require("./routes/shapers");
+const projects = require("./routes/projects");
 
 const home = require("./routes/index");
 app.use(bodyParser.json());
@@ -54,6 +56,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+    }
+});
 app.post('/auth', function(req, res) {
     const body = req.body;
 
@@ -63,11 +74,15 @@ app.post('/auth', function(req, res) {
     var token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
     res.send({token});
 });
+
+app.route('/project').post((req, res) => {
+    res.send(201, req.body)
+});
 app.use("/adverts", adverts);
+app.use("/projects", projects);
 app.use("/landings", landings);
 app.use("/shapers", shapers);
 app.use("/", home);
-
 //
 // ─── SERVER ─────────────────────────────────────────────────────────────────────
 //
