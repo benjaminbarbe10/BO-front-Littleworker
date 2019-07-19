@@ -3,14 +3,29 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const expressJWT = require('express-jwt');
+const path = require('path');
 
 //AUTH
 const jwt = require('jsonwebtoken');
 
 const expressJwt = require('express-jwt');
+const multer = require('multer');
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 //app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/auth']}));
+const DIR = './uploads';
+
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, DIR);
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        cb(null, file.fieldname + '-' + file.originalname)
+    }
+});
+let upload = multer({storage: storage});
 
 const USERS = [
     { 'id': 1, 'username': 'jemma' },
@@ -35,7 +50,8 @@ const shapers = require("./routes/shapers");
 const projects = require("./routes/projects");
 
 const home = require("./routes/index");
-app.use(bodyParser.json());
+
+
 // Add headers
 app.use(function (req, res, next) {
 
@@ -83,6 +99,20 @@ app.use("/projects", projects);
 app.use("/landings", landings);
 app.use("/shapers", shapers);
 app.use("/", home);
+app.post('/upload',upload.single('photo'), function (req, res) {
+    if (!req.file) {
+        console.log("No file received");
+        return res.send({
+            success: false
+        });
+
+    } else {
+        console.log('file received');
+        return res.send({
+            success: true
+        })
+    }
+});
 //
 // ─── SERVER ─────────────────────────────────────────────────────────────────────
 //

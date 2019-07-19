@@ -54,7 +54,25 @@ function validateProject(project) {
   const schema = {
     name: Joi.string()
       .min(3)
-      .required()
+      .required(),
+    tags: Joi.required(),
+    htag: Joi.string()
+        .required(),
+    title: Joi.string()
+        .required(),
+    description: Joi.string()
+        .required(),
+    cities: Joi.string()
+        .required(),
+    surface: Joi.number()
+        .integer()
+        .required(),
+    duration: Joi.number()
+        .integer()
+        .required(),
+    budgect: Joi.string()
+        .required(),
+
   };
 
   return Joi.validate(project, schema);
