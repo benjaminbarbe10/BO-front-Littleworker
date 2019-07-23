@@ -21,7 +21,6 @@ let storage = multer.diskStorage({
         cb(null, DIR);
     },
     filename: (req, file, cb) => {
-        console.log(file);
         cb(null, file.fieldname + '-' + file.originalname)
     }
 });
@@ -29,7 +28,7 @@ let upload = multer({storage: storage});
 
 const USERS = [
     { 'id': 1, 'username': 'jemma' },
-    { 'id': 2, 'username': 'paul' },
+    { 'id': 2, 'username': 'littleworker' },
     { 'id': 3, 'username': 'sebastian' },
 ];
 
@@ -44,9 +43,10 @@ mongoose.Promise = global.Promise;
 // ─── ROUTES ─────────────────────────────────────────────────────────────────────
 //
 
-const adverts = require("./routes/adverts");
+const press = require("./routes/press");
 const landings = require("./routes/landings");
 const shapers = require("./routes/shapers");
+const lworker = require("./routes/lworkers");
 const projects = require("./routes/projects");
 
 const home = require("./routes/index");
@@ -85,7 +85,7 @@ app.post('/auth', function(req, res) {
     const body = req.body;
 
     const user = USERS.find(user => user.username == body.username);
-    if(!user || body.password != 'todo') return res.sendStatus(401);
+    if(!user || body.password != '9{bj3V)F,r~>uj{m') return res.sendStatus(401);
 
     var token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
     res.send({token});
@@ -94,12 +94,55 @@ app.post('/auth', function(req, res) {
 app.route('/project').post((req, res) => {
     res.send(201, req.body)
 });
-app.use("/adverts", adverts);
+app.use("/press", press);
 app.use("/projects", projects);
 app.use("/landings", landings);
+app.use("/lworkers", lworker);
 app.use("/shapers", shapers);
 app.use("/", home);
-app.post('/upload',upload.single('photo'), function (req, res) {
+app.post('/upload/press',upload.single('press'), function (req, res) {
+    if (!req.file) {
+        console.log("No file received");
+        return res.send({
+            success: false
+        });
+
+    } else {
+        console.log('file received');
+        return res.send({
+            success: true
+        })
+    }
+});
+app.post('/upload/projects',upload.single('project'), function (req, res) {
+    if (!req.file) {
+        console.log("No file received");
+        return res.send({
+            success: false
+        });
+
+    } else {
+        console.log('file received');
+        return res.send({
+            success: true
+        })
+    }
+});
+app.post('/upload/shapers',upload.single('shaper'), function (req, res) {
+    if (!req.file) {
+        console.log("No file received");
+        return res.send({
+            success: false
+        });
+
+    } else {
+        console.log('file received');
+        return res.send({
+            success: true
+        })
+    }
+});
+app.post('/upload/lworkers',upload.single('lworker'), function (req, res) {
     if (!req.file) {
         console.log("No file received");
         return res.send({

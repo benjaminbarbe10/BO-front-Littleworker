@@ -55,9 +55,27 @@ function validateAvert(shaper) {
         name: Joi.string()
             .min(3)
             .required(),
+        tags: Joi.required(),
+        htag: Joi.string()
+            .required(),
         title: Joi.string()
-            .min(3)
-            .required()
+            .required(),
+        description: Joi.string()
+            .required(),
+        cities: Joi.string()
+            .required(),
+        experience: Joi.number()
+            .integer()
+            .required(),
+        since: Joi.number()
+            .integer()
+            .required(),
+        worksites: Joi.number()
+            .integer()
+            .required(),
+        images: Joi.required(),
+        projects: Joi.array(),
+        paragraph: Joi.any()
     };
 
     return Joi.validate(shaper, schema);

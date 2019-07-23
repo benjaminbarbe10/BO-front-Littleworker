@@ -72,6 +72,9 @@ function validateProject(project) {
         .required(),
     budgect: Joi.string()
         .required(),
+    images: Joi.required(),
+    projects: Joi.array(),
+    paragraph: Joi.any()
 
   };
 

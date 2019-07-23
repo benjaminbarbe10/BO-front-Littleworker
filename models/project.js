@@ -34,15 +34,15 @@ const ProjectSchema = new Schema(
         duration: {
             type: Number,
         },
-        text_area: {
+        projects: {
             type: Object,
         },
         images: {
             type: Object,
         },
-        projects: {
+        paragraph: {
             type: Object,
-        },
+        }
 
     },
     {
