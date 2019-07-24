@@ -13,6 +13,8 @@ const multer = require('multer');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(path.join(process.cwd(), 'public')));
+
 //app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/auth']}));
 const DIR = './uploads';
 
