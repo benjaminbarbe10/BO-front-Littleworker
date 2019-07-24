@@ -29,5 +29,5 @@ const PressSchema = new Schema(
   }
 );
 
-const Lworker = mongoose.model("lworker", PressSchema);
+const Lworker = mongoose.model("front_workers", PressSchema);
 module.exports = Lworker;

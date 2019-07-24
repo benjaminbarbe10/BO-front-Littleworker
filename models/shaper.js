@@ -50,5 +50,5 @@ const ShaperSchema = new Schema(
     }
 );
 
-const Shaper = mongoose.model("shaper", ShaperSchema);
+const Shaper = mongoose.model("front_shapers", ShaperSchema);
 module.exports = Shaper;

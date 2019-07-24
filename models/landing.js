@@ -21,5 +21,5 @@ const LandingSchema = new Schema(
     }
 );
 
-const Landing = mongoose.model("landing", LandingSchema);
+const Landing = mongoose.model("front_landings", LandingSchema);
 module.exports = Landing;

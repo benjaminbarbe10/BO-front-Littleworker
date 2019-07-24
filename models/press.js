@@ -23,5 +23,5 @@ const PressSchema = new Schema(
   }
 );
 
-const Press = mongoose.model("press", PressSchema);
+const Press = mongoose.model("front_press", PressSchema);
 module.exports = Press;
