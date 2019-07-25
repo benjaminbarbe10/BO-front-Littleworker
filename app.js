@@ -153,9 +153,6 @@ app.post('/upload/lworkers',upload.single('lworker'), function (req, res) {
     }
 });
 
-// Demo for templates rendering
-app.use('/:slug', projects.findBySlug);
-
 // 404 Handler
 app.use(function(req, res, next) {
     if (!req.path.match(/\.[a-z0-1]{3,5}$/)) {

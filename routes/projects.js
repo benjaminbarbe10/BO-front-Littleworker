@@ -17,4 +17,6 @@ router.delete("/:id", project_controller.delete);
 
 router.put("/:id", project_controller.update);
 
+router.get('/:slug', project_controller.findBySlug);
+
 module.exports = router;
