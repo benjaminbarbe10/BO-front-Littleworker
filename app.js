@@ -11,9 +11,11 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const multer = require('multer');
 
+const staticPath = path.join(process.cwd(), 'public');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.static(staticPath));
 
 //app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/auth']}));
 const DIR = './uploads';
@@ -74,15 +76,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-
-app.use(function (err, req, res, next) {
-    if (err.name === 'UnauthorizedError') {
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-    }
-});
 app.post('/auth', function(req, res) {
     const body = req.body;
 
@@ -156,6 +149,24 @@ app.post('/upload/lworkers',upload.single('lworker'), function (req, res) {
         return res.send({
             success: true
         })
+    }
+});
+
+// 404 Handler
+app.use(function(req, res, next) {
+    if (!req.path.match(/\.[a-z0-1]{3,5}$/)) {
+        return res.sendFile(path.join(staticPath, 'index.html'));
+    }
+    res.status(404).send('404 :(');
+});
+
+// Error handler : @ End
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
     }
 });
 //
