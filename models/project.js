@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
+
 const Schema = mongoose.Schema;
 
 //
@@ -12,7 +14,17 @@ const ProjectImage = new Schema({
 
 const ProjectSchema = new Schema(
     {
-        name: String,
+        name: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        slug: {
+            type: String,
+            required: true,
+            unique: true,
+            index: true
+        },
         tags: [ String ],
         htag: {
             type: String,
@@ -42,7 +54,14 @@ const ProjectSchema = new Schema(
     }
 );
 
-
+ProjectSchema.pre('save', function (next) {
+    this.slug = slugify(this.name, {
+        replacement: '-',
+        remove: /[$*_+~()'"!\-:@]/g,
+        lower: true
+    });
+    return next();
+});
 
 const Project = mongoose.model("front_projects", ProjectSchema);
 module.exports = Project;
