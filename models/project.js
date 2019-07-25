@@ -5,48 +5,40 @@ const Schema = mongoose.Schema;
 // ─── ADVERT_MODEL ────────────────────────────────────────────────────────────────
 //
 
+const ProjectImage = new Schema({
+    url: String,
+    alt: String,
+});
+
 const ProjectSchema = new Schema(
     {
-        name: {
-            type: String,
-        },
-        tags: {
-            type: Array,
-        },
+        name: String,
+        tags: [ String ],
         htag: {
             type: String,
+            index: true
         },
-        title: {
-            type: String,
-        },
-        description: {
-            type: String,
-        },
-        cities: {
-            type: String,
-        },
-        surface: {
-            type: Number,
-        },
-        budgect: {
-            type: String,
-        },
-        duration: {
-            type: Number,
-        },
+        title: String,
+        description: String,
+        cities: String,
+        surface: Number,
+        budgect: String,
+        duration: Number,
         projects: {
             type: Object,
         },
         images: {
-            type: Object,
+            primary_left: ProjectImage,
+            primary_right: ProjectImage,
+            main: ProjectImage,
+            secondary_left: ProjectImage,
+            secondary_right: ProjectImage
         },
         paragraph: {
-            type: Object,
+            title: String,
+            description: String
         }
 
-    },
-    {
-        versionKey: false
     }
 );
 

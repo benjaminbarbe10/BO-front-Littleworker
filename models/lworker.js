@@ -7,26 +7,18 @@ const Schema = mongoose.Schema;
 
 const PressSchema = new Schema(
     {
-        tags: {
-            type: Array,
-        },
+        tags: [ String ],
         name: {
             type: String,
+            required: true,
+            index: true
         },
-        surname: {
-            type: String,
-        },
-        position: {
-            type: String,
-        },
+        surname: String,
+        position: Number,
         image: {
             type: Object,
         }
-
-    },
-  {
-    versionKey: false
-  }
+    }
 );
 
 const Lworker = mongoose.model("front_workers", PressSchema);

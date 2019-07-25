@@ -7,20 +7,12 @@ const Schema = mongoose.Schema;
 
 const PressSchema = new Schema(
     {
-        tags: {
-            type: Array,
-        },
-        url: {
-            type: String,
-        },
+        tags: [ String ],
+        url: String,
         logo: {
             type: Object,
         }
-
-    },
-  {
-    versionKey: false
-  }
+    }
 );
 
 const Press = mongoose.model("front_press", PressSchema);
