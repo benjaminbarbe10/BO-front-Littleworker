@@ -1,0 +1,9 @@
+<link type="text/css" rel="stylesheet" href="/demo.css"/>
+
+<h1><%= project.name %></h1>
+
+<ul>
+<% project.tags.forEach((tag) => { %>
+    <li><%= tag %></li>
+<% }); %>
+</ul>

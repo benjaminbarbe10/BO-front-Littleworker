@@ -1,10 +1,25 @@
 const Joi = require("joi");
 const Project = require("../models/project");
-const mongoose = require("mongoose");
 
 //
 // ─── PROJECT_CONTROLLER ──────────────────────────────────────────────────────────
 //
+
+exports.findBySlug = (req, res, next) => {
+  return Project
+      .findOne({ slug: req.params.slug })
+      .exec((pErr, project) => {
+        if (pErr) {
+          return next(pErr); // 500
+        }
+
+        if (!project) {
+          return next(); // 404
+        }
+
+        return res.render('demo', { project: project });
+      });
+};
 
 exports.list = (req, res) => {
   Project.find((err, projects) => {
