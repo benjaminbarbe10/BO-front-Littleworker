@@ -35,8 +35,10 @@ exports.post = (req, res, next) => {
     err.statusCode = 400;
     return next(err);
   }
-  Project.create(req.body).then(function(project) {
-    res.send(project);
+  const nProject = new Project(req.body);
+  return nProject.save(function(err) {
+    if (err) return next(err);
+    res.send(nProject);
   });
 };
 
