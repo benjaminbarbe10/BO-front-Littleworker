@@ -16,6 +16,8 @@ const staticPath = path.join(process.cwd(), 'public');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(staticPath));
+
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/templates'));
 
 //app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/auth']}));
@@ -128,6 +130,7 @@ app.use(function (err, req, res, next) {
             message: 'No token provided.'
         });
     }
+    return res.status(500).send(JSON.stringify(err));
 });
 //
 // ─── SERVER ─────────────────────────────────────────────────────────────────────

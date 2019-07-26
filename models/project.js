@@ -67,7 +67,6 @@ const ProjectSchema = new Schema(
             title: String,
             description: String
         }
-
     }
 );
 
