@@ -51,7 +51,6 @@ const ProjectSchema = new Schema({
 });
 
 ProjectSchema.pre('save', function (next) {
-    console.log('presave');
     this.slug = slugify(this.name, {
         replacement: '-',
         remove: /[$*_+~()'"!\-:@]/g,

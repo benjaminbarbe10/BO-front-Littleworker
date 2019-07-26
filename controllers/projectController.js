@@ -15,12 +15,10 @@ exports.findBySlug = (req, res, next) => {
       });
 };
 
-exports.list = (req, res) => {
-  Project.find((err, projects) => {
-    if (err) return next(new Error('internal server error'));
-    res.json(projects);
-  });
-};
+exports.list = (req, res) => Project.find((err, projects) => {
+    if (err) return next(err);
+    return res.json(projects);
+});
 
 exports.post = (req, res, next) => {
   const nProject = new Project(req.body);
