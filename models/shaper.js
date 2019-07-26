@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 const Schema = mongoose.Schema;
 
 //
@@ -14,6 +15,11 @@ const ShaperSchema = new Schema(
         name: {
             type: String,
             required: true
+        },
+        slug: {
+            type: String,
+            unique: true,
+            index: true
         },
         tags: {
             type: Array,
@@ -42,7 +48,7 @@ const ShaperSchema = new Schema(
             type: Number,
             required: true
         },
-        worsites: {
+        worksites: {
             type: Number,
             required: true
         },
@@ -63,6 +69,15 @@ const ShaperSchema = new Schema(
 
     }
 );
+
+ShaperSchema.pre('save', function (next) {
+    this.slug = slugify(this.name, {
+        replacement: '-',
+        remove: /[$*_+~()'"!\-:@]/g,
+        lower: true
+    });
+    return next();
+});
 
 const Shaper = mongoose.model("front_shapers", ShaperSchema);
 module.exports = Shaper;

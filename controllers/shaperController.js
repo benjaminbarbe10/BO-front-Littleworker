@@ -6,42 +6,50 @@ const mongoose = require("mongoose");
 // ─── SHAPER_CONTROLLER ──────────────────────────────────────────────────────────
 //
 
-exports.list = (req, res) => {
-    Shaper.find((err, shapers) => {
-        if (err) res.send({ message: "internal server error" });
-        res.json(shapers);
-    });
+exports.findBySlug = (req, res, next) => {
+    return Shaper
+        .findOne({ slug: req.params.slug })
+        .exec((pErr, shaper) => {
+            if (pErr) return next(pErr);
+            if (!shaper) return next();
+
+            return res.render('../templates/shaper.ejs', { shaper: shaper });
+        });
 };
 
+exports.list = (req, res) => Shaper.find((err, shapers) => {
+    if (err) return next(err);
+    return res.render('../templates/shapers.ejs', { shapers: shapers });
+});
+
 exports.post = (req, res) => {
-    const { error } = validateAvert(req.body);
+    const { error } = new Shaper(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     Shaper.create(req.body).then(function(shaper) {
         res.send(shaper);
     });
 };
 
-exports.show = (req, res) => {
+exports.show = (req, res, next) => {
     Shaper.findById(req.params.id, (err, shaper) => {
-        if (!shaper) return res.status(404).send("Not found");
+        if (!shaper) return next();
         res.json(shaper);
     });
 };
 
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
     Shaper.findByIdAndRemove(req.params.id, (err, shaper) => {
-        if (!shaper) return res.status(404).send("Not found");
+        if (!shaper) return next();
         res.send("Has been deleted");
     });
 };
 
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
     Shaper.findByIdAndUpdate(req.params.id, req.body, (err, shaper) => {
-        if (!shaper) return res.status(404).send("Not found");
-        shaper.findOne({
-            _id: req.params.id
-        }).then(shaper => {
-            res.send(shaper);
+        if (!shaper) return next();
+        return Shaper.findById(req.params.id,(err, shaper) => {
+            if (err) return next(err);
+            return res.send(shaper);
         });
     });
 };
@@ -49,34 +57,3 @@ exports.update = (req, res) => {
 //
 // ─── FUNCTIONS ──────────────────────────────────────────────────────────────────
 //
-
-function validateAvert(shaper) {
-    const schema = {
-        name: Joi.string()
-            .min(3)
-            .required(),
-        tags: Joi.required(),
-        htag: Joi.string()
-            .required(),
-        title: Joi.string()
-            .required(),
-        description: Joi.string()
-            .required(),
-        cities: Joi.string()
-            .required(),
-        experience: Joi.number()
-            .integer()
-            .required(),
-        since: Joi.number()
-            .integer()
-            .required(),
-        worksites: Joi.number()
-            .integer()
-            .required(),
-        images: Joi.required(),
-        projects: Joi.array(),
-        paragraph: Joi.any()
-    };
-
-    return Joi.validate(shaper, schema);
-}

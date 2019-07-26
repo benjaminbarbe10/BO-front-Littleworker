@@ -16,25 +16,20 @@ exports.findBySlug = (req, res, next) => {
 };
 
 exports.list = (req, res) => Project.find((err, projects) => {
-    if (err) return next(err);
-    return res.render('../templates/projects.ejs', { projects: projects });
+  if (err) return next(err);
+  return res.render('../templates/projects.ejs', { projects: projects });
 });
 
-exports.post = (req, res, next) => {
-  const nProject = new Project(req.body);
-  return nProject.save(function(err) {
-    if (err) {
-      if (err.name === 'ValidationError') {
-        const vError = new Error('There is some issues with your data!');
-        vError.status = 400;
-        const simplifiedErrors = Object.entries(err.errors)
-            .map(curError => ({ on: curError[0], error: curError[1].message }));
-        vError.message = { title: vError.message, errors: simplifiedErrors };
-        return next(vError);
-      }
-      return next(err);
-    }
-    return res.send(nProject);
+exports.jsonlist = (req, res) => Project.find((err, projects) => {
+    if (err) return next(err);
+    return res.json(projects);
+});
+
+exports.post = (req, res) => {
+  const { error } = new Project(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  Project.create(req.body).then(function(project) {
+    res.send(project);
   });
 };
 

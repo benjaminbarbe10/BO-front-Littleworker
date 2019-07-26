@@ -1,16 +1,22 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const slugify = require("slugify");
 
 //
 // ─── ADVERT_MODEL ────────────────────────────────────────────────────────────────
 //
 
-const PressSchema = new Schema(
+const LworkerSchema = new Schema(
     {
         tags: [ String ],
         name: {
             type: String,
             required: true,
+            index: true
+        },
+        slug: {
+            type: String,
+            unique: true,
             index: true
         },
         surname: {
@@ -29,5 +35,14 @@ const PressSchema = new Schema(
     }
 );
 
-const Lworker = mongoose.model("front_workers", PressSchema);
+LworkerSchema.pre('save', function (next) {
+    this.slug = slugify(this.name + ' ' + this.surname, {
+        replacement: '-',
+        remove: /[$*_+~()'"!\-:@]/g,
+        lower: true
+    });
+    return next();
+});
+
+const Lworker = mongoose.model("front_workers", LworkerSchema);
 module.exports = Lworker;

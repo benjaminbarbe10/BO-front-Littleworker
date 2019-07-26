@@ -1,0 +1,7 @@
+<link type="text/css" rel="stylesheet" href="/style.css"/>
+<%- include header/main_nav %>
+<ul>
+    <% shapers.forEach((shaper) => { %>
+        <li><%= shaper.name %></li>
+    <% }); %>
+</ul>

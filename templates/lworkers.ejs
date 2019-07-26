@@ -1,0 +1,7 @@
+<link type="text/css" rel="stylesheet" href="/style.css"/>
+<%- include header/main_nav %>
+<ul>
+    <% lworkers.forEach((lworker) => { %>
+        <li><%= lworker.name %></li>
+    <% }); %>
+</ul>

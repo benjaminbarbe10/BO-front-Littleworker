@@ -17,4 +17,6 @@ router.delete("/:id", lworker_controller.delete);
 
 router.put("/:id", lworker_controller.update);
 
+router.get('/:slug', lworker_controller.findBySlug);
+
 module.exports = router;

@@ -17,4 +17,6 @@ router.delete("/:id", shaper_controller.delete);
 
 router.put("/:id", shaper_controller.update);
 
+router.get('/:slug', shaper_controller.findBySlug);
+
 module.exports = router;

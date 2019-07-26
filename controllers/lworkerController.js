@@ -1,47 +1,53 @@
-const Joi = require("joi");
 const Lworker = require("../models/lworker");
-const mongoose = require("mongoose");
 
 //
 // ─── LWORKER_CONTROLLER ──────────────────────────────────────────────────────────
 //
 
-exports.list = (req, res) => {
-  Lworker.find((err, lworker) => {
-    if (err) res.send({ message: "internal server error" });
-    res.json(lworker);
-  });
+exports.findBySlug = (req, res, next) => {
+  return Lworker
+      .findOne({ slug: req.params.slug })
+      .exec((pErr, lworker) => {
+        if (pErr) return next(pErr);
+        if (!lworker) return next();
+
+        return res.render('../templates/lworker.ejs', { lworker: lworker });
+      });
 };
 
+exports.list = (req, res) => Lworker.find((err, lworkers) => {
+  if (err) return next(err);
+  return res.render('../templates/lworkers.ejs', { lworkers: lworkers });
+});
+
 exports.post = (req, res) => {
-  const { error } = validateLworker(req.body);
+  const { error } = new Lworker(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   Lworker.create(req.body).then(function(lworker) {
     res.send(lworker);
   });
 };
 
-exports.show = (req, res) => {
+exports.show = (req, res, next) => {
   Lworker.findById(req.params.id, (err, lworker) => {
-    if (!lworker) return res.status(404).send("Not found");
+    if (!lworker) return next();
     res.json(lworker);
   });
 };
 
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
   Lworker.findByIdAndRemove(req.params.id, (err, lworker) => {
-    if (!lworker) return res.status(404).send("Not found");
+    if (!lworker) return next();
     res.send("Has been deleted");
   });
 };
 
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   Lworker.findByIdAndUpdate(req.params.id, req.body, (err, lworker) => {
-    if (!lworker) return res.status(404).send("Not found");
-    Lworker.findOne({
-      _id: req.params.id
-    }).then(lworker => {
-      res.send(lworker);
+    if (!lworker) return next();
+    return Lworker.findById(req.params.id,(err, lworker) => {
+      if (err) return next(err);
+      return res.send(lworker);
     });
   });
 };
@@ -49,18 +55,3 @@ exports.update = (req, res) => {
 //
 // ─── FUNCTIONS ──────────────────────────────────────────────────────────────────
 //
-
-function validateLworker(lworker) {
-  const schema = {
-    tags: Joi.required(),
-    name: Joi.string()
-        .required(),
-    surname: Joi.string()
-        .required(),
-    position: Joi.string()
-        .required(),
-    image: Joi.required()
-  };
-
-  return Joi.validate(lworker, schema);
-}
