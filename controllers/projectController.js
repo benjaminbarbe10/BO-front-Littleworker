@@ -17,7 +17,7 @@ exports.findBySlug = (req, res, next) => {
 
 exports.list = (req, res) => Project.find((err, projects) => {
     if (err) return next(err);
-    return res.json(projects);
+    return res.render('../templates/projects.ejs', { projects: projects });
 });
 
 exports.post = (req, res, next) => {

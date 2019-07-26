@@ -1,7 +1,4 @@
-const Joi = require("joi");
 const Press = require("../models/press");
-const mongoose = require("mongoose");
-
 //
 // ─── PRESS_CONTROLLER ──────────────────────────────────────────────────────────
 //
@@ -9,15 +6,25 @@ const mongoose = require("mongoose");
 exports.list = (req, res) => {
   Press.find((err, press) => {
     if (err) res.send({ message: "internal server error" });
-    res.json(press);
+    return res.render('../templates/press.ejs', { press: press });
   });
 };
 
-exports.post = (req, res) => {
-  const { error } = validatePress(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  Press.create(req.body).then(function(press) {
-    res.send(press);
+exports.post = (req, res, next) => {
+  const nPress = new Press(req.body);
+  return nPress.save(function(err) {
+    if (err) {
+      if (err.name === 'ValidationError') {
+        const vError = new Error('There is some issues with your data!');
+        vError.status = 400;
+        const simplifiedErrors = Object.entries(err.errors)
+            .map(curError => ({ on: curError[0], error: curError[1].message }));
+        vError.message = { title: vError.message, errors: simplifiedErrors };
+        return next(vError);
+      }
+      return next(err);
+    }
+    return res.send(nPress);
   });
 };
 
@@ -50,13 +57,3 @@ exports.update = (req, res) => {
 // ─── FUNCTIONS ──────────────────────────────────────────────────────────────────
 //
 
-function validatePress(press) {
-  const schema = {
-    tags: Joi.required(),
-    url: Joi.string()
-        .required(),
-    logo: Joi.required()
-  };
-
-  return Joi.validate(press, schema);
-}
