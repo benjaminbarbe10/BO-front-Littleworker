@@ -15,9 +15,6 @@ const LandingSchema = new Schema(
             type: String,
             required: [true, "surname field is required"]
         }
-    },
-    {
-        versionKey: false
     }
 );
 

@@ -11,7 +11,7 @@ exports.findBySlug = (req, res, next) => {
         if (pErr) return next(pErr);
         if (!project) return next();
 
-        return res.render('demo', { project: project });
+        return res.render('../templates/project.ejs', { project: project });
       });
 };
 

@@ -12,43 +12,63 @@ const ProjectImage = new Schema({
     alt: String,
 });
 
-const ProjectSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    slug: {
-        type: String,
-        unique: true,
-        index: true
-    },
-    tags: [ String ],
-    htag: {
-        type: String,
-        index: true
-    },
-    title: String,
-    description: String,
-    cities: String,
-    surface: Number,
-    budgect: String,
-    duration: Number,
-    projects: {
-        type: Object,
-    },
-    images: {
-        primary_left: ProjectImage,
-        primary_right: ProjectImage,
-        main: ProjectImage,
-        secondary_left: ProjectImage,
-        secondary_right: ProjectImage
-    },
-    paragraph: {
-        title: String,
-        description: String
+const ProjectSchema = new Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        slug: {
+            type: String,
+            unique: true,
+            index: true
+        },
+        tags: [ String ],
+        htag: {
+            type: String,
+            index: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        cities: {
+            type: String,
+            required: true
+        },
+        surface: {
+            type: Number,
+            required: true
+        },
+        budgect: {
+            type: String,
+            required: true
+        },
+        duration: {
+            type: Number,
+            required: true
+        },
+        projects: {
+            type: Object,
+        },
+        images: {
+            primary_left: ProjectImage,
+            primary_right: ProjectImage,
+            main: ProjectImage,
+            secondary_left: ProjectImage,
+            secondary_right: ProjectImage
+        },
+        paragraph: {
+            title: String,
+            description: String
+        }
     }
-});
+);
 
 ProjectSchema.pre('save', function (next) {
     this.slug = slugify(this.name, {
