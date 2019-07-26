@@ -23,36 +23,40 @@ exports.findBySlug = (req, res, next) => {
 
 exports.list = (req, res) => {
   Project.find((err, projects) => {
-    if (err) res.send({ message: "internal server error" });
+    if (err) return next(new Error("internal server error" ));
     res.json(projects);
   });
 };
 
-exports.post = (req, res) => {
+exports.post = (req, res, next) => {
   const { error } = validateProject(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    const err = new Error(error.details[0].message);
+    err.statusCode = 400;
+    return next(err);
+  }
   Project.create(req.body).then(function(project) {
     res.send(project);
   });
 };
 
-exports.show = (req, res) => {
+exports.show = (req, res, next) => {
   Project.findById(req.params.id, (err, project) => {
-    if (!project) return res.status(404).send("Not found");
+    if (!project) return next();
     res.json(project);
   });
 };
 
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
   Project.findByIdAndRemove(req.params.id, (err, project) => {
-    if (!project) return res.status(404).send("Not found");
+    if (!project) return next();
     res.send("Has been deleted");
   });
 };
 
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   Project.findByIdAndUpdate(req.params.id, req.body, (err, project) => {
-    if (!project) return res.status(404).send("Not found");
+    if (!project) return next();
     Project.findOne({
       _id: req.params.id
     }).then(project => {

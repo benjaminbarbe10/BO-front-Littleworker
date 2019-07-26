@@ -12,47 +12,44 @@ const ProjectImage = new Schema({
     alt: String,
 });
 
-const ProjectSchema = new Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        slug: {
-            type: String,
-            required: true,
-            unique: true,
-            index: true
-        },
-        tags: [ String ],
-        htag: {
-            type: String,
-            index: true
-        },
+const ProjectSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    slug: {
+        type: String,
+        required: true,
+        unique: true,
+        index: true
+    },
+    tags: [ String ],
+    htag: {
+        type: String,
+        index: true
+    },
+    title: String,
+    description: String,
+    cities: String,
+    surface: Number,
+    budgect: String,
+    duration: Number,
+    projects: {
+        type: Object,
+    },
+    images: {
+        primary_left: ProjectImage,
+        primary_right: ProjectImage,
+        main: ProjectImage,
+        secondary_left: ProjectImage,
+        secondary_right: ProjectImage
+    },
+    paragraph: {
         title: String,
-        description: String,
-        cities: String,
-        surface: Number,
-        budgect: String,
-        duration: Number,
-        projects: {
-            type: Object,
-        },
-        images: {
-            primary_left: ProjectImage,
-            primary_right: ProjectImage,
-            main: ProjectImage,
-            secondary_left: ProjectImage,
-            secondary_right: ProjectImage
-        },
-        paragraph: {
-            title: String,
-            description: String
-        }
-
+        description: String
     }
-);
+});
 
 ProjectSchema.pre('save', function (next) {
     this.slug = slugify(this.name, {
