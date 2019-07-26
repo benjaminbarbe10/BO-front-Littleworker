@@ -10,7 +10,7 @@ const PressSchema = new Schema(
         tags: [ String ],
         url: String,
         logo: {
-            type: Object,
+            url: String,
         }
     }
 );

@@ -16,6 +16,8 @@ const staticPath = path.join(process.cwd(), 'public');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(staticPath));
+
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/templates'));
 
 //app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/auth']}));
@@ -80,10 +82,10 @@ app.use(function (req, res, next) {
 app.post('/auth', function(req, res) {
     const body = req.body;
 
-    const user = USERS.find(user => user.username == body.username);
-    if(!user || body.password != '9{bj3V)F,r~>uj{m') return res.sendStatus(401);
+    const user = USERS.find(user => user.username === body.username);
+    if (!user || body.password !== '9{bj3V)F,r~>uj{m') return res.sendStatus(401);
 
-    var token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
+    const token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
     res.send({token});
 });
 
@@ -96,61 +98,20 @@ app.use("/landings", landings);
 app.use("/lworkers", lworker);
 app.use("/shapers", shapers);
 app.use("/", home);
-app.post('/upload/press',upload.single('press'), function (req, res) {
-    if (!req.file) {
-        console.log("No file received");
-        return res.send({
-            success: false
-        });
 
-    } else {
-        console.log('file received');
-        return res.send({
-            success: true
-        })
-    }
+app.post('/upload/press', upload.single('press'), function (req, res) {
+    return res.send({ success: !!req.file });
 });
-app.post('/upload/projects',upload.single('project'), function (req, res) {
-    if (!req.file) {
-        console.log("No file received");
-        return res.send({
-            success: false
-        });
 
-    } else {
-        console.log('file received');
-        return res.send({
-            success: true
-        })
-    }
+app.post('/upload/projects', upload.single('project'), function (req, res) {
+    return res.send({ success: !!req.file });
 });
+
 app.post('/upload/shapers',upload.single('shaper'), function (req, res) {
-    if (!req.file) {
-        console.log("No file received");
-        return res.send({
-            success: false
-        });
-
-    } else {
-        console.log('file received');
-        return res.send({
-            success: true
-        })
-    }
+    return res.send({ success: !!req.file });
 });
 app.post('/upload/lworkers',upload.single('lworker'), function (req, res) {
-    if (!req.file) {
-        console.log("No file received");
-        return res.send({
-            success: false
-        });
-
-    } else {
-        console.log('file received');
-        return res.send({
-            success: true
-        })
-    }
+    return res.send({ success: !!req.file });
 });
 
 // 404 Handler
@@ -169,6 +130,7 @@ app.use(function (err, req, res, next) {
             message: 'No token provided.'
         });
     }
+    return res.status(500).send(JSON.stringify(err));
 });
 //
 // ─── SERVER ─────────────────────────────────────────────────────────────────────

@@ -21,7 +21,6 @@ const ProjectSchema = new Schema(
         },
         slug: {
             type: String,
-            required: true,
             unique: true,
             index: true
         },
@@ -30,12 +29,30 @@ const ProjectSchema = new Schema(
             type: String,
             index: true
         },
-        title: String,
-        description: String,
-        cities: String,
-        surface: Number,
-        budgect: String,
-        duration: Number,
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        cities: {
+            type: String,
+            required: true
+        },
+        surface: {
+            type: Number,
+            required: true
+        },
+        budgect: {
+            type: String,
+            required: true
+        },
+        duration: {
+            type: Number,
+            required: true
+        },
         projects: {
             type: Object,
         },
@@ -50,7 +67,6 @@ const ProjectSchema = new Schema(
             title: String,
             description: String
         }
-
     }
 );
 
