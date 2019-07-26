@@ -37,6 +37,7 @@ exports.post = (req, res) => {
 };
 
 exports.show = (req, res) => {
+  console.log(req)
   Project.findById(req.params.id, (err, project) => {
     if (!project) return res.status(404).send("Not found");
     res.json(project);
@@ -71,8 +72,7 @@ function validateProject(project) {
       .min(3)
       .required(),
     tags: Joi.required(),
-    htag: Joi.string()
-        .required(),
+    htag: Joi.string(),
     title: Joi.string()
         .required(),
     description: Joi.string()

@@ -13,10 +13,18 @@ const PressSchema = new Schema(
             required: true,
             index: true
         },
-        surname: String,
-        position: Number,
+        surname: {
+            type: String,
+            required: true,
+            index: true
+        },
+        position: {
+            type: String,
+            required: true,
+            index: true
+        },
         image: {
-            type: Object,
+            url: String,
         }
     }
 );
