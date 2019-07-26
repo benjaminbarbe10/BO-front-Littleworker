@@ -17,7 +17,7 @@ exports.findBySlug = (req, res, next) => {
           return next(); // 404
         }
 
-        return res.render('demo', { project: project });
+        return res.render('../templates/project.ejs', { project: project });
       });
 };
 
