@@ -23,11 +23,8 @@ exports.list = (req, res) => {
 };
 
 exports.post = (req, res, next) => {
-  console.log('start post');
   const nProject = new Project(req.body);
-  console.log('before save call');
   return nProject.save(function(err) {
-    console.log('save result');
     if (err) {
       if (err.name === 'ValidationError') {
         const vError = new Error('There is some issues with your data!');
@@ -39,7 +36,7 @@ exports.post = (req, res, next) => {
       }
       return next(err);
     }
-    return res.send(nProject);
+    return res.send(nProject.toObject());
   });
 };
 
