@@ -36,7 +36,7 @@ exports.post = (req, res, next) => {
       }
       return next(err);
     }
-    return res.send(nProject.toObject());
+    return res.send(nProject);
   });
 };
 

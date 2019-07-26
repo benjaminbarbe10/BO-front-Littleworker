@@ -20,10 +20,8 @@ const ProjectSchema = new Schema({
     },
     slug: {
         type: String,
-        required: true,
         unique: true,
-        index: true,
-        default: ''
+        index: true
     },
     tags: [ String ],
     htag: {

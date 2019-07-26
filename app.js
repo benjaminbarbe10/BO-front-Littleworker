@@ -128,6 +128,7 @@ app.use(function (err, req, res, next) {
             message: 'No token provided.'
         });
     }
+    return res.status(500).send(JSON.stringify(err));
 });
 //
 // ─── SERVER ─────────────────────────────────────────────────────────────────────
