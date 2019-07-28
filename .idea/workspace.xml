@@ -92,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/templates/press.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="32" column="68" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
+              <caret line="32" column="126" selection-start-line="32" selection-start-column="126" selection-end-line="32" selection-end-column="126" />
             </state>
           </provider>
         </entry>
@@ -305,18 +305,17 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75899000" />
+    <option name="totallyTimeSpent" value="76232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.24954791" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.24954791" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection Results" weight="0.32987553" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.37240663" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.37240663" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
@@ -634,7 +633,7 @@
     <entry file="file://$PROJECT_DIR$/templates/press.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="32" column="68" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
+          <caret line="32" column="126" selection-start-line="32" selection-start-column="126" selection-end-line="32" selection-end-column="126" />
         </state>
       </provider>
     </entry>
