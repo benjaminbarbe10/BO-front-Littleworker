@@ -1,7 +1,80 @@
-<link type="text/css" rel="stylesheet" href="/style.css"/>
-<%- include header/main_nav %>
-<ul>
-    <% projects.forEach((project) => { %>
-        <li><%= project.title %></li>
-    <% }); %>
-</ul>
+<%- include partials/header/main_nav.ejs %>
+
+<div class="body">
+    <div class="breadcrumb">
+        Accueil > Rénovation d’appartement > Nos réalisations > Appartements
+    </div>
+    <div class="header-container">
+        <div class="header-titles">
+            <h1 class="header-title">Nos réalisations</h1>
+            <button class="header-btn">Demander un devis</button>
+            <p class="header-htag">#clapdefindechantier</p>
+        </div>
+        <div class="header-img">
+
+            <img src="/images/projects-background.png" alt="">
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="body-content">
+            <div class="body-tags">
+                <button class="tags-btn display-tag-selected" id="appartments" onclick="changeSelectedTag('Appartements', 'appartments')">Appartements</button>
+                <button class="tags-btn" id="homes" onclick="changeSelectedTag('Maisons','homes')">Maisons</button>
+                <button class="tags-btn" id="paris" onclick="changeSelectedTag('Paris - IDF','paris')">Paris - IDF</button>
+                <button class="tags-btn" id="bordeaux" onclick="changeSelectedTag('Bordeaux - CUB','bordeaux')">Bordeaux - CUB</button>
+                <button class="tags-btn" id="current" onclick="changeSelectedTag('En cours','current')">En cours</button>
+            </div>
+            <div class="items-container">
+                <% projects.forEach((project) => { %>
+                <%selectedTag = 'Appartements'%>
+
+                <% if (project.tags.includes(selectedTag)) { %>
+                    <div class="items-content">
+                        <img onmouseover="onProjectHover('<%=project.id%>-img', '<%=project.id%>-titles')"  class="item-img" src="/<%=project.images.main.url%>" alt="<%=project.images.main.alt%>">
+                        <div onmouseleave="onProjectLeave('<%=project.id%>-img', '<%=project.id%>-titles')" id="<%=project.id%>-img" class="item-hover-content">
+                            <div class="item-hover-content-title">Surface : <span class="item-hover-content-value"><%=project.surface%> m2</span></div>
+                            <div class="item-hover-content-title">Budget : <span class="item-hover-content-value"><%=project.budgect%></span></div>
+                            <div class="item-hover-content-title">Durée : <span class="item-hover-content-value"><%=project.duration%> mois</span></div>
+                            <button class="item-hover-content-btn">Voir le projet <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div id="<%=project.id%>-titles" class="item-titles">
+                            <h2 class="item-title"><%= project.title %></h2>
+                            <p class="item-city"><%= project.cities %></p>
+                        </div>
+
+                    </div>
+                    <%}%>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <ul>
+
+    </ul>
+</div>
+
+<%- include partials/footer/footer.ejs %>
+
+<script type="text/javascript">
+    changeSelectedTag = function(tag,id) {
+        let btns = document.getElementsByClassName('tags-btn')
+        for (let item of btns) {
+            if(item.classList.contains('display-tag-selected')) {
+                item.classList.remove('display-tag-selected')
+            }
+         }
+        document.getElementById(id).classList.add('display-tag-selected')
+        selectedTag = tag;
+        console.log(selectedTag)
+    }
+    onProjectHover = function(idimg, idtitles) {
+        document.getElementById(idimg).classList.add('display-item-hover')
+        document.getElementById(idtitles).classList.add('display-bold')
+    }
+    onProjectLeave = function(idimg, idtitles) {
+        document.getElementById(idimg).classList.remove('display-item-hover')
+        document.getElementById(idtitles).classList.remove('display-bold')
+
+    }
+</script>
+

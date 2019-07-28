@@ -19,7 +19,8 @@ exports.findBySlug = (req, res, next) => {
 
 exports.list = (req, res) => Shaper.find((err, shapers) => {
     if (err) return next(err);
-    return res.render('../templates/shapers.ejs', { shapers: shapers });
+    let selectedTag;
+    return res.render('../templates/shapers.ejs', { shapers: shapers, selectedTag: selectedTag  });
 });
 
 exports.post = (req, res) => {

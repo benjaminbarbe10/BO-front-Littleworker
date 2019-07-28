@@ -11,11 +11,13 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const multer = require('multer');
 
-const staticPath = path.join(process.cwd(), 'public');
+const staticPathPublic = path.join(process.cwd(), 'public');
+const staticPathUploads = path.join(process.cwd(), 'uploads');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(staticPath));
+app.use(express.static(staticPathPublic));
+app.use(express.static(staticPathUploads));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/templates'));
@@ -92,9 +94,7 @@ app.post('/auth', function(req, res) {
     res.send({token});
 });
 
-app.route('/project').post((req, res) => {
-    res.send(201, req.body)
-});
+
 app.use("/press", press);
 app.use("/projects", projects);
 app.use("/landings", landings);
@@ -125,6 +125,11 @@ app.use(function(req, res, next) {
     res.status(404).send('404 :(');
 });
 
+
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 // Error handler : @ End
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {

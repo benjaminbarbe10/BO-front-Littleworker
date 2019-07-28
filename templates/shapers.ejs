@@ -1,7 +1,78 @@
-<link type="text/css" rel="stylesheet" href="/style.css"/>
-<%- include header/main_nav %>
-<ul>
-    <% shapers.forEach((shaper) => { %>
-        <li><%= shaper.name %></li>
-    <% }); %>
-</ul>
+<%- include partials/header/main_nav.ejs %>
+
+
+<div class="body">
+    <div class="breadcrumb">
+        Accueil > Rénovation d’appartement > Nos réalisations > Appartements
+    </div>
+    <div class="header-container">
+        <div class="header-titles">
+            <h1 class="header-title">Nos shapers <span class="gold-star-large">*</span></h1>
+            <button class="header-btn">Demander un devis</button>
+            <p class="header-htag"><span class="gold-star">*</span>architectes ou entrepreneurs passionnés</p>
+        </div>
+        <div class="header-img">
+
+            <img src="/images/projects-background.png" alt="">
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="body-content">
+            <div class="body-tags">
+                <button class="tags-btn display-tag-selected" id="architect" onclick="changeSelectedTag('Architectes','architect')">Architectes</button>
+                <button class="tags-btn" id="worsite-manager" onclick="changeSelectedTag('Chefs de chantier','worsite-manager')">Chefs de chantier</button>
+                <button class="tags-btn" id="decorator" onclick="changeSelectedTag('Decorateur','decorator')">Décorateur</button>
+                <button class="tags-btn" id="paris" onclick="changeSelectedTag('Paris','current')">Paris</button>
+                <button class="tags-btn" id="bordeaux" onclick="changeSelectedTag('Bordeaux','bordeaux')">Bordeaux</button>
+
+            </div>
+            <div class="items-container">
+                <% shapers.forEach((shaper) => { %>
+                <%selectedTag = 'Architectes'%>
+
+                <% if (shaper.tags.includes(selectedTag)) { %>
+                <div class="items-content">
+                    <img onmouseover="onProjectHover('<%=shaper.id%>-img', '<%=shaper.id%>-titles')"  class="item-img" src="/<%=shaper.images.main.url%>" alt="<%=shaper.images.main.alt%>">
+                    <div onmouseleave="onProjectLeave('<%=shaper.id%>-img', '<%=shaper.id%>-titles')" id="<%=shaper.id%>-img" class="item-hover-content">
+                        <button class="item-hover-content-btn">Voir le shaper <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div id="<%=shaper.id%>-titles" class="item-titles">
+                        <h2 class="item-title"><%= shaper.title %></h2>
+                        <p class="item-city"><%= shaper.cities %></p>
+                    </div>
+
+                </div>
+                <%}%>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <ul>
+
+    </ul>
+</div>
+
+<%- include partials/footer/footer.ejs %>
+
+<script type="text/javascript">
+    changeSelectedTag = function(tag,id) {
+        let btns = document.getElementsByClassName('tags-btn')
+        for (let item of btns) {
+            if(item.classList.contains('display-tag-selected')) {
+                item.classList.remove('display-tag-selected')
+            }
+        }
+        document.getElementById(id).classList.add('display-tag-selected')
+        selectedTag = tag;
+        console.log(selectedTag)
+    }
+    onProjectHover = function(idimg, idtitles) {
+        document.getElementById(idimg).classList.add('display-item-hover')
+        document.getElementById(idtitles).classList.add('display-bold')
+    }
+    onProjectLeave = function(idimg, idtitles) {
+        document.getElementById(idimg).classList.remove('display-item-hover')
+        document.getElementById(idtitles).classList.remove('display-bold')
+
+    }
+</script>

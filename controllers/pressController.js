@@ -3,52 +3,40 @@ const Press = require("../models/press");
 // ─── PRESS_CONTROLLER ──────────────────────────────────────────────────────────
 //
 
-exports.list = (req, res) => {
-  Press.find((err, press) => {
-    if (err) res.send({ message: "internal server error" });
-    return res.render('../templates/press.ejs', { press: press });
+exports.list = (req, res, next) => Press.find((err, press) => {
+  if (err) return next(err);
+  let selectedTag;
+  return res.render('../templates/press.ejs', { press: press, selectedTag: selectedTag });
+});
+
+exports.post = (req, res) => {
+  const { error } = new Press(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  Press.create(req.body).then(function(press) {
+    res.send(press);
   });
 };
 
-exports.post = (req, res, next) => {
-  const nPress = new Press(req.body);
-  return nPress.save(function(err) {
-    if (err) {
-      if (err.name === 'ValidationError') {
-        const vError = new Error('There is some issues with your data!');
-        vError.status = 400;
-        const simplifiedErrors = Object.entries(err.errors)
-            .map(curError => ({ on: curError[0], error: curError[1].message }));
-        vError.message = { title: vError.message, errors: simplifiedErrors };
-        return next(vError);
-      }
-      return next(err);
-    }
-    return res.send(nPress);
-  });
-};
-
-exports.show = (req, res) => {
+exports.show = (req, res, next) => {
   Press.findById(req.params.id, (err, press) => {
-    if (!press) return res.status(404).send("Not found");
+    if (!press) return next();
     res.json(press);
   });
 };
 
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
   Press.findByIdAndRemove(req.params.id, (err, press) => {
-    if (!press) return res.status(404).send("Not found");
+    if (!press) return next();
     res.send("Has been deleted");
   });
 };
 
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   Press.findByIdAndUpdate(req.params.id, req.body, (err, press) => {
-    if (!press) return res.status(404).send("Not found");
-    Press.findOne({
-      _id: req.params.id
-    }).then(press => {
-      res.send(press);
+    if (!press) return next();
+    return Press.findById(req.params.id,(err, press) => {
+      if (err) return next(err);
+      return res.send(press);
     });
   });
 };

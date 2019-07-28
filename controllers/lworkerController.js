@@ -17,7 +17,8 @@ exports.findBySlug = (req, res, next) => {
 
 exports.list = (req, res) => Lworker.find((err, lworkers) => {
   if (err) return next(err);
-  return res.render('../templates/lworkers.ejs', { lworkers: lworkers });
+  let selectedTag;
+  return res.render('../templates/lworkers.ejs', { lworkers: lworkers, selectedTag: selectedTag });
 });
 
 exports.post = (req, res) => {

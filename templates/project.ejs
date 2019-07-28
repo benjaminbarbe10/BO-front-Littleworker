@@ -1,8 +1,12 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
-<%- include header/main_nav %>
-<h1><%= project.name %></h1>
-<ul>
-<% project.tags.forEach((tag) => { %>
-    <li><%= tag %></li>
-<% }); %>
-</ul>
+<%- include partials/header/main_nav.ejs %>
+<div class="body">
+    <h1><%= project.name %></h1>
+    <ul>
+        <% project.tags.forEach((tag) => { %>
+            <li><%= tag %></li>
+        <% }); %>
+    </ul>
+</div>
+<%- include partials/footer/footer.ejs %>
+

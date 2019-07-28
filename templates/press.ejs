@@ -1,7 +1,70 @@
-<link type="text/css" rel="stylesheet" href="/style.css"/>
-<%- include header/main_nav %>
-<ul>
-    <% press.forEach((p) => { %>
-        <li><%= p.url %></li>
-    <% }); %>
-</ul>
+<%- include partials/header/main_nav.ejs %>
+
+<div class="body">
+    <div class="breadcrumb">
+        Accueil > Rénovation d’appartement > Nos réalisations > Appartements
+    </div>
+    <div class="header-container">
+        <div class="header-titles">
+            <h1 class="header-title">Notre Equipe</h1>
+            <button class="header-btn">Demander un devis</button>
+        </div>
+        <div class="header-img">
+
+            <img src="/images/backgrounds/lworkers-background.jpg" alt="">
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="body-content">
+            <div class="body-tags">
+                <button class="tags-btn display-tag-selected" id="deco" onclick="changeSelectedTag('Déco','deco')">Déco</button>
+                <button class="tags-btn" id="news" onclick="changeSelectedTag('News','news')">News</button>
+                <button class="tags-btn" id="works" onclick="changeSelectedTag('Travaux','works')">Travaux</button>
+                <button class="tags-btn" id="media" onclick="changeSelectedTag('Media','media')">Media</button>
+                <button class="tags-btn" id="instagram" onclick="changeSelectedTag('Instagram','instagram')">Instagram</button>
+
+            </div>
+            <div class="items-container">
+                <% press.forEach((p) => { %>
+                <%selectedTag = 'Déco'%>
+
+                <% if (p.tags.includes(selectedTag)) { %>
+                <div class="items-content">
+                    <img onmouseover="onProjectHover('<%=p.id%>-img')"  class="item-img" src="/<%=p.logo.url%>" alt="<%=p.logo.alt%>">
+                    <div onmouseleave="onProjectLeave('<%=p.id%>-img')" id="<%=p.id%>-img" class="item-hover-content">
+                        <button class="item-hover-content-btn">Lire la publication <i class="fas fa-arrow-right"></i></button>
+                    </div>
+
+                </div>
+                <%}%>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <ul>
+
+    </ul>
+</div>
+
+<%- include partials/footer/footer.ejs %>
+
+<script type="text/javascript">
+    changeSelectedTag = function(tag,id) {
+        let btns = document.getElementsByClassName('tags-btn')
+        for (let item of btns) {
+            if(item.classList.contains('display-tag-selected')) {
+                item.classList.remove('display-tag-selected')
+            }
+        }
+        document.getElementById(id).classList.add('display-tag-selected')
+        selectedTag = tag;
+        console.log(selectedTag)
+    }
+    onProjectHover = function(idimg) {
+        document.getElementById(idimg).classList.add('display-item-hover')
+    }
+    onProjectLeave = function(idimg) {
+        document.getElementById(idimg).classList.remove('display-item-hover')
+
+    }
+</script>

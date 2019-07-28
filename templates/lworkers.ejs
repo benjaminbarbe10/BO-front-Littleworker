@@ -1,7 +1,76 @@
-<link type="text/css" rel="stylesheet" href="/style.css"/>
-<%- include header/main_nav %>
-<ul>
-    <% lworkers.forEach((lworker) => { %>
-        <li><%= lworker.name %></li>
-    <% }); %>
-</ul>
+<%- include partials/header/main_nav.ejs %>
+
+<div class="body">
+    <div class="breadcrumb">
+        Accueil > Rénovation d’appartement > Nos réalisations > Appartements
+    </div>
+    <div class="header-container">
+        <div class="header-titles">
+            <h1 class="header-title">Notre Equipe</h1>
+            <button class="header-btn">Demander un devis</button>
+        </div>
+        <div class="header-img">
+
+            <img src="/images/backgrounds/lworkers-background.jpg" alt="">
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="body-content">
+            <div class="body-tags">
+                <button class="tags-btn display-tag-selected" id="marketing" onclick="changeSelectedTag('Marketing','marketing')">Marketing</button>
+                <button class="tags-btn" id="studies" onclick="changeSelectedTag('Etudes','studies')">Etudes</button>
+                <button class="tags-btn" id="works" onclick="changeSelectedTag('Travaux','works')">Travaux</button>
+                <button class="tags-btn" id="fondators" onclick="changeSelectedTag('Fondateurs','fondators')">Fondateurs</button>
+                <button class="tags-btn" id="dev" onclick="changeSelectedTag('Développeurs','dev')">Développeurs</button>
+
+            </div>
+            <div class="items-container">
+                <% lworkers.forEach((lworker) => { %>
+                <%selectedTag = 'Marketing'%>
+
+                <% if (lworker.tags.includes(selectedTag)) { %>
+                <div class="items-content">
+                    <img onmouseover="onProjectHover('<%=lworker.id%>-img', '<%=lworker.id%>-titles')"  class="item-img" src="/<%=lworker.image.url%>" alt="<%=lworker.image.alt%>">
+                    <div onmouseleave="onProjectLeave('<%=lworker.id%>-img', '<%=lworker.id%>-titles')" id="<%=lworker.id%>-img" class="item-hover-content">
+                        <button class="item-hover-content-btn">Voir le lworker <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div id="<%=lworker.id%>-titles" class="item-titles">
+                        <h2 class="item-title"><%= lworker.title %></h2>
+                        <p class="item-city"><%= lworker.cities %></p>
+                    </div>
+
+                </div>
+                <%}%>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <ul>
+
+    </ul>
+</div>
+
+<%- include partials/footer/footer.ejs %>
+
+<script type="text/javascript">
+    changeSelectedTag = function(tag,id) {
+        let btns = document.getElementsByClassName('tags-btn')
+        for (let item of btns) {
+            if(item.classList.contains('display-tag-selected')) {
+                item.classList.remove('display-tag-selected')
+            }
+        }
+        document.getElementById(id).classList.add('display-tag-selected')
+        selectedTag = tag;
+        console.log(selectedTag)
+    }
+    onProjectHover = function(idimg, idtitles) {
+        document.getElementById(idimg).classList.add('display-item-hover')
+        document.getElementById(idtitles).classList.add('display-bold')
+    }
+    onProjectLeave = function(idimg, idtitles) {
+        document.getElementById(idimg).classList.remove('display-item-hover')
+        document.getElementById(idtitles).classList.remove('display-bold')
+
+    }
+</script>
