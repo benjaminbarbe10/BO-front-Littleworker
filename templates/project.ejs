@@ -1,12 +1,56 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
 <%- include partials/header/main_nav.ejs %>
 <div class="body">
-    <h1><%= project.name %></h1>
-    <ul>
-        <% project.tags.forEach((tag) => { %>
-            <li><%= tag %></li>
-        <% }); %>
-    </ul>
+    <div class="breadcrumb">
+        Accueil > Rénovation d’appartement > Nos réalisations > Appartements
+    </div>
+    <div class="header-container">
+        <div class="header-titles">
+            <h1 class="header-title"><%=project.name%></h1>
+            <button class="header-btn">Demander un devis</button>
+            <p class="header-htag">#<%=project.htag%></p>
+        </div>
+        <div class="header-img">
+
+            <img src="/<%=project.images.main.url%>" alt="">
+        </div>
+    </div>
+    <div class="item-container">
+        <div class="item-header">
+            <div class="item-introduction">
+                <h3 class="introduction-title"><%=project.title%></h3>
+                <p class="introduction-text"><%=project.description%></p>
+            </div>
+            <div class="item-identity">
+                <h3 class="identity-list-title">carte d'identité</h3>
+                <ul class="identity-list">
+                    <li class="identity-list-item">Ville : <%=project.cities%></li>
+                    <li class="identity-list-item">Surface : <%=project.surface%> m2</li>
+                    <li class="identity-list-item">Budget :  <%=project.budgect%></li>
+                    <li class="identity-list-item">Durée des travaux : <%=project.duration%> mois</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item-content">
+           <div class="item-primary-images">
+               <img src="/<%=project.images.primary_left.url%>" alt="<%=project.images.primary_left.alt%>">
+               <img src="/<%=project.images.primary_right.url%>" alt="<%=project.images.primary_right.alt%>">
+           </div>
+            <%if (project.paragraph.title && project.paragraph.description) {%>
+                <div class="item-paragraph">
+                    <h3 class="paragraph-title"><%=project.paragraph.title%></h3>
+                    <p class="paragraph-text"><%=project.paragraph.description%></p>
+                </div>
+            <%}%>
+            <div class="item-main-image">
+                <img src="/<%=project.images.main.url%>" alt="<%=project.images.main.alt%>">
+            </div>
+            <div class="item-secondary-images">
+                <img src="/<%=project.images.secondary_left.url%>" alt="<%=project.images.secondary_left.alt%>">
+                <img src="/<%=project.images.secondary_right.url%>" alt="<%=project.images.secondary_right.alt%>">
+            </div>
+        </div>
+    </div>
 </div>
 <%- include partials/footer/footer.ejs %>
 

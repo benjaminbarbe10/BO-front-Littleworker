@@ -63,6 +63,7 @@ const ProjectSchema = new Schema(
             secondary_left: ProjectImage,
             secondary_right: ProjectImage
         },
+        othersimages: [ String ],
         paragraph: {
             title: String,
             description: String

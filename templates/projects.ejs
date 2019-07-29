@@ -35,7 +35,7 @@
                             <div class="item-hover-content-title">Surface : <span class="item-hover-content-value"><%=project.surface%> m2</span></div>
                             <div class="item-hover-content-title">Budget : <span class="item-hover-content-value"><%=project.budgect%></span></div>
                             <div class="item-hover-content-title">Durée : <span class="item-hover-content-value"><%=project.duration%> mois</span></div>
-                            <button class="item-hover-content-btn">Voir le projet <i class="fas fa-arrow-right"></i></button>
+                            <button class="item-hover-content-btn"><a href="<%=project.slug%>">Voir le projet <i class="fas fa-arrow-right"></i></a></button>
                         </div>
                         <div id="<%=project.id%>-titles" class="item-titles">
                             <h2 class="item-title"><%= project.title %></h2>
