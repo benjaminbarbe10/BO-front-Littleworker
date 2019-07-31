@@ -1,7 +1,118 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
 <%- include partials/header/main_nav.ejs %>
 <div class="body">
-    <h1><%= shaper.name %></h1>
+    <div class="breadcrumb">
+        Accueil > Rénovation d’appartement > Nos réalisations > Appartements
+    </div>
+    <div class="custom-header-container">
+        <div class="header-titles">
+            <h1 class="header-title"><%=shaper.name%></h1>
+            <button class="header-btn">Demander un devis</button>
+            <p class="header-htag">#<%=shaper.htag%></p>
+        </div>
+        <div class="header-img">
+
+            <img src="/<%=shaper.images.main.url%>" alt="">
+        </div>
+    </div>
+    <div class="item-container">
+        <div class="item-header">
+            <div class="item-introduction">
+                <h3 class="introduction-title"><%=shaper.title%></h3>
+                <p class="introduction-text"><%=shaper.description%></p>
+            </div>
+            <div class="item-identity">
+                <h3 class="identity-list-title">carte d'identité</h3>
+                <ul class="identity-list">
+                    <li class="identity-list-item">Ville : <%=shaper.cities%></li>
+                    <li class="identity-list-item">Années d'expérience : <%=shaper.experience%> ans</li>
+                    <li class="identity-list-item">Partenaire depuis :  <%=shaper.since%></li>
+                    <li class="identity-list-item">Nombre de chantier avec Little Worker :  <%=shaper.worksites%></li>
+                </ul>
+            </div>
+        </div>
+        <div class="item-content">
+            <div class="item-primary-images">
+                <img src="/<%=shaper.images.primary_left.url%>" alt="<%=shaper.images.primary_left.alt%>">
+                <img src="/<%=shaper.images.primary_right.url%>" alt="<%=shaper.images.primary_right.alt%>">
+            </div>
+            <%if (shaper.paragraph.title && shaper.paragraph.description) {%>
+            <div class="item-paragraph">
+                <h3 class="paragraph-title"><%=shaper.paragraph.title%></h3>
+                <p class="paragraph-text"><%=shaper.paragraph.description%></p>
+            </div>
+            <%}%>
+            <div class="item-main-image">
+                <img src="/<%=shaper.images.main.url%>" alt="<%=shaper.images.main.alt%>">
+            </div>
+            <div class="item-secondary-images">
+                <img src="/<%=shaper.images.secondary_left.url%>" alt="<%=shaper.images.secondary_left.alt%>">
+                <img src="/<%=shaper.images.secondary_right.url%>" alt="<%=shaper.images.secondary_right.alt%>">
+            </div>
+
+            <div class=" more-projects-container">
+                <div class="more-projects-title">Découvrir d'autres projets : </div>
+                <div class="items-container">
+                    <% projects.slice(-3).forEach((p) => { %>
+                    <div class="items-content">
+                        <img onmouseover="onProjectHover('<%=p.id%>-img', '<%=p.id%>-titles')"  class="item-img" src="/<%=p.images.main.url%>" alt="<%=p.images.main.alt%>">
+                        <div onmouseleave="onProjectLeave('<%=p.id%>-img', '<%=p.id%>-titles')" id="<%=p.id%>-img" class="item-hover-content">
+                            <div class="item-hover-content-title">Surface : <span class="item-hover-content-value"><%=p.surface%> m2</span></div>
+                            <div class="item-hover-content-title">Budget : <span class="item-hover-content-value"><%=p.budgect%></span></div>
+                            <div class="item-hover-content-title">Durée : <span class="item-hover-content-value"><%=p.duration%> mois</span></div>
+                            <button class="item-hover-content-btn"><a href="<%=p.slug%>">Voir le projet <i class="fas fa-arrow-right"></i></a></button>
+                        </div>
+                        <div id="<%=p.id%>-titles" class="item-titles">
+                            <h2 class="item-title"><%= p.title %></h2>
+                            <p class="item-city"><%= p.cities %></p>
+                        </div>
+                    </div>
+                    <%})%>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
 </div>
+<%- include partials/templates/maillage.ejs%>
 
 <%- include partials/footer/footer.ejs %>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "flex";
+        slides[slideIndex-1].style.justifyContent = "space-evenly";
+
+    }
+
+    function onProjectHover(idimg, idtitles) {
+        document.getElementById(idimg).classList.add('display-item-hover')
+        document.getElementById(idtitles).classList.add('display-bold')
+    }
+    function onProjectLeave(idimg, idtitles) {
+        document.getElementById(idimg).classList.remove('display-item-hover')
+        document.getElementById(idtitles).classList.remove('display-bold')
+    }
+</script>

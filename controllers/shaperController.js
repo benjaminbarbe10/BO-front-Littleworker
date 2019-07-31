@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const Shaper = require("../models/shaper");
 const mongoose = require("mongoose");
+const Project = require('../models/project');
 
 //
 // ─── SHAPER_CONTROLLER ──────────────────────────────────────────────────────────
@@ -12,8 +13,10 @@ exports.findBySlug = (req, res, next) => {
         .exec((pErr, shaper) => {
             if (pErr) return next(pErr);
             if (!shaper) return next();
-
-            return res.render('../templates/shaper.ejs', { shaper: shaper });
+            Project.find((err, projects) => {
+                if (err) return next(err);
+                return res.render('../templates/shaper.ejs', { shaper: shaper, projects: projects  });
+            });
         });
 };
 

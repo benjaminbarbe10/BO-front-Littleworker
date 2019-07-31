@@ -17,31 +17,14 @@
     <div class="body-container">
         <div class="body-content">
             <div class="body-tags">
-                <button class="tags-btn display-tag-selected" id="marketing" onclick="changeSelectedTag('Marketing','marketing')">Marketing</button>
-                <button class="tags-btn" id="studies" onclick="changeSelectedTag('Etudes','studies')">Etudes</button>
-                <button class="tags-btn" id="works" onclick="changeSelectedTag('Travaux','works')">Travaux</button>
-                <button class="tags-btn" id="fondators" onclick="changeSelectedTag('Fondateurs','fondators')">Fondateurs</button>
-                <button class="tags-btn" id="dev" onclick="changeSelectedTag('Développeurs','dev')">Développeurs</button>
+                <button class="tags-btn display-tag-selected" id="marketing" onclick="changeSelectedTag('Marketing', <%=JSON.stringify(lworkers)%>,'marketing')">Marketing</button>
+                <button class="tags-btn" id="studies" onclick="changeSelectedTag('Etudes', <%=JSON.stringify(lworkers)%>,'studies')">Etudes</button>
+                <button class="tags-btn" id="works" onclick="changeSelectedTag('Travaux', <%=JSON.stringify(lworkers)%>,'works')">Travaux</button>
+                <button class="tags-btn" id="fondators" onclick="changeSelectedTag('Fondateurs', <%=JSON.stringify(lworkers)%>,'fondators')">Fondateurs</button>
+                <button class="tags-btn" id="dev" onclick="changeSelectedTag('Développeurs', <%=JSON.stringify(lworkers)%>,'dev')">Développeurs</button>
 
             </div>
-            <div class="items-container">
-                <% lworkers.forEach((lworker) => { %>
-                <%selectedTag = 'Marketing'%>
-
-                <% if (lworker.tags.includes(selectedTag)) { %>
-                <div class="items-content">
-                    <img onmouseover="onProjectHover('<%=lworker.id%>-img', '<%=lworker.id%>-titles')"  class="item-img" src="/<%=lworker.image.url%>" alt="<%=lworker.image.alt%>">
-                    <div onmouseleave="onProjectLeave('<%=lworker.id%>-img', '<%=lworker.id%>-titles')" id="<%=lworker.id%>-img" class="item-hover-content">
-                        <button class="item-hover-content-btn">Voir le lworker <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                    <div id="<%=lworker.id%>-titles" class="item-titles">
-                        <h2 class="item-title"><%= lworker.title %></h2>
-                        <p class="item-city"><%= lworker.cities %></p>
-                    </div>
-
-                </div>
-                <%}%>
-                <% }); %>
+            <div id="item-display" class="items-container">
             </div>
         </div>
     </div>
@@ -49,11 +32,12 @@
 
     </ul>
 </div>
+<%- include partials/templates/maillage.ejs%>
 
 <%- include partials/footer/footer.ejs %>
 
 <script type="text/javascript">
-    changeSelectedTag = function(tag,id) {
+    changeSelectedTag = function(tag, lworkers, id) {
         let btns = document.getElementsByClassName('tags-btn')
         for (let item of btns) {
             if(item.classList.contains('display-tag-selected')) {
@@ -62,15 +46,67 @@
         }
         document.getElementById(id).classList.add('display-tag-selected')
         selectedTag = tag;
-        console.log(selectedTag)
-    }
-    onProjectHover = function(idimg, idtitles) {
-        document.getElementById(idimg).classList.add('display-item-hover')
-        document.getElementById(idtitles).classList.add('display-bold')
-    }
-    onProjectLeave = function(idimg, idtitles) {
-        document.getElementById(idimg).classList.remove('display-item-hover')
-        document.getElementById(idtitles).classList.remove('display-bold')
+        selectedTag = tag;
+        console.log(selectedTag);
+        var main = document.getElementById('item-display');
+        main.innerHTML = '';
+        lworkers.forEach(el => {
+            if (el.tags.includes(selectedTag)) {
+                console.log(el)
+                //create div
+                const itemsContent = document.createElement('div');
+                const itemImg = document.createElement('img');
+                const itemHoverContent = document.createElement('div');
+                const itemTitle = document.createElement('h2');
+                const itemPosition = document.createElement('p');
+                const itemHoverContentBtn = document.createElement('button');
+                const btnArrow = document.createElement('i');
+
+                const itemTitles = document.createElement('div');
+
+                //add class
+                itemImg.className = 'item-img';
+                itemsContent.className = 'items-content';
+                itemHoverContent.className = 'item-hover-content';
+                btnArrow.className = 'fas fa-arrow-right';
+                itemHoverContentBtn.className = 'item-hover-content-btn';
+                itemTitle.className = 'item-title';
+                itemPosition.className = 'item-city';
+
+                //add event listener
+                itemsContent.addEventListener("mouseenter", function () {
+                    itemHoverContent.classList.add('display-item-hover');
+                    itemTitles.classList.add('display-bold')  ;
+                });
+                itemHoverContent.addEventListener("mouseleave", function () {
+                    itemHoverContent.classList.remove('display-item-hover');
+                    itemTitles.classList.remove('display-bold')  ;
+                });
+                itemHoverContentBtn.addEventListener("click", function () {
+                    window.open('/lworkers/' + el.slug, "_self");
+                });
+                //put content
+                itemTitle.innerHTML = el.name + ' ' + el.surname;
+                itemPosition.innerHTML = el.position;
+
+                itemImg.src = '/' + el.image.url;
+                itemImg.alt = el.image.alt;
+                itemHoverContentBtn.innerText = 'Voir le profil';
+                //display
+
+                itemHoverContentBtn.appendChild(btnArrow);
+                itemHoverContent.appendChild(itemHoverContentBtn);
+                itemTitles.appendChild(itemTitle);
+                itemTitles.appendChild(itemPosition);
+                itemsContent.appendChild(itemImg);
+                itemsContent.appendChild(itemHoverContent);
+                itemsContent.appendChild(itemTitles);
+                main.appendChild(itemsContent);
+            }
+
+        });
 
     }
+    document.getElementById('marketing').click();
+
 </script>
