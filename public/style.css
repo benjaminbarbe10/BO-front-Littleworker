@@ -15,6 +15,9 @@ a{
 .show{
     display: block!important;
 }
+.hide{
+    display: none!important;
+}
 
 .current{
     border-bottom: 3px solid #2D8B95;
@@ -371,7 +374,6 @@ a{
     height: 350px;
     object-fit: cover;
     cursor: pointer;
-    padding: 10px;
     transition: all 0.3s ease;
 }
 
@@ -506,6 +508,7 @@ a{
 .item-container .item-content .item-main-image img {
     object-fit: cover;
     height: 684px;
+    width: 100%;
 }
 
 * {box-sizing:border-box}
@@ -533,10 +536,8 @@ a{
 .prev, .next {
     cursor: pointer;
     position: absolute;
-    top: 41%;
+    top: 43%;
     width: auto;
-    margin-top: -22px;
-    padding: 16px;
     color: black;
     font-weight: bold;
     font-size: 48px;

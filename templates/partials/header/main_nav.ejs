@@ -7,22 +7,51 @@
     (function() { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
-    <img class="logo" src="/images/logo.png" alt="LittleWorker">
+    <img onmouseover="hideCollapsedMenu()" class="logo" src="/images/logo.png" alt="LittleWorker">
     <div class="desktop-nav">
         <ul class="desktop-nav-list">
             <li onmouseover="showCollapsedMenu('collapsed-menu-realisations')"><a href="#" class="current">Nos réalisations</a> </li>
-            <li><a href="#">Architecture d’intérieur</a> </li>
-            <li><a href="#">Travaux de rénovation</a> </li>
-            <li><a href="#">Les guides</a> </li>
-            <li><a href="#">Espace Pro</a> </li>
+            <li onmouseover="showCollapsedMenu('collapsed-menu-architecte')"><a href="#">Architecture d’intérieur</a> </li>
+            <li onmouseover="showCollapsedMenu('collapsed-menu-works')"><a href="#">Travaux de rénovation</a> </li>
+            <li onmouseover="showCollapsedMenu('collapsed-menu-guides')"><a href="#">Les guides</a> </li>
+            <li onmouseover="showCollapsedMenu('collapsed-menu-about')"><a href="#">À propos</a> </li>
+            <li onmouseover="hideCollapsedMenu()"><a href="#">Espace Pro</a> </li>
         </ul>
-            <div id="collapsed-menu-realisations" class="collapsed-menu" >
+            <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-realisations" class="collapsed-menu" >
                 <div  class="collapsed-menu-content" >
                     <div class="content-row">
-                        colapsed-menu
+                        colapsed-menu 1
                     </div>
                 </div>
             </div>
+        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-architecte" class="collapsed-menu" >
+            <div  class="collapsed-menu-content" >
+                <div class="content-row">
+                    colapsed-menu 2
+                </div>
+            </div>
+        </div>
+        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-works" class="collapsed-menu" >
+            <div  class="collapsed-menu-content" >
+                <div class="content-row">
+                    colapsed-menu 3
+                </div>
+            </div>
+        </div>
+        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-guides" class="collapsed-menu" >
+            <div  class="collapsed-menu-content" >
+                <div class="content-row">
+                    colapsed-menu 4
+                </div>
+            </div>
+        </div>
+        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-about" class="collapsed-menu" >
+            <div  class="collapsed-menu-content" >
+                <div class="content-row">
+                    colapsed-menu 4
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="right-btn">
@@ -41,12 +70,23 @@
 
 <script>
     function showCollapsedMenu(menucollapsed) {
-        const othersmenu = document.getElementsByClassName('collapsed-menu')
-        if (othersmenu !== undefined) {
-
+        let collapsedMenus = document.getElementsByClassName('collapsed-menu')
+        for (let item of collapsedMenus) {
+            if(item.classList.contains('show')) {
+                item.classList.remove('show')
+            }
         }
         const menu = document.getElementById(menucollapsed);
         menu.classList.add('show');
 
+    }
+
+    function hideCollapsedMenu() {
+        let collapsedMenus = document.getElementsByClassName('collapsed-menu')
+        for (let item of collapsedMenus) {
+            if(item.classList.contains('show')) {
+                item.classList.remove('show')
+            }
+        }
     }
 </script>
