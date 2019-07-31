@@ -1,23 +1,32 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
+<link type="text/css" rel="stylesheet" href="/landings.css"/>
+
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
-<script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+<script type="text/javascript">
+
+    (function() { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
     <img class="logo" src="/images/logo.png" alt="LittleWorker">
     <div class="desktop-nav">
         <ul class="desktop-nav-list">
-            <li><a href="#" class="current">Nos réalisations</a> </li>
+            <li onmouseover="showCollapsedMenu('collapsed-menu-realisations')"><a href="#" class="current">Nos réalisations</a> </li>
             <li><a href="#">Architecture d’intérieur</a> </li>
             <li><a href="#">Travaux de rénovation</a> </li>
             <li><a href="#">Les guides</a> </li>
             <li><a href="#">Espace Pro</a> </li>
         </ul>
-
+            <div id="collapsed-menu-realisations" class="collapsed-menu" >
+                <div  class="collapsed-menu-content" >
+                    <div class="content-row">
+                        colapsed-menu
+                    </div>
+                </div>
+            </div>
     </div>
 
     <div class="right-btn">
-        <button
-                (click)="showGeolocPopup()">
+        <button>
             <img src="/images/icons/map-marker.png">
         </button>
 
@@ -30,3 +39,14 @@
     </div>
 </nav>
 
+<script>
+    function showCollapsedMenu(menucollapsed) {
+        const othersmenu = document.getElementsByClassName('collapsed-menu')
+        if (othersmenu !== undefined) {
+
+        }
+        const menu = document.getElementById(menucollapsed);
+        menu.classList.add('show');
+
+    }
+</script>

@@ -10,8 +10,10 @@ exports.findBySlug = (req, res, next) => {
       .exec((pErr, project) => {
         if (pErr) return next(pErr);
         if (!project) return next();
-
-        return res.render('../templates/project.ejs', { project: project });
+          Project.find((err, projects) => {
+              if (err) return next(err);
+              return res.render('../templates/project.ejs', { project: project, projects: projects   });
+          });
       });
 };
 

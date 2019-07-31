@@ -4,7 +4,7 @@
     <div class="breadcrumb">
         Accueil > Rénovation d’appartement > Nos réalisations > Appartements
     </div>
-    <div class="header-container">
+    <div class="custom-header-container">
         <div class="header-titles">
             <h1 class="header-title"><%=project.name%></h1>
             <button class="header-btn">Demander un devis</button>
@@ -49,8 +49,95 @@
                 <img src="/<%=project.images.secondary_left.url%>" alt="<%=project.images.secondary_left.alt%>">
                 <img src="/<%=project.images.secondary_right.url%>" alt="<%=project.images.secondary_right.alt%>">
             </div>
-        </div>
+
+            <%if (project.othersimages.length > 0) {%>
+                <div class="slideshow-container">
+                    <div class="slideshow-title">Voir toutes les photos</div>
+                        <% for(let i = 1; i < (project.othersimages.length / 3)+1; i++) { %>
+
+                            <div class="mySlides fade">
+                                <% for(let x = 0; x < 3; x++) {
+
+                                    if( project.othersimages[ (((i*3) - 3 ) + x) ]) { %>
+                                <img src="/<%= project.othersimages[ (((i*3) - 3 ) + x) ] %>">
+                                <% } %>
+
+                                <% } %>
+                            </div>
+
+                            <a class="prev" onclick="plusSlides(-1)"><i class="fas fa-angle-left"></i></a>
+                            <a class="next" onclick="plusSlides(1)"><i class="fas fa-angle-right"></i></a>
+                        <%}%>
+
+                </div>
+
+            <%}%>
+
+
+                <div class=" more-projects-container">
+                    <div class="more-projects-title">Découvrir d'autres projets : </div>
+                    <div class="items-container">
+                        <% projects.slice(-3).forEach((p) => { %>
+                        <div class="items-content">
+                            <img onmouseover="onProjectHover('<%=p.id%>-img', '<%=p.id%>-titles')"  class="item-img" src="/<%=p.images.main.url%>" alt="<%=p.images.main.alt%>">
+                            <div onmouseleave="onProjectLeave('<%=p.id%>-img', '<%=p.id%>-titles')" id="<%=p.id%>-img" class="item-hover-content">
+                                <div class="item-hover-content-title">Surface : <span class="item-hover-content-value"><%=p.surface%> m2</span></div>
+                                <div class="item-hover-content-title">Budget : <span class="item-hover-content-value"><%=p.budgect%></span></div>
+                                <div class="item-hover-content-title">Durée : <span class="item-hover-content-value"><%=p.duration%> mois</span></div>
+                                <button class="item-hover-content-btn"><a href="<%=p.slug%>">Voir le projet <i class="fas fa-arrow-right"></i></a></button>
+                            </div>
+                            <div id="<%=p.id%>-titles" class="item-titles">
+                                <h2 class="item-title"><%= p.title %></h2>
+                                <p class="item-city"><%= p.cities %></p>
+                            </div>
+                        </div>
+                        <%})%>
+                    </div>
+
+                </div>
+
+
+    </div>
     </div>
 </div>
+
+<%- include partials/templates/maillage.ejs%>
+
 <%- include partials/footer/footer.ejs %>
 
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "flex";
+        slides[slideIndex-1].style.justifyContent = "space-evenly";
+
+    }
+
+    function onProjectHover(idimg, idtitles) {
+        document.getElementById(idimg).classList.add('display-item-hover')
+        document.getElementById(idtitles).classList.add('display-bold')
+    }
+    function onProjectLeave(idimg, idtitles) {
+        document.getElementById(idimg).classList.remove('display-item-hover')
+        document.getElementById(idtitles).classList.remove('display-bold')
+    }
+</script>

@@ -4,7 +4,7 @@
     <div class="breadcrumb">
         Accueil > Rénovation d’appartement > Nos réalisations > Appartements
     </div>
-    <div class="header-container">
+    <div class="custom-header-container">
         <div class="header-titles">
             <h1 class="header-title">Nos réalisations</h1>
             <button class="header-btn">Demander un devis</button>
@@ -18,33 +18,13 @@
     <div class="body-container">
         <div class="body-content">
             <div class="body-tags">
-                <button class="tags-btn display-tag-selected" id="appartments" onclick="changeSelectedTag('Appartements', 'appartments')">Appartements</button>
-                <button class="tags-btn" id="homes" onclick="changeSelectedTag('Maisons','homes')">Maisons</button>
-                <button class="tags-btn" id="paris" onclick="changeSelectedTag('Paris - IDF','paris')">Paris - IDF</button>
-                <button class="tags-btn" id="bordeaux" onclick="changeSelectedTag('Bordeaux - CUB','bordeaux')">Bordeaux - CUB</button>
-                <button class="tags-btn" id="current" onclick="changeSelectedTag('En cours','current')">En cours</button>
+                <button class="tags-btn display-tag-selected" id="appartments" onclick="changeSelectedTag('Appartements', <%=JSON.stringify(projects)%>, 'appartments')">Appartements</button>
+                <button class="tags-btn" id="homes" onclick="changeSelectedTag('Maisons',<%=JSON.stringify(projects)%>, 'homes')">Maisons</button>
+                <button class="tags-btn" id="paris" onclick="changeSelectedTag('Paris - IDF',<%=JSON.stringify(projects) %>, 'paris')">Paris - IDF</button>
+                <button class="tags-btn" id="bordeaux" onclick="changeSelectedTag('Bordeaux - CUB',<%=JSON.stringify(projects)%>, 'bordeaux')">Bordeaux - CUB</button>
+                <button class="tags-btn" id="current" onclick="changeSelectedTag('En cours',<%=JSON.stringify(projects)%>, 'current')">En cours</button>
             </div>
-            <div class="items-container">
-                <% projects.forEach((project) => { %>
-                <%selectedTag = 'Appartements'%>
-
-                <% if (project.tags.includes(selectedTag)) { %>
-                    <div class="items-content">
-                        <img onmouseover="onProjectHover('<%=project.id%>-img', '<%=project.id%>-titles')"  class="item-img" src="/<%=project.images.main.url%>" alt="<%=project.images.main.alt%>">
-                        <div onmouseleave="onProjectLeave('<%=project.id%>-img', '<%=project.id%>-titles')" id="<%=project.id%>-img" class="item-hover-content">
-                            <div class="item-hover-content-title">Surface : <span class="item-hover-content-value"><%=project.surface%> m2</span></div>
-                            <div class="item-hover-content-title">Budget : <span class="item-hover-content-value"><%=project.budgect%></span></div>
-                            <div class="item-hover-content-title">Durée : <span class="item-hover-content-value"><%=project.duration%> mois</span></div>
-                            <button class="item-hover-content-btn"><a href="<%=project.slug%>">Voir le projet <i class="fas fa-arrow-right"></i></a></button>
-                        </div>
-                        <div id="<%=project.id%>-titles" class="item-titles">
-                            <h2 class="item-title"><%= project.title %></h2>
-                            <p class="item-city"><%= project.cities %></p>
-                        </div>
-
-                    </div>
-                    <%}%>
-                <% }); %>
+            <div id="item-display" class="items-container">
             </div>
         </div>
     </div>
@@ -56,25 +36,104 @@
 <%- include partials/footer/footer.ejs %>
 
 <script type="text/javascript">
-    changeSelectedTag = function(tag,id) {
+
+    changeSelectedTag = function(tag, projects, id) {
         let btns = document.getElementsByClassName('tags-btn')
         for (let item of btns) {
             if(item.classList.contains('display-tag-selected')) {
                 item.classList.remove('display-tag-selected')
             }
-         }
+        }
         document.getElementById(id).classList.add('display-tag-selected')
         selectedTag = tag;
-        console.log(selectedTag)
-    }
-    onProjectHover = function(idimg, idtitles) {
-        document.getElementById(idimg).classList.add('display-item-hover')
-        document.getElementById(idtitles).classList.add('display-bold')
-    }
-    onProjectLeave = function(idimg, idtitles) {
-        document.getElementById(idimg).classList.remove('display-item-hover')
-        document.getElementById(idtitles).classList.remove('display-bold')
+        selectedTag = tag;
+        console.log(selectedTag);
+        var main = document.getElementById('item-display');
+        main.innerHTML = '';
+        console.log(projects);
+        projects.forEach(el => {
+            if (el.tags.includes(selectedTag)) {
+                console.log(el)
+                //create div
+                const itemsContent = document.createElement('div');
+                const itemImg = document.createElement('img');
+                const itemHoverContent = document.createElement('div');
+                const itemSurface = document.createElement('div');
+                const itemBudget = document.createElement('div');
+                const itemDuration = document.createElement('div');
+                const itemSurfaceValue = document.createElement('span');
+                const itemBudgetValue = document.createElement('span');
+                const itemDurationValue = document.createElement('span');
+                const itemTitle = document.createElement('h2');
+                const itemCity = document.createElement('p');
+                const itemHoverContentBtn = document.createElement('button');
+                const btnArrow = document.createElement('i');
+
+                const itemTitles = document.createElement('div');
+
+                //add class
+                itemImg.className = 'item-img';
+                itemsContent.className = 'items-content';
+                itemHoverContent.className = 'item-hover-content';
+                itemSurface.className = 'item-hover-content-title';
+                itemBudget.className = 'item-hover-content-title';
+                itemDuration.className = 'item-hover-content-title';
+                itemSurfaceValue.className = 'item-hover-content-value';
+                itemBudgetValue.className = 'item-hover-content-value';
+                itemDurationValue.className = 'item-hover-content-value';
+                btnArrow.className = 'fas fa-arrow-right';
+                itemHoverContentBtn.className = 'item-hover-content-btn';
+                itemTitle.className = 'item-title';
+                itemCity.className = 'item-city';
+
+                //add event listener
+                itemsContent.addEventListener("mouseenter", function () {
+                    itemHoverContent.classList.add('display-item-hover');
+                    itemTitles.classList.add('display-bold')  ;
+                });
+                itemHoverContent.addEventListener("mouseleave", function () {
+                    itemHoverContent.classList.remove('display-item-hover');
+                    itemTitles.classList.remove('display-bold')  ;
+                });
+                itemHoverContentBtn.addEventListener("click", function () {
+                    window.open('/projects/' + el.slug, "_self");
+                });
+                //put content
+                itemTitle.innerHTML = el.title;
+                itemCity.innerHTML = el.cities;
+                itemSurface.innerText = 'Surface : ';
+                itemBudget.innerText = 'Budget : ';
+                itemDuration.innerText = 'Durée : ';
+                itemSurfaceValue.innerHTML = el.surface + ' m2';
+                itemBudgetValue.innerHTML = el.budgect;
+                itemDurationValue.innerHTML = el.duration + '  mois';
+
+                itemImg.src = '/' + el.images.main.url;
+                itemImg.alt = el.images.main.alt;
+                itemHoverContentBtn.innerText = 'Voir le projet';
+                //display
+                itemSurface.appendChild(itemSurfaceValue);
+                itemBudget.appendChild(itemBudgetValue);
+                itemDuration.appendChild(itemDurationValue);
+
+                itemHoverContent.appendChild(itemSurface);
+                itemHoverContent.appendChild(itemBudget);
+                itemHoverContent.appendChild(itemDuration);
+                itemHoverContentBtn.appendChild(btnArrow);
+                itemHoverContent.appendChild(itemHoverContentBtn);
+                itemTitles.appendChild(itemTitle);
+                itemTitles.appendChild(itemCity);
+                itemsContent.appendChild(itemImg);
+                itemsContent.appendChild(itemHoverContent);
+                itemsContent.appendChild(itemTitles);
+                main.appendChild(itemsContent);
+            }
+
+        });
 
     }
+    document.getElementById('appartments').click();
+
+
 </script>
 

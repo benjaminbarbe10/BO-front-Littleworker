@@ -5,7 +5,7 @@
     <div class="breadcrumb">
         Accueil > Rénovation d’appartement > Nos réalisations > Appartements
     </div>
-    <div class="header-container">
+    <div class="custom-header-container">
         <div class="header-titles">
             <h1 class="header-title">Nos shapers <span class="gold-star-large">*</span></h1>
             <button class="header-btn">Demander un devis</button>
@@ -19,31 +19,14 @@
     <div class="body-container">
         <div class="body-content">
             <div class="body-tags">
-                <button class="tags-btn display-tag-selected" id="architect" onclick="changeSelectedTag('Architectes','architect')">Architectes</button>
-                <button class="tags-btn" id="worsite-manager" onclick="changeSelectedTag('Chefs de chantier','worsite-manager')">Chefs de chantier</button>
-                <button class="tags-btn" id="decorator" onclick="changeSelectedTag('Decorateur','decorator')">Décorateur</button>
-                <button class="tags-btn" id="paris" onclick="changeSelectedTag('Paris','current')">Paris</button>
-                <button class="tags-btn" id="bordeaux" onclick="changeSelectedTag('Bordeaux','bordeaux')">Bordeaux</button>
+                <button class="tags-btn display-tag-selected" id="architect" onclick="changeSelectedTag('Architectes', <%=JSON.stringify(shapers)%>,'architect')">Architectes</button>
+                <button class="tags-btn" id="worsite-manager" onclick="changeSelectedTag('Chefs de chantier', <%=JSON.stringify(shapers)%>,'worsite-manager')">Chefs de chantier</button>
+                <button class="tags-btn" id="decorator" onclick="changeSelectedTag('Decorateur', <%=JSON.stringify(shapers)%>,'decorator')">Décorateur</button>
+                <button class="tags-btn" id="paris" onclick="changeSelectedTag('Paris', <%=JSON.stringify(shapers)%>,'paris')">Paris</button>
+                <button class="tags-btn" id="bordeaux" onclick="changeSelectedTag('Bordeaux', <%=JSON.stringify(shapers)%>,'bordeaux')">Bordeaux</button>
 
             </div>
-            <div class="items-container">
-                <% shapers.forEach((shaper) => { %>
-                <%selectedTag = 'Architectes'%>
-
-                <% if (shaper.tags.includes(selectedTag)) { %>
-                <div class="items-content">
-                    <img onmouseover="onProjectHover('<%=shaper.id%>-img', '<%=shaper.id%>-titles')"  class="item-img" src="/<%=shaper.images.main.url%>" alt="<%=shaper.images.main.alt%>">
-                    <div onmouseleave="onProjectLeave('<%=shaper.id%>-img', '<%=shaper.id%>-titles')" id="<%=shaper.id%>-img" class="item-hover-content">
-                        <button class="item-hover-content-btn">Voir le shaper <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                    <div id="<%=shaper.id%>-titles" class="item-titles">
-                        <h2 class="item-title"><%= shaper.title %></h2>
-                        <p class="item-city"><%= shaper.cities %></p>
-                    </div>
-
-                </div>
-                <%}%>
-                <% }); %>
+            <div id="item-display" class="items-container">
             </div>
         </div>
     </div>
@@ -55,7 +38,8 @@
 <%- include partials/footer/footer.ejs %>
 
 <script type="text/javascript">
-    changeSelectedTag = function(tag,id) {
+
+    changeSelectedTag = function(tag, shapers, id) {
         let btns = document.getElementsByClassName('tags-btn')
         for (let item of btns) {
             if(item.classList.contains('display-tag-selected')) {
@@ -64,15 +48,68 @@
         }
         document.getElementById(id).classList.add('display-tag-selected')
         selectedTag = tag;
-        console.log(selectedTag)
-    }
-    onProjectHover = function(idimg, idtitles) {
-        document.getElementById(idimg).classList.add('display-item-hover')
-        document.getElementById(idtitles).classList.add('display-bold')
-    }
-    onProjectLeave = function(idimg, idtitles) {
-        document.getElementById(idimg).classList.remove('display-item-hover')
-        document.getElementById(idtitles).classList.remove('display-bold')
+        selectedTag = tag;
+        console.log(selectedTag);
+        var main = document.getElementById('item-display');
+        main.innerHTML = '';
+        shapers.forEach(el => {
+            if (el.tags.includes(selectedTag)) {
+                console.log(el)
+                //create div
+                const itemsContent = document.createElement('div');
+                const itemImg = document.createElement('img');
+                const itemHoverContent = document.createElement('div');
+                const itemTitle = document.createElement('h2');
+                const itemCity = document.createElement('p');
+                const itemHoverContentBtn = document.createElement('button');
+                const btnArrow = document.createElement('i');
+
+                const itemTitles = document.createElement('div');
+
+                //add class
+                itemImg.className = 'item-img';
+                itemsContent.className = 'items-content';
+                itemHoverContent.className = 'item-hover-content';
+                btnArrow.className = 'fas fa-arrow-right';
+                itemHoverContentBtn.className = 'item-hover-content-btn';
+                itemTitle.className = 'item-title';
+                itemCity.className = 'item-city';
+
+                //add event listener
+                itemsContent.addEventListener("mouseenter", function () {
+                    itemHoverContent.classList.add('display-item-hover');
+                    itemTitles.classList.add('display-bold')  ;
+                });
+                itemHoverContent.addEventListener("mouseleave", function () {
+                    itemHoverContent.classList.remove('display-item-hover');
+                    itemTitles.classList.remove('display-bold')  ;
+                });
+                itemHoverContentBtn.addEventListener("click", function () {
+                    window.open('/shapers/' + el.slug, "_self");
+                });
+                //put content
+                itemTitle.innerHTML = el.title;
+                itemCity.innerHTML = el.cities;
+
+                itemImg.src = '/' + el.images.main.url;
+                itemImg.alt = el.images.main.alt;
+                itemHoverContentBtn.innerText = 'Voir le projet';
+                //display
+
+                itemHoverContentBtn.appendChild(btnArrow);
+                itemHoverContent.appendChild(itemHoverContentBtn);
+                itemTitles.appendChild(itemTitle);
+                itemTitles.appendChild(itemCity);
+                itemsContent.appendChild(itemImg);
+                itemsContent.appendChild(itemHoverContent);
+                itemsContent.appendChild(itemTitles);
+                main.appendChild(itemsContent);
+            }
+
+        });
 
     }
+    document.getElementById('architect').click();
+
+
 </script>

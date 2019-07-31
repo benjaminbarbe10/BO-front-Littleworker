@@ -118,13 +118,6 @@ app.post('/upload/lworkers',upload.single('lworker'), function (req, res) {
 });
 
 // 404 Handler
-app.use(function(req, res, next) {
-    if (!req.path.match(/\.[a-z0-1]{3,5}$/)) {
-        return res.sendFile(path.join(staticPath, 'index.html'));
-    }
-    res.status(404).send('404 :(');
-});
-
 
 app.use(function(err, req, res, next) {
     console.error(err.stack);
