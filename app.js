@@ -4,21 +4,22 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const expressJWT = require('express-jwt');
 const path = require('path');
-
 //AUTH
 const jwt = require('jsonwebtoken');
 
 const expressJwt = require('express-jwt');
 const multer = require('multer');
+const MobileDetect = require('mobile-detect');
 
 const staticPathPublic = path.join(process.cwd(), 'public');
 const staticPathUploads = path.join(process.cwd(), 'uploads');
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(staticPathPublic));
 app.use(express.static(staticPathUploads));
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/templates'));
 
@@ -63,7 +64,12 @@ const home = require("./routes/index");
 
 // Add headers
 app.use(function (req, res, next) {
+    const md = new MobileDetect(req.headers['user-agent']);
 
+    const isMobile =  !!md.mobile();
+    app.locals = {
+        isMobile: isMobile
+    };
     // Website you wish to allow to connect
     res.header('Access-Control-Allow-Origin', '*');
 
@@ -93,7 +99,6 @@ app.post('/auth', function(req, res) {
     const token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
     res.send({token});
 });
-
 
 
 app.use("/press", press);

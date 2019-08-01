@@ -21,12 +21,10 @@ exports.findBySlug = (req, res, next) => {
 
                     shaper.projects.forEach(p => {
                         return Project
-                            .findOne({_id: ObjectId("5d3b51c74aadde838dbf4e4c")}, function (err, docs) {
+                            .findOne({_id: p._id}, function (err, shaperProject) {
+                                console.log(shaperProject)
                             })
                     });
-
-
-
 
                 }
                 return res.render('../templates/shaper.ejs', {

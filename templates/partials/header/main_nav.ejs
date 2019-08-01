@@ -11,6 +11,7 @@
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
     <img onmouseover="hideCollapsedMenu()" class="logo" src="/images/logo.png" alt="LittleWorker">
+    <%if (!isMobile) { %>
     <div class="desktop-nav">
         <ul class="desktop-nav-list">
             <li onmouseover="showCollapsedMenu('collapsed-menu-realisations')"><a href="#" class="current">Nos réalisations</a> </li>
@@ -84,6 +85,7 @@
             </div>
         </div>
     </div>
+    <%}%>
 
     <div class="right-btn">
         <button>
@@ -93,9 +95,18 @@
         <button class="user-btn">
             <a href="https://auth.littleworker.fr/"><img src="/images/icons/user.png"></a>
         </button>
+        <%if (isMobile) { %>
+        <button type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+            <img src="/images/icons/menu.png" >
+            <!--<img *ngIf="isMenuOpen" src="../../assets/images/icons/croix.svg" >-->
+
+        </button>
+        <%}%>
+        <%if (!isMobile) { %>
         <button class="item-estimation-btn" >
             Estimer mon projet
         </button>
+        <%}%>
     </div>
 </nav>
 

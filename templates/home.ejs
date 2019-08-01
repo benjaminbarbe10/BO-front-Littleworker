@@ -1,5 +1,5 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
-<%- include('partials/header/main_nav.ejs', {isMobile:isMobile}); %>
+<%- include('partials/header/main_nav.ejs'); %>
 
 <div class="body">
     <div class="homepage-header-container">
@@ -60,37 +60,42 @@
         <div class="intervention-zone">
             <h2 class="title section-title">Nos zones d'interventions</h2>
             <div class="line"></div>
-            <div class="intervention-zone-item">
-                <img src="/images/paris.png" alt="Tendances 2019">
-                <div class="filter"></div>
-                <div class="item-text">
-                    <p class="item-title">Paris </p>
-                    <p class="item-desc">et sa petite couronne</p>
+            <div class="intervention-zone-content">
+                <div class="intervention-zone-item">
+                    <img src="/images/paris.png" alt="Tendances 2019">
+                    <div class="filter"></div>
+                    <div class="item-text">
+                        <p class="item-title">Paris </p>
+                        <p class="item-desc">et sa petite couronne</p>
+                    </div>
+                </div>
+                <div class="intervention-zone-item">
+                    <div class="filter"></div>
+                    <img src="/images/paris.png" alt="Tendances 2019">
+                    <div class="item-text">
+                        <p class="item-title">Bordeaux</p>
+                        <p class="item-desc">et sa communauté urbaine</p>
+                    </div>
                 </div>
             </div>
-            <div class="intervention-zone-item">
-                <div class="filter"></div>
-                <img src="/images/paris.png" alt="Tendances 2019">
-                <div class="item-text">
-                    <p class="item-title">Bordeaux</p>
-                    <p class="item-desc">et sa communauté urbaine</p>
-                </div>
-            </div>
-            <h2 class="section-title">et bientôt : </h2>
             <div class="soon-container">
-            <span class="soon-item">
-                Nantes
-            </span>
+                <h2 class="section-title">et bientôt : </h2>
+                <div class="soon-content">
                 <span class="soon-item">
-                Toulouse
-            </span>
-                <span class="soon-item">
-                Lille
-            </span>
-                <span class="soon-item">
-                Lyon
-            </span>
+                    Nantes
+                </span>
+                    <span class="soon-item">
+                    Toulouse
+                </span>
+                    <span class="soon-item">
+                    Lille
+                </span>
+                    <span class="soon-item">
+                    Lyon
+                </span>
+                </div>
             </div>
+
 
         </div>
 
@@ -128,19 +133,38 @@
         <div class="satisfaction-container">
             <h2 class="section-title">Ils sont satisfaits de leurs travaux</h2>
             <div class="line"></div>
-            <img class="satisfaction-img" src="/images/satisfaction.png" alt="">
-            <p class="satisfaction-text">Nous avons fait appel à Little Worker pour la rénovation de notre appart. C'est la première fois que nous faisions
-                ce type de projet et l'équipe a été à l'écoute, disponible et très patiente ! Ils nous ont rassuré à chaque étape du projet et le résultat nous
-                plaît beaucoup. C'est très confortable de pouvoir s'appuyer sur eux, notamment quand on travaille et qu'on ne s'y connaît pas en rénovation.
-                C'est un gain de temps et d'énergie pour un super résultat ! </br> </br>Aurélien C - Juin 2019</p>
-            <h2 class="see-quotations">Voir les avis sur : </h2>
-            <div class="satisfaction-buttons">
-                <button class="trustpilot-btn"><a href="#"><i class="fas fa-star"></i>Trustpilot</a></button>
-                <button class="google-btn"><a href="#"><i class="fab fa-google"></i>Google</a></button>
+            <div class="satisfaction-contents">
+                <img class="satisfaction-img" src="/images/satisfaction.png" alt="">
+                <div class="feedbacks-container">
+                    <p class="satisfaction-text">Nous avons fait appel à Little Worker pour la rénovation de notre appart. C'est la première fois que nous faisions
+                        ce type de projet et l'équipe a été à l'écoute, disponible et très patiente ! Ils nous ont rassuré à chaque étape du projet et le résultat nous
+                        plaît beaucoup. C'est très confortable de pouvoir s'appuyer sur eux, notamment quand on travaille et qu'on ne s'y connaît pas en rénovation.
+                        C'est un gain de temps et d'énergie pour un super résultat ! </br> </br>Aurélien C - Juin 2019</p>
+                    <h2 class="see-quotations">Voir les avis sur : </h2>
+                    <div class="satisfaction-buttons">
+                        <button class="trustpilot-btn"><a href="#"><i class="fas fa-star"></i>Trustpilot</a></button>
+                        <button class="google-btn"><a href="#"><i class="fab fa-google"></i>Google</a></button>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
 
+        </div>
+        <%if (!isMobile) {%>
+            <div class="before-after-container">
+                <div class="wrapper">
+                    <div class="before">
+                        <img class="content-image" src="/images/projects-background.png" draggable="false"/>   </div>
+                    <div class="after">
+                        <img class="content-image" src="/images/before.png" draggable="false"/>
+                    </div>
+                    <div class="scroller">
+                        <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="0 50 37 68 37 32 0 50" style="fill:#fff"/><polygon points="100 50 64 32 64 68 100 50" style="fill:#fff"/></svg>
+                    </div>
+                </div>
+            </div>
+        <%}%>
         <div class="hometour-container">
             <h2 class="section-title">Home Tour chez Juliette : architecte partenaire depuis 2 ans</h2>
             <div class="line"></div>
@@ -161,12 +185,75 @@
             </p>
             <a class="all-projects-link" href="/projects/list"><i class="fas fa-caret-right"></i>Voir tous nos projets à Bordeaux</a>
         </div>
+
+
+
     </div>
 </div>
 
 <%- include partials/footer/footer.ejs %>
 
 <script>
+    // I hope this over-commenting helps. Let's do this!
+    // Let's use the 'active' variable to let us know when we're using it
+    let active = false;
+
+    // First we'll have to set up our event listeners
+    // We want to watch for clicks on our scroller
+    document.querySelector('.scroller').addEventListener('mousedown',function(){
+        active = true;
+        // Add our scrolling class so the scroller has full opacity while active
+        document.querySelector('.scroller').classList.add('scrolling');
+    });
+    // We also want to watch the body for changes to the state,
+    // like moving around and releasing the click
+    // so let's set up our event listeners
+    document.body.addEventListener('mouseup',function(){
+        active = false;
+        document.querySelector('.scroller').classList.remove('scrolling');
+    });
+    document.body.addEventListener('mouseleave',function(){
+        active = false;
+        document.querySelector('.scroller').classList.remove('scrolling');
+    });
+
+    // Let's figure out where their mouse is at
+    document.body.addEventListener('mousemove',function(e){
+        if (!active) return;
+        // Their mouse is here...
+        let x = e.pageX;
+        // but we want it relative to our wrapper
+        x -= document.querySelector('.wrapper').getBoundingClientRect().left;
+        // Okay let's change our state
+        scrollIt(x);
+    });
+
+    // Let's use this function
+    function scrollIt(x){
+        let transform = Math.max(0,(Math.min(x,document.querySelector('.wrapper').offsetWidth)));
+        document.querySelector('.after').style.width = transform+"px";
+        document.querySelector('.scroller').style.left = transform-25+"px";
+    }
+
+    // Let's set our opening state based off the width,
+    // we want to show a bit of both images so the user can see what's going on
+    scrollIt(150);
+
+    // And finally let's repeat the process for touch events
+    // first our middle scroller...
+    document.querySelector('.scroller').addEventListener('touchstart',function(){
+        active = true;
+        document.querySelector('.scroller').classList.add('scrolling');
+    });
+    document.body.addEventListener('touchend',function(){
+        active = false;
+        document.querySelector('.scroller').classList.remove('scrolling');
+    });
+    document.body.addEventListener('touchcancel',function(){
+        active = false;
+        document.querySelector('.scroller').classList.remove('scrolling');
+    });
+
     function onProjectHover(idimg, idtitles) {
         document.getElementById(idimg).classList.add('display-item-hover')
         document.getElementById(idtitles).classList.add('display-bold')
