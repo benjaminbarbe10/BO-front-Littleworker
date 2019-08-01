@@ -1,0 +1,179 @@
+<link type="text/css" rel="stylesheet" href="/style.css"/>
+<%- include('partials/header/main_nav.ejs', {isMobile:isMobile}); %>
+
+<div class="body">
+    <div class="homepage-header-container">
+        <%if (isMobile) {%>
+            <img class="background" src="/images/backgrounds/home-page-mobile.png" alt="">
+    <%}else {%>
+             <img class="background" src="/images/backgrounds/home-page-desktop.png" alt="">
+        <%}%>
+        <div class="header-content">
+            <h1 class="tag">#WeAreHomeShapers</h1>
+            <p class="title">Confiez nous vos travaux,
+                Emménagez dans un intérieur qui vous ressemble.</p>
+            <div class="quotation-btn">
+                <p class="quotation-btn-content">Demander un devis</p>
+            </div>
+            <i class="fas fa-arrow-down down-arrow bounce"></i>
+            <div class="tv-talk">
+                <p class="tv-talk-title">Ils parlent de nous</p>
+                <div class="tv-talk-logos">
+                    <img src="/images/logos/france2.png" alt="France 2">
+                    <img src="/images/logos/bfmtv.png" alt="BFM TV">
+                    <img src="/images/logos/france3.png" alt="France 3">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="homepage-body-container">
+        <div class="why-trust">
+            <h2 class="title section-title">
+                Pourquoi nous faire confiance ?
+            </h2>
+            <div class="line"></div>
+            <div class="why-trust-content">
+                <div class="trust-group">
+                    <img src="/images/pictos/home.svg" alt="">
+                    <h3 class="trust-title">200 chantiers en 2018</h3>
+                    <a class="blue" href="#">Je veux les voir !</a>
+                </div>
+                <div class="trust-group">
+                    <img src="/images/pictos/ticket.png" alt="">
+                    <h3 class="trust-title">Des travaux au prix du marché</h3>
+                    <a class="orange" href="#">Estimez vous verrez !</a>
+                </div>
+                <div class="trust-group">
+                    <img src="/images/pictos/certificate.png" alt="">
+                    <h3 class="trust-title">Des travaux garantie 10 ans</h3>
+                    <a class="blue" href="#">Comment ca marche ?</a>
+                </div>
+                <div class="trust-group">
+                    <img src="/images/pictos/worker.png" alt="">
+                    <h3 class="trust-title">Un chef de chantier pour votre projet</h3>
+                    <a class="orange" href="#">Qui sont-ils ?</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="intervention-zone">
+            <h2 class="title section-title">Nos zones d'interventions</h2>
+            <div class="line"></div>
+            <div class="intervention-zone-item">
+                <img src="/images/paris.png" alt="Tendances 2019">
+                <div class="filter"></div>
+                <div class="item-text">
+                    <p class="item-title">Paris </p>
+                    <p class="item-desc">et sa petite couronne</p>
+                </div>
+            </div>
+            <div class="intervention-zone-item">
+                <div class="filter"></div>
+                <img src="/images/paris.png" alt="Tendances 2019">
+                <div class="item-text">
+                    <p class="item-title">Bordeaux</p>
+                    <p class="item-desc">et sa communauté urbaine</p>
+                </div>
+            </div>
+            <h2 class="section-title">et bientôt : </h2>
+            <div class="soon-container">
+            <span class="soon-item">
+                Nantes
+            </span>
+                <span class="soon-item">
+                Toulouse
+            </span>
+                <span class="soon-item">
+                Lille
+            </span>
+                <span class="soon-item">
+                Lyon
+            </span>
+            </div>
+
+        </div>
+
+        <div class="renovation-container d-flex-align">
+            <h2 class="section-title">Nos dernières rénovations</h2>
+            <div class="line"></div>
+                <div class="body-content">
+                    <div class="items-container">
+                        <% projects.slice(-3).forEach((p) => { %>
+                        <div class="items-content">
+                            <img onmouseover="onProjectHover('<%=p.id%>-img', '<%=p.id%>-titles')"  class="item-img" src="/<%=p.images.main.url%>" alt="<%=p.images.main.alt%>">
+                            <div onmouseleave="onProjectLeave('<%=p.id%>-img', '<%=p.id%>-titles')" id="<%=p.id%>-img" class="item-hover-content">
+                                <div class="item-hover-content-title">Surface : <span class="item-hover-content-value"><%=p.surface%> m2</span></div>
+                                <div class="item-hover-content-title">Budget : <span class="item-hover-content-value"><%=p.budgect%></span></div>
+                                <div class="item-hover-content-title">Durée : <span class="item-hover-content-value"><%=p.duration%> mois</span></div>
+                                <button class="item-hover-content-btn"><a href="/projects/<%=p.slug%>">Voir le projet <i class="fas fa-arrow-right"></i></a></button>
+                            </div>
+                            <div id="<%=p.id%>-titles" class="item-titles">
+                                <h2 class="item-title"><%= p.title %></h2>
+                                <p class="item-city"><%= p.cities %></p>
+                            </div>
+                        </div>
+                        <%})%>
+                    </div>
+                </div>
+        </div>
+        <div class="buttons-container">
+            <button class="ask-quotation">
+                <a href="">Demander un devis gratuit</a>
+            </button>
+            <button class="see-projects">
+                <a href="/projects/list">Voir tous les projets</a>
+            </button>
+        </div>
+        <div class="satisfaction-container">
+            <h2 class="section-title">Ils sont satisfaits de leurs travaux</h2>
+            <div class="line"></div>
+            <img class="satisfaction-img" src="/images/satisfaction.png" alt="">
+            <p class="satisfaction-text">Nous avons fait appel à Little Worker pour la rénovation de notre appart. C'est la première fois que nous faisions
+                ce type de projet et l'équipe a été à l'écoute, disponible et très patiente ! Ils nous ont rassuré à chaque étape du projet et le résultat nous
+                plaît beaucoup. C'est très confortable de pouvoir s'appuyer sur eux, notamment quand on travaille et qu'on ne s'y connaît pas en rénovation.
+                C'est un gain de temps et d'énergie pour un super résultat ! </br> </br>Aurélien C - Juin 2019</p>
+            <h2 class="see-quotations">Voir les avis sur : </h2>
+            <div class="satisfaction-buttons">
+                <button class="trustpilot-btn"><a href="#"><i class="fas fa-star"></i>Trustpilot</a></button>
+                <button class="google-btn"><a href="#"><i class="fab fa-google"></i>Google</a></button>
+            </div>
+
+        </div>
+
+        <div class="hometour-container">
+            <h2 class="section-title">Home Tour chez Juliette : architecte partenaire depuis 2 ans</h2>
+            <div class="line"></div>
+            <div class="hometour-video">
+                <iframe width="960" height="540" src="https://www.youtube.com/embed/06iVRoX83s4" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="hometour-video-title-container">
+                <h2>Rénovation d’une échoppe bordelaise.</h2>
+                <p>Découvrir la vidéo</p>
+            </div>
+            <div class="left-line"></div>
+            <p class="hometour-text">Après plusieurs mois de recherche, Juliette et Maxime ont enfin trouvé leur appartement coup de coeur !
+                Localisation, surface, luminosité, tout ce qui leur fallait, réuni en plein coeur de Paris.</br></br>
+                Seul hic.. Quelques travaux de rénovation étaient nécessaires. Qu’à cela ne tienne ! Avec Little Worker,
+                ils ont pu rénover entièrement leur appartement, en six semaines, et sans retard !</br></br>
+                Nous vous laissons découvrir leur nouvel intérieur, enfin à leur image.
+            </p>
+            <a class="all-projects-link" href="/projects/list"><i class="fas fa-caret-right"></i>Voir tous nos projets à Bordeaux</a>
+        </div>
+    </div>
+</div>
+
+<%- include partials/footer/footer.ejs %>
+
+<script>
+    function onProjectHover(idimg, idtitles) {
+        document.getElementById(idimg).classList.add('display-item-hover')
+        document.getElementById(idtitles).classList.add('display-bold')
+    }
+    function onProjectLeave(idimg, idtitles) {
+        document.getElementById(idimg).classList.remove('display-item-hover')
+        document.getElementById(idtitles).classList.remove('display-bold')
+    }
+</script>
+

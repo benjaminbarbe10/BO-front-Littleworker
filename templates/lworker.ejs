@@ -1,8 +1,20 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
 <%- include partials/header/main_nav.ejs %>
 <div class="body">
-    <h1><%= lworker.name %></h1>
+    <div class="breadcrumb">
+        Accueil > Rénovation d’appartement > Nos réalisations > Appartements
+    </div>
+    <div class="custom-header-container">
+        <div class="header-titles">
+            <h1 class="header-title"><%=lworker.name + ' ' + lworker.surname%></h1>
+            <button class="header-btn">Demander un devis</button>
+        </div>
+        <div class="header-img">
+
+            <img src="/<%=lworker.image.url%>" alt="">
+        </div>
+    </div>
 </div>
-<%- include partials/templates/maillage.ejs%>
 
 <%- include partials/footer/footer.ejs %>
+

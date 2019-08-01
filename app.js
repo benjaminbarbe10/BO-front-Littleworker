@@ -95,6 +95,7 @@ app.post('/auth', function(req, res) {
 });
 
 
+
 app.use("/press", press);
 app.use("/projects", projects);
 app.use("/landings", landings);
@@ -117,6 +118,15 @@ app.post('/upload/lworkers',upload.single('lworker'), function (req, res) {
     return res.send({ success: !!req.file });
 });
 
+app.render(__dirname + '/templates/partials/header/main_nav.ejs', { item:
+
+        {
+            "link1": "dzqdzq",
+            "link2": "qzdzqqd"
+        }
+}, function (err, html) {
+    console.log(html)
+});
 // 404 Handler
 
 app.use(function(err, req, res, next) {
