@@ -15,7 +15,9 @@
             <div class="quotation-btn">
                 <p class="quotation-btn-content">Demander un devis</p>
             </div>
-            <i class="fas fa-arrow-down down-arrow bounce"></i>
+            <%if (isMobile) { %>
+                <i class="fas fa-arrow-down down-arrow-mobile bounce"></i>
+            <%}%>
             <div class="tv-talk">
                 <p class="tv-talk-title">Ils parlent de nous</p>
                 <div class="tv-talk-logos">
@@ -25,6 +27,9 @@
 
                 </div>
             </div>
+            <%if (!isMobile) { %>
+                <i class="fas fa-arrow-down down-arrow bounce"></i>
+            <%}%>
         </div>
     </div>
     <div class="homepage-body-container">
@@ -71,7 +76,7 @@
                 </div>
                 <div class="intervention-zone-item">
                     <div class="filter"></div>
-                    <img src="/images/paris.png" alt="Tendances 2019">
+                    <img src="/images/bordeaux.jpg" alt="Tendances 2019">
                     <div class="item-text">
                         <p class="item-title">Bordeaux</p>
                         <p class="item-desc">et sa communauté urbaine</p>
@@ -103,6 +108,7 @@
             <h2 class="section-title">Nos dernières rénovations</h2>
             <div class="line"></div>
                 <div class="body-content">
+                    <%if (isMobile) {%>
                     <div class="items-container">
                         <% projects.slice(-3).forEach((p) => { %>
                         <div class="items-content">
@@ -120,6 +126,17 @@
                         </div>
                         <%})%>
                     </div>
+                    <%}else {%>
+                        <div class="body-tags">
+                            <button class="tags-btn display-tag-selected" id="appartments" onclick="changeSelectedTag('Appartements', <%=JSON.stringify(projects)%>, 'appartments')">Appartements</button>
+                            <button class="tags-btn" id="homes" onclick="changeSelectedTag('Maisons',<%=JSON.stringify(projects)%>, 'homes')">Maisons</button>
+                            <button class="tags-btn" id="paris" onclick="changeSelectedTag('Paris - IDF',<%=JSON.stringify(projects) %>, 'paris')">Paris - IDF</button>
+                            <button class="tags-btn" id="bordeaux" onclick="changeSelectedTag('Bordeaux - CUB',<%=JSON.stringify(projects)%>, 'bordeaux')">Bordeaux - CUB</button>
+                            <button class="tags-btn" id="current" onclick="changeSelectedTag('En cours',<%=JSON.stringify(projects)%>, 'current')">En cours</button>
+                        </div>
+                        <div id="item-display" class="items-container">
+                        </div>
+                    <%}%>
                 </div>
         </div>
         <div class="buttons-container">
@@ -130,10 +147,10 @@
                 <a href="/projects/list">Voir tous les projets</a>
             </button>
         </div>
-        <div class="satisfaction-container">
+        <div class="home-satisfaction-container">
             <h2 class="section-title">Ils sont satisfaits de leurs travaux</h2>
             <div class="line"></div>
-            <div class="satisfaction-contents">
+            <div class="home-satisfaction-content">
                 <img class="satisfaction-img" src="/images/satisfaction.png" alt="">
                 <div class="feedbacks-container">
                     <p class="satisfaction-text">Nous avons fait appel à Little Worker pour la rénovation de notre appart. C'est la première fois que nous faisions
@@ -151,13 +168,43 @@
 
 
         </div>
+
+        <div class="unique-container">
+            <h2 class="title section-title">Ce qui nous rend unique</h2>
+            <div class="line"></div>
+            <div class="unique-content">
+                <div class="unique-item">
+                    <img src="/images/pictos/simplicity.png" alt="">
+                    <h2 class="unique-title">#Simplicité</h2>
+                    <p class="unique-desc">Nous vous avons concocté un espace personnel en ligne aux
+                        petits oignons. Vous accédez en instantané à toutes vos informations : devis interactif,
+                        planning, matériaux, photos heure par heure, et échanges avec notre équipe.
+                    </p>
+                </div>
+                <div class="unique-item">
+                    <img src="/images/pictos/locker.png" alt="">
+                    <h2 class="unique-title">#Sécurité</h2>
+                    <p class="unique-desc">Pendant toute la durée du chantier, le montant des
+                        travaux est en sécurité sur un compte tiers à votre nom. Les montants ne
+                        seront reversés à l’entrepreneur qu’une fois le chantier terminé. </p>
+                </div>
+                <div class="unique-item">
+                    <img src="/images/pictos/security.png" alt="">
+                    <h2 class="unique-title">#Tiersdeconfiance</h2>
+                    <p class="unique-desc">En tant que contractant général, nous sommes à vos cotés avant,
+                        pendant et après la réalisation de votre projet. Nous pilotons votre projet à chaque étape
+                        clé et nous rencontrons de manière hebdomadaire nos entrepreneurs. </p>
+                </div>
+            </div>
+        </div>
+
         <%if (!isMobile) {%>
             <div class="before-after-container">
                 <div class="wrapper">
                     <div class="before">
-                        <img class="content-image" src="/images/projects-background.png" draggable="false"/>   </div>
+                        <img class="content-image" src="/images/after.jpg" draggable="false"/>   </div>
                     <div class="after">
-                        <img class="content-image" src="/images/before.png" draggable="false"/>
+                        <img class="content-image" src="/images/before.jpg" draggable="false"/>
                     </div>
                     <div class="scroller">
                         <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="0 50 37 68 37 32 0 50" style="fill:#fff"/><polygon points="100 50 64 32 64 68 100 50" style="fill:#fff"/></svg>
@@ -168,22 +215,33 @@
         <div class="hometour-container">
             <h2 class="section-title">Home Tour chez Juliette : architecte partenaire depuis 2 ans</h2>
             <div class="line"></div>
-            <div class="hometour-video">
-                <iframe width="960" height="540" src="https://www.youtube.com/embed/06iVRoX83s4" frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="hometour-content">
+                <div class="hometour-video-content">
+                    <div class="hometour-video">
+                        <iframe width="960" height="540" src="https://www.youtube.com/embed/TrmQd2Mv0uY" frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hometour-video-title-container">
+                        <h2>Rénovation d’un appartement parisien.</h2>
+                        <div class="hometour-subtitles">
+                            <p>Découvrir la vidéo</p>
+                            <div class="satisfaction-line"></div>
+                            <a href="https://youtu.be/TrmQd2Mv0uY"><i class="fas hometour-player fa-play"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="hometour-text-content">-
+                    <div class="left-line"></div>
+                    <p class="hometour-text">Après plusieurs mois de recherche, Juliette et Maxime ont enfin trouvé leur appartement coup de coeur !
+                        Localisation, surface, luminosité, tout ce qui leur fallait, réuni en plein coeur de Paris.</br></br>
+                        Seul hic.. Quelques travaux de rénovation étaient nécessaires. Qu’à cela ne tienne ! Avec Little Worker,
+                        ils ont pu rénover entièrement leur appartement, en six semaines, et sans retard !</br></br>
+                        Nous vous laissons découvrir leur nouvel intérieur, enfin à leur image.
+                    </p>
+                    <a class="all-projects-link" href="/projects/list"><i class="fas fa-caret-right"></i>Voir tous nos projets à Bordeaux</a>
+                </div>
             </div>
-            <div class="hometour-video-title-container">
-                <h2>Rénovation d’une échoppe bordelaise.</h2>
-                <p>Découvrir la vidéo</p>
-            </div>
-            <div class="left-line"></div>
-            <p class="hometour-text">Après plusieurs mois de recherche, Juliette et Maxime ont enfin trouvé leur appartement coup de coeur !
-                Localisation, surface, luminosité, tout ce qui leur fallait, réuni en plein coeur de Paris.</br></br>
-                Seul hic.. Quelques travaux de rénovation étaient nécessaires. Qu’à cela ne tienne ! Avec Little Worker,
-                ils ont pu rénover entièrement leur appartement, en six semaines, et sans retard !</br></br>
-                Nous vous laissons découvrir leur nouvel intérieur, enfin à leur image.
-            </p>
-            <a class="all-projects-link" href="/projects/list"><i class="fas fa-caret-right"></i>Voir tous nos projets à Bordeaux</a>
         </div>
 
 
@@ -262,5 +320,104 @@
         document.getElementById(idimg).classList.remove('display-item-hover')
         document.getElementById(idtitles).classList.remove('display-bold')
     }
+
+    changeSelectedTag = function(tag, projects, id) {
+        let btns = document.getElementsByClassName('tags-btn')
+        for (let item of btns) {
+            if(item.classList.contains('display-tag-selected')) {
+                item.classList.remove('display-tag-selected')
+            }
+        }
+        document.getElementById(id).classList.add('display-tag-selected')
+        selectedTag = tag;
+        selectedTag = tag;
+        console.log(selectedTag);
+        var main = document.getElementById('item-display');
+        main.innerHTML = '';
+        console.log(projects);
+        projects.forEach(el => {
+            if (el.tags.includes(selectedTag)) {
+                console.log(el)
+                //create div
+                const itemsContent = document.createElement('div');
+                const itemImg = document.createElement('img');
+                const itemHoverContent = document.createElement('div');
+                const itemSurface = document.createElement('div');
+                const itemBudget = document.createElement('div');
+                const itemDuration = document.createElement('div');
+                const itemSurfaceValue = document.createElement('span');
+                const itemBudgetValue = document.createElement('span');
+                const itemDurationValue = document.createElement('span');
+                const itemTitle = document.createElement('h2');
+                const itemCity = document.createElement('p');
+                const itemHoverContentBtn = document.createElement('button');
+                const btnArrow = document.createElement('i');
+
+                const itemTitles = document.createElement('div');
+
+                //add class
+                itemImg.className = 'item-img';
+                itemsContent.className = 'items-content';
+                itemHoverContent.className = 'item-hover-content';
+                itemSurface.className = 'item-hover-content-title';
+                itemBudget.className = 'item-hover-content-title';
+                itemDuration.className = 'item-hover-content-title';
+                itemSurfaceValue.className = 'item-hover-content-value';
+                itemBudgetValue.className = 'item-hover-content-value';
+                itemDurationValue.className = 'item-hover-content-value';
+                btnArrow.className = 'fas fa-arrow-right';
+                itemHoverContentBtn.className = 'item-hover-content-btn';
+                itemTitle.className = 'item-title';
+                itemCity.className = 'item-city';
+
+                //add event listener
+                itemsContent.addEventListener("mouseenter", function () {
+                    itemHoverContent.classList.add('display-item-hover');
+                    itemTitles.classList.add('display-bold')  ;
+                });
+                itemHoverContent.addEventListener("mouseleave", function () {
+                    itemHoverContent.classList.remove('display-item-hover');
+                    itemTitles.classList.remove('display-bold')  ;
+                });
+                itemHoverContentBtn.addEventListener("click", function () {
+                    window.open('/projects/' + el.slug, "_self");
+                });
+                //put content
+                itemTitle.innerHTML = el.title;
+                itemCity.innerHTML = el.cities;
+                itemSurface.innerText = 'Surface : ';
+                itemBudget.innerText = 'Budget : ';
+                itemDuration.innerText = 'Durée : ';
+                itemSurfaceValue.innerHTML = el.surface + ' m2';
+                itemBudgetValue.innerHTML = el.budgect;
+                itemDurationValue.innerHTML = el.duration + '  mois';
+
+                itemImg.src = '/' + el.images.main.url;
+                itemImg.alt = el.images.main.alt;
+                itemHoverContentBtn.innerText = 'Voir le shaper';
+                //display
+                itemSurface.appendChild(itemSurfaceValue);
+                itemBudget.appendChild(itemBudgetValue);
+                itemDuration.appendChild(itemDurationValue);
+
+                itemHoverContent.appendChild(itemSurface);
+                itemHoverContent.appendChild(itemBudget);
+                itemHoverContent.appendChild(itemDuration);
+                itemHoverContentBtn.appendChild(btnArrow);
+                itemHoverContent.appendChild(itemHoverContentBtn);
+                itemTitles.appendChild(itemTitle);
+                itemTitles.appendChild(itemCity);
+                itemsContent.appendChild(itemImg);
+                itemsContent.appendChild(itemHoverContent);
+                itemsContent.appendChild(itemTitles);
+                main.appendChild(itemsContent);
+            }
+
+        });
+
+    }
+    document.getElementById('appartments').click();
+
+
 </script>
 

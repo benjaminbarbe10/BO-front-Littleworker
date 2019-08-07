@@ -1,6 +1,7 @@
 <%- include partials/header/main_nav.ejs %>
 
 <div class="body">
+    <%if (!isMobile) {%>
     <div class="breadcrumb">
         Accueil > Rénovation d’appartement > Nos réalisations > Appartements
     </div>
@@ -15,6 +16,16 @@
             <img src="/images/projects-background.png" alt="">
         </div>
     </div>
+    <%}else {%>
+        <div class="mobile-custom-header">
+            <img class="background" src="/images/projects-background.png" alt="">
+            <div class="header-content">
+                <h1 class="title">Nos réalisations</h1>
+                <i class="fas fa-arrow-down down-arrow-mobile bounce"></i>
+            </div>
+        </div>
+
+        <%}%>
     <div class="body-container">
         <div class="body-content">
             <div class="body-tags">
@@ -111,7 +122,7 @@
 
                 itemImg.src = '/' + el.images.main.url;
                 itemImg.alt = el.images.main.alt;
-                itemHoverContentBtn.innerText = 'Voir le shaper';
+                itemHoverContentBtn.innerText = 'Voir le projet';
                 //display
                 itemSurface.appendChild(itemSurfaceValue);
                 itemBudget.appendChild(itemBudgetValue);

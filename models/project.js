@@ -79,6 +79,5 @@ ProjectSchema.pre('save', function (next) {
     });
     return next();
 });
-
 const Project = mongoose.model("front_projects", ProjectSchema);
 module.exports = Project;

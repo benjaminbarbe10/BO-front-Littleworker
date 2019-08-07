@@ -1,6 +1,8 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
 <%- include partials/header/main_nav.ejs %>
 <div class="body">
+    <%if (!isMobile) {%>
+
     <div class="breadcrumb">
         Accueil > Rénovation d’appartement > Nos réalisations > Appartements
     </div>
@@ -15,6 +17,16 @@
             <img src="/<%=project.images.main.url%>" alt="">
         </div>
     </div>
+    <%}else {%>
+        <div class="mobile-custom-header">
+            <img class="background" src="/<%=project.images.main.url%>" alt="">
+            <div class="header-content">
+                <h1 class="title"><%=project.name%></h1>
+                <i class="fas fa-arrow-down down-arrow-mobile bounce"></i>
+            </div>
+        </div>
+
+    <%}%>
     <div class="item-container">
         <div class="item-header">
             <div class="item-introduction">

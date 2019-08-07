@@ -8,29 +8,36 @@ const ObjectId = require('mongodb').ObjectID;
 // ─── SHAPER_CONTROLLER ──────────────────────────────────────────────────────────
 //
 
-exports.findBySlug = (req, res, next) => {
+exports.findBySlug = async (req, res, next) => {
     return Shaper
         .findOne({slug: req.params.slug})
         .exec((pErr, shaper) => {
             if (pErr) return next(pErr);
             if (!shaper) return next();
+            let projectsList = [];
             Project.find((err, projects) => {
                 if (err) return next(err);
-                let projectsList;
-                if (shaper.projects !== undefined) {
+                try {
+                    if (shaper.projects !== undefined) {
 
-                    shaper.projects.forEach(p => {
-                        return Project
-                            .findOne({_id: p._id}, function (err, shaperProject) {
-                                console.log(shaperProject)
-                            })
-                    });
+                        shaper.projects.forEach(p => {
 
+                            Project.findOne({_id: p._id}, function (err, shaperProject) {
+                                projectsList.push(shaperProject);
+                            });
+
+                        })
+
+                    }
                 }
+                catch (e) {
+                }
+
                 return res.render('../templates/shaper.ejs', {
                     shaper: shaper,
                     projects: projects});
-            });
+            }).then(
+            );
         });
 };
 exports.list = (req, res) => Shaper.find((err, shapers) => {

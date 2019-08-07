@@ -14,76 +14,44 @@
     <%if (!isMobile) { %>
     <div class="desktop-nav">
         <ul class="desktop-nav-list">
-            <li onmouseover="showCollapsedMenu('collapsed-menu-realisations')"><a href="#" class="current">Nos réalisations</a> </li>
-            <li onmouseover="showCollapsedMenu('collapsed-menu-architecte')"><a href="#">Architecture d’intérieur</a> </li>
+            <%for(let el of Object.values(navigation.elements)){%>
+
+            <li onmouseover="showCollapsedMenu('<%=el.lvl2.id%>')"><a href="#" ><%=el.title%></a> </li>
+            <%}%>
+                <!--class="current"<li onmouseover="showCollapsedMenu('collapsed-menu-architecte')"><a href="#">Architecture d’intérieur</a> </li>
             <li onmouseover="showCollapsedMenu('collapsed-menu-works')"><a href="#">Travaux de rénovation</a> </li>
             <li onmouseover="showCollapsedMenu('collapsed-menu-guides')"><a href="#">Les guides</a> </li>
-            <li onmouseover="showCollapsedMenu('collapsed-menu-about')"><a href="#">À propos</a> </li>
+            <li onmouseover="showCollapsedMenu('collapsed-menu-about')"><a href="#">À propos</a> </li>-->
             <li onmouseover="hideCollapsedMenu()"><a href="https://www.littleworker.fr/espacepro/">Espace Pro</a> </li>
         </ul>
-            <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-realisations" class="collapsed-menu" >
+        <%for(let el of Object.values(navigation.elements)){%>
+
+        <div onmouseleave="hideCollapsedMenu()" id="<%=el.lvl2.id%>" class="collapsed-menu" >
+
                 <div  class="collapsed-menu-content" >
+                    <%for(let item of el.lvl2.items){%>
+
                     <div class="content-row" >
-                        <a  class="title" href="#">eaéaeeé</a>
-                        <div  class="links">
-                            <a href="#">sqde</a>
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                        </div>
+                        <a  class="title" <%if (!item.subItems) {%> href="<%=item.url%>" <%}%>><%=item.title%></a>
+                        <%if (item.subItems) {%>
+                            <div  class="links">
+                                <%for(let subEl of item.subItems){%>
+                                <a href="<%=subEl.url%>"> <%=subEl.title%></a>
+                                <%}%>
+                            </div>
+                        <%}%>
+
                     </div>
-                    <div class="content-row" >
-                        <a  class="title" href="#">eaéaeeé</a>
-                        <div  class="links">
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                        </div>
-                    </div>
-                    <div class="content-row" >
-                        <a  class="title" href="#">eaéaeeé</a>
-                        <div  class="links">
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                            <a href="#">dzqdqz</a>
-                        </div>
-                    </div>
+                        <%}%>
+
                     <div class="collapsed-menu-right-image">
                         <img src="/images/backgrounds/home-page-mobile.png" alt="Tendances 2019">
                         <p>Tendances 2019</p>
                     </div>
                 </div>
             </div>
-        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-architecte" class="collapsed-menu" >
-            <div  class="collapsed-menu-content" >
-                <div class="content-row">
-                    colapsed-menu 2
-                </div>
-            </div>
-        </div>
-        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-works" class="collapsed-menu" >
-            <div  class="collapsed-menu-content" >
-                <div class="content-row">
-                    colapsed-menu 3
-                </div>
-            </div>
-        </div>
-        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-guides" class="collapsed-menu" >
-            <div  class="collapsed-menu-content" >
-                <div class="content-row">
-                    colapsed-menu 4
-                </div>
-            </div>
-        </div>
-        <div onmouseleave="hideCollapsedMenu()" id="collapsed-menu-about" class="collapsed-menu" >
-            <div  class="collapsed-menu-content" >
-                <div class="content-row">
-                    colapsed-menu 4
-                </div>
-            </div>
-        </div>
+        <%}%>
+
     </div>
     <%}%>
 
@@ -96,9 +64,9 @@
             <a href="https://auth.littleworker.fr/"><img src="/images/icons/user.png"></a>
         </button>
         <%if (isMobile) { %>
-        <button type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
-            <img src="/images/icons/menu.png" >
-            <!--<img *ngIf="isMenuOpen" src="../../assets/images/icons/croix.svg" >-->
+        <button onclick="openAndCloseNav()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+            <img id="mobile-menu" src="/images/icons/menu.png" >
+            <img id="mobile-cross" class="hide" src="/images/icons/croix.svg" >
 
         </button>
         <%}%>
@@ -108,9 +76,88 @@
         </button>
         <%}%>
     </div>
+    <div id="sidenav" class="sidenav">
+        <div class="sidenav-header-title">Menu</div>
+
+        <%for(let el of Object.values(navigation.elements)){%>
+        <div class="sidenav-element" id="sidenav-level1">
+
+            <a onclick="showNextLevel('sidenav-level1', '<%=el.lvl2.id%>')" href="#"><%=el.title%><i class="fas fa-chevron-right"></i></a>
+            <div class="sidenav-level sidenav-level2" id="<%=el.lvl2.id%>" >
+                <div class="sidenav-header-title"><span onclick="goBack('sidenav-level1')">Menu</span> > <%=el.title%></div>
+                <%for(let item of el.lvl2.items){%>
+                    <div class="sidenav-element">
+                        <a  <%if (!item.subItems) {%> href="<%=item.url%>" <%}else {%> onclick="showNextLevel('<%=el.lvl2.id%>', '<%=item.id%>')" <%}%>><%=item.title%><%if (item.subItems) {%><i class="fas fa-chevron-right"></i><%}%></a>
+                        <%if (item.subItems) {%>
+                        <div class="sidenav-level sidenav-level3" id="<%=item.id%>">
+                            <div class="sidenav-header-title"><span onclick="goBack('sidenav-level1')">Menu</span> > <span onclick="goBack('<%=el.lvl2.id%>')"><%=el.title%></span> > <%=item.title%></div>
+                            <%for(let subEl of item.subItems){%>
+
+                            <div class="sidenav-element">
+                                <a href="<%=subEl.url%>"> <%=subEl.title%></a>
+                            </div>
+                            <%}%>
+                        </div>
+                        <%}%>
+                    </div>
+                <%}%>
+
+            </div>
+        </div>
+        <%}%>
+        <div class="sidenav-element display-bold">
+            <a href="/espacepro/">Espace pro</a>
+        </div>
+    </div>
 </nav>
 
 <script>
+    function showNextLevel(lvlToHide, lvlToShow) {
+        const toHide = document.getElementById(lvlToHide);
+        const toShow = document.getElementById(lvlToShow);
+        toShow.classList.add('show');
+    }
+    function goBack(prevEl) {
+        const el = document.getElementById(prevEl);
+        const nav = document.getElementsByClassName('sidenav-level')
+        for (let item of nav) {
+            if (item.classList.contains('show')) {
+                item.classList.remove('show');
+            }
+        }
+        el.classList.add('show')
+    }
+    function openAndCloseNav() {
+        const navItems = document.getElementsByClassName('sidenav-level')
+        for (let item of navItems) {
+            if (item.classList.contains('show')) {
+                item.classList.remove('show');
+            }
+        }
+        const menuIcon = document.getElementById('mobile-menu');
+        const crossIcon = document.getElementById('mobile-cross');
+        if (crossIcon.classList.contains('hide')) {
+            menuIcon.classList.add('hide');
+            crossIcon.classList.remove('hide');
+        } else {
+            menuIcon.classList.remove('hide');
+            crossIcon.classList.add('hide');
+        }
+
+        const nav = document.getElementById('sidenav');
+        nav.classList.add('show');
+        if (this.isMenuOpen) {
+            nav.style.width = '0';
+            nav.style.boxShadow = 'unset';
+            nav.style.opacity = '0';
+            this.isMenuOpen = false;
+        } else {
+            nav.style.width = '90%';
+            nav.style.boxShadow = '-16px 15px 15px 4px rgba(111,111,111,0.5)';
+            nav.style.opacity = '1';
+            this.isMenuOpen = true;
+        }
+    }
     function showCollapsedMenu(menucollapsed) {
         let collapsedMenus = document.getElementsByClassName('collapsed-menu')
         for (let item of collapsedMenus) {

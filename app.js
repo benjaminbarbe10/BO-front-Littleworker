@@ -4,6 +4,10 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const expressJWT = require('express-jwt');
 const path = require('path');
+const navigation = require('./templates/partials/header/navigation.json');
+
+
+
 //AUTH
 const jwt = require('jsonwebtoken');
 
@@ -68,7 +72,8 @@ app.use(function (req, res, next) {
 
     const isMobile =  !!md.mobile();
     app.locals = {
-        isMobile: isMobile
+        isMobile: isMobile,
+        navigation: navigation
     };
     // Website you wish to allow to connect
     res.header('Access-Control-Allow-Origin', '*');

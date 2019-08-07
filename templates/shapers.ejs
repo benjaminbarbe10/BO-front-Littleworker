@@ -2,6 +2,8 @@
 
 
 <div class="body">
+    <%if (!isMobile) {%>
+
     <div class="breadcrumb">
         Accueil > Rénovation d’appartement > Nos réalisations > Appartements
     </div>
@@ -16,6 +18,16 @@
             <img src="/images/projects-background.png" alt="">
         </div>
     </div>
+    <%}else {%>
+    <div class="mobile-custom-header">
+        <img class="background" src="/images/projects-background.png" alt="">
+        <div class="header-content">
+            <h1 class="title">Nos shapers </h1>
+            <i class="fas fa-arrow-down down-arrow-mobile bounce"></i>
+        </div>
+    </div>
+
+    <%}%>
     <div class="body-container">
         <div class="body-content">
             <div class="body-tags">

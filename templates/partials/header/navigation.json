@@ -1,0 +1,306 @@
+{
+  "elements": [
+    {
+      "title": "Les guides",
+      "lvl2": {
+        "id": "sidenav-guides-lv2",
+        "items": [
+          {
+            "title": "Tous nos guides",
+            "url": "/guides"
+          },
+          {
+            "title": "Inspiration",
+            "id": "sidenav-guides-inspiration",
+            "subItems": [
+              {
+                "title": "Aménagement de la cuisine",
+                "url": "/guides/amenagement-cuisine/"
+              },
+              {
+                "title": "Aménagement de la chambre",
+                "url": "/guides/amenagement-chambre/"
+              },
+              {
+                "title": "Aménagement de la salle de bain",
+                "url": "/guides/amenagement-salle-de-bain/"
+              }
+            ]
+          },
+          {
+            "title": "Matériaux",
+            "id": "sidenav-guides-materials",
+            "subItems": [
+              {
+                "title": "Le guide du carrelage",
+                "url": "/guides/carrelage/"
+              },
+              {
+                "title": "Le guide de la peinture",
+                "url": "/guides/guide-peinture/"
+              },
+              {
+                "title": "Le guide du parquet",
+                "url": "/guides/parquet"
+              },
+              {
+                "title": "L'achat des fournitures'",
+                "url": "/guides/fournitures-materiaux"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Architecture d'intérieur",
+      "lvl2": {
+        "id": "sidenav-architect-lv2",
+        "items": [
+          {
+            "title": "La mission d'architecture intérieure",
+            "id": "sidenav-architect-mission",
+            "subItems": [
+              {
+                "title": "Notre accompagnement",
+                "url": "/architecte-interieur#notre-accompagnement"
+              },
+              {
+                "title": "Le sur mesure",
+                "url": "/architecte-interieur#sur-mesure"
+              }
+            ]
+          },
+          {
+            "title": "Les 10 raisons pour les quelles choisir l'accompagnement Little Worker",
+            "url": "/blog/top-10-des-raisons-pour-lesquelles-passer-par-little-worker/"
+          },
+          {
+            "title": "Nos architectes partenaires",
+            "id": "sidenav-architect-shapers",
+            "subItems": [
+              {
+                "title": "Tous nos architectes",
+                "url": "/architectes-interieur"
+              },
+              {
+                "title": "Paris",
+                "url": "/architectes-interieur/paris"
+              },
+              {
+                "title": "Bordeaux",
+                "url": "/architectes-interieur/bordeaux"
+              }
+            ]
+          },
+          {
+            "title": "Tarif architecte d'intérieur",
+            "url": "/architectes-interieur/tarif-architecte-interieur/"
+          },
+          {
+            "title": "Blog",
+            "id": "sidenav-architect-blog",
+            "subItems": [
+              {
+                "title": "Agrandir une pièce",
+                "url": "/blog/renovation-dappartement-agrandir-une-piece/"
+              },
+              {
+                "title": "Choisir un parquet écologique",
+                "url": "/blog/comment-choisir-un-parquet-ecologique/"
+              },
+              {
+                "title": "Tendance : les alcôves",
+                "url": "/blog/lalcove-vue-par-nos-architectes-dinterieur/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Nos réalisations",
+      "lvl2": {
+        "id": "sidenav-realisation-lv2",
+        "items": [
+          {
+            "title": "Toutes nos réalisations",
+            "url": "/realisations"
+          },
+          {
+            "title": "Nos villes",
+            "id": "sidenav-realisation-cities",
+            "subItems": [
+              {
+                "title": "Toutes les réalisations à Paris",
+                "url": "/realisations/paris/"
+              },
+              {
+                "title": "Toutes les réalisations à Bordeaux",
+                "url": "/realisations/bordeaux/"
+              }
+            ]
+          },
+          {
+            "title": "Types de réalisations",
+            "id": "sidenav-realisation-type",
+            "subItems": [
+              {
+                "title": "Tous les appartements",
+                "url": "/realisations/appartements/"
+              },
+              {
+                "title": "Toutes les maisons",
+                "url": "/realisations/maisons/"
+              }
+            ]
+          },
+          {
+            "title": "Nos 3 projets coups de cœur",
+            "id": "sidenav-realisation-loves",
+            "subItems": [
+              {
+                "title": "Rénovation appartement - Bordeaux",
+                "url": "/realisations/bordeaux/15-bontemps-talence/"
+              },
+              {
+                "title": "Rénovation Loft - Paris 3e",
+                "url": "/realisations/paris/08-meslay/"
+              },
+              {
+                "title": "Projet Rousseau",
+                "url": "/realisations/paris/10-rousseau/"
+              }
+            ]
+          },
+          {
+            "title": "Blog",
+            "id": "sidenav-realisation-blog",
+            "subItems": [
+              {
+                "title": "Agrandir une pièce",
+                "url": "/blog/renovation-dappartement-agrandir-une-piece/"
+              },
+              {
+                "title": "Les alcoves",
+                "url": "/blog/lalcove-vue-par-nos-architectes-dinterieur/"
+              },
+              {
+                "title": "Les parquets graphiques",
+                "url": "/blog/parquet_architecte_dinterieur/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Travaux de rénovation",
+      "lvl2": {
+        "id": "sidenav-renovations-lv2",
+        "items": [
+          {
+            "title": "Accompagnement travaux",
+            "url": "/guides"
+          },
+          {
+            "title": "Inspiration",
+            "id": "sidenav-guides-inspiration",
+            "subItems": [
+              {
+                "title": "Aménagement de la cuisine",
+                "url": "/guides/amenagement-cuisine/"
+              },
+              {
+                "title": "Aménagement de la chambre",
+                "url": "/guides/amenagement-chambre/"
+              },
+              {
+                "title": "Aménagement de la salle de bain",
+                "url": "/guides/amenagement-salle-de-bain/"
+              }
+            ]
+          },
+          {
+            "title": "Matériaux",
+            "id": "sidenav-guides-materials",
+            "subItems": [
+              {
+                "title": "Le guide du carrelage",
+                "url": "/guides/carrelage/"
+              },
+              {
+                "title": "Le guide de la peinture",
+                "url": "/guides/guide-peinture/"
+              },
+              {
+                "title": "Le guide du parquet",
+                "url": "/guides/parquet"
+              },
+              {
+                "title": "L'achat des fournitures'",
+                "url": "/guides/fournitures-materiaux"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "À propos",
+      "lvl2": {
+        "id": "sidenav-about-lv2",
+        "items": [
+          {
+            "title": "Le concept",
+            "url": "/a-propos"
+          },
+          {
+            "title": "L'équipe",
+            "url": "/equipe"
+          },
+          {
+            "title": "Presse",
+            "id": "sidenav-about-press",
+            "subItems": [
+              {
+                "title": "Little Worker élu Pépite Frenchy",
+                "url": "https://pepites.petitsfrenchies.com/article/les-meilleurs-allies-de-vos-travaux"
+              },
+              {
+                "title": "Little Worker chez BFM TV",
+                "url": "https://bfmbusiness.bfmtv.com/mediaplayer/video/start-up-co-little-worker-specialiste-dans-le-conseil-et-la-realisation-des-travaux-de-renovation-2908-1097843.html"
+              },
+              {
+                "title": "Little Worker sur Côté Maison",
+                "url": "http://www.cotemaison.fr/loft-appartement/diaporama/appartement-paris-3-un-50-m2-renove-avec-des-airs-de-loft_31095.html"
+              }
+            ]
+          },
+          {
+            "title": "Matériaux",
+            "id": "sidenav-guides-materials",
+            "subItems": [
+              {
+                "title": "Le guide du carrelage",
+                "url": "/guides/carrelage/"
+              },
+              {
+                "title": "Le guide de la peinture",
+                "url": "/guides/guide-peinture/"
+              },
+              {
+                "title": "Le guide du parquet",
+                "url": "/guides/parquet"
+              },
+              {
+                "title": "L'achat des fournitures'",
+                "url": "/guides/fournitures-materiaux"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
