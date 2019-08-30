@@ -78,6 +78,7 @@
 
                 //add class
                 itemImg.className = 'item-img';
+                itemImg.style = 'cursor:unset;'
                 itemsContent.className = 'items-content';
                 itemHoverContent.className = 'item-hover-content';
                 btnArrow.className = 'fas fa-arrow-right';
@@ -85,18 +86,6 @@
                 itemTitle.className = 'item-title';
                 itemPosition.className = 'item-city';
 
-                //add event listener
-                itemsContent.addEventListener("mouseenter", function () {
-                    itemHoverContent.classList.add('display-item-hover');
-                    itemTitles.classList.add('display-bold')  ;
-                });
-                itemHoverContent.addEventListener("mouseleave", function () {
-                    itemHoverContent.classList.remove('display-item-hover');
-                    itemTitles.classList.remove('display-bold')  ;
-                });
-                itemHoverContentBtn.addEventListener("click", function () {
-                    window.open('/lworkers/' + el.slug, "_self");
-                });
                 //put content
                 itemTitle.innerHTML = el.name + ' ' + el.surname;
                 itemPosition.innerHTML = el.position;
