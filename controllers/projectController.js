@@ -1,4 +1,5 @@
 const Project = require('../models/project');
+const Landing = require("../models/landing");
 
 //
 // ─── PROJECT_CONTROLLER ──────────────────────────────────────────────────────────
@@ -18,9 +19,14 @@ exports.findBySlug = (req, res, next) => {
 };
 
 exports.list = (req, res) => Project.find((err, projects) => {
-  if (err) return next(err);
-  let selectedTag;
-  return res.render('../templates/projects.ejs', { projects: projects, selectedTag: selectedTag });
+    Landing
+        .findOne({ tag: 'realisation' })
+        .exec((pErr, landing) => {
+            if (pErr) return next(pErr);
+            if (!landing) return next();
+            let selectedTag;
+            return res.render('../templates/projects.ejs', { projects: projects, selectedTag: selectedTag,landing : landing });
+        });
 });
 
 exports.jsonlist = (req, res) => Project.find((err, projects) => {

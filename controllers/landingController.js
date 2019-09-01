@@ -1,11 +1,18 @@
-const Joi = require("joi");
 const Landing = require("../models/landing");
 const mongoose = require("mongoose");
 
 //
 // ─── landing_CONTROLLER ──────────────────────────────────────────────────────────
 //
-
+exports.findByTag = (req, res, next) => {
+  return Landing
+      .findOne({ tag: req.params.tag })
+      .exec((pErr, landing) => {
+        if (pErr) return next(pErr);
+        if (!landing) return next();
+        res.send(landing);
+      });
+};
 exports.list = (req, res) => {
   Landing.find((err, landings) => {
     if (err) res.send({ message: "internal server error" });
@@ -13,52 +20,40 @@ exports.list = (req, res) => {
   });
 };
 
-exports.post = (req, res) => {
+exports.post = (req, res,next) => {
   const { error } = validateAvert(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return next();
   Landing.create(req.body).then(function(landing) {
     res.send(landing);
   });
 };
 
-exports.show = (req, res) => {
+exports.show = (req, res,next ) => {
   Landing.findById(req.params.id, (err, landing) => {
-    if (!landing) return res.status(404).send("Not found");
+    if (!landing) return next();
     res.json(landing);
   });
 };
 
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
   Landing.findByIdAndRemove(req.params.id, (err, landing) => {
-    if (!landing) return res.status(404).send("Not found");
+    if (!landing) return next();
     res.send("Has been deleted");
   });
 };
-
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   Landing.findByIdAndUpdate(req.params.id, req.body, (err, landing) => {
-    if (!landing) return res.status(404).send("Not found");
-    landing.findOne({
-      _id: req.params.id
-    }).then(landing => {
-      res.send(landing);
+    if (!landing) return next();
+    return Landing.findById(req.params.id,(err, landing) => {
+      if (err) return next(err);
+      return res.send(landing);
     });
   });
 };
+
+
 
 //
 // ─── FUNCTIONS ──────────────────────────────────────────────────────────────────
 //
 
-function validateAvert(landing) {
-  const schema = {
-    name: Joi.string()
-      .min(3)
-      .required(),
-    surname: Joi.string()
-      .min(3)
-      .required()
-  };
-
-  return Joi.validate(landing, schema);
-}

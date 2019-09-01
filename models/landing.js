@@ -7,13 +7,20 @@ const Schema = mongoose.Schema;
 
 const LandingSchema = new Schema(
     {
-        name: {
+        title: {
             type: String,
-            required: [true, "name field is required"]
+            required: true,
         },
-        surname: {
+        htag: {
             type: String,
-            required: [true, "surname field is required"]
+            required: true,
+        },
+        breadcrumb: {
+            type: String,
+            required: true,
+        },
+        background: {
+            url: String,
         }
     }
 );

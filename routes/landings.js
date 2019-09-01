@@ -9,6 +9,8 @@ const landing_controller = require("../controllers/landingController");
 
 router.get("/", landing_controller.list);
 
+router.get('/:tag', landing_controller.findByTag);
+
 router.post("/", landing_controller.post);
 
 router.get("/:id", landing_controller.show);
@@ -16,5 +18,6 @@ router.get("/:id", landing_controller.show);
 router.delete("/:id", landing_controller.delete);
 
 router.put("/:id", landing_controller.update);
+
 
 module.exports = router;

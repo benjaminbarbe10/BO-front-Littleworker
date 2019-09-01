@@ -117,6 +117,10 @@ app.post('/upload/press', upload.single('press'), function (req, res) {
     return res.send({ success: !!req.file });
 });
 
+app.post('/upload/landings', upload.single('landing'), function (req, res) {
+    return res.send({ success: !!req.file });
+});
+
 app.post('/upload/projects', upload.single('project'), function (req, res) {
     return res.send({ success: !!req.file });
 });
