@@ -1,4 +1,5 @@
 const Lworker = require("../models/lworker");
+const Landing = require("../models/landing");
 
 //
 // ─── LWORKER_CONTROLLER ──────────────────────────────────────────────────────────
@@ -16,9 +17,19 @@ exports.findBySlug = (req, res, next) => {
 };
 
 exports.list = (req, res) => Lworker.find((err, lworkers) => {
+  Landing
+      .findOne({ tag: 'lworkers' })
+      .exec((pErr, landing) => {
+        if (pErr) return next(pErr);
+        if (!landing) return next();
+        let selectedTag;
+        return res.render('../templates/lworkers.ejs', { lworkers: lworkers, selectedTag: selectedTag, landing: landing });
+      });
+  });
+
+exports.jsonlist = (req, res) => Lworker.find((err, lworkers) => {
   if (err) return next(err);
-  let selectedTag;
-  return res.render('../templates/lworkers.ejs', { lworkers: lworkers, selectedTag: selectedTag });
+  return res.json(lworkers);
 });
 
 exports.post = (req, res) => {

@@ -1,12 +1,18 @@
 const Press = require("../models/press");
+const Landing = require("../models/landing");
+
 //
 // ─── PRESS_CONTROLLER ──────────────────────────────────────────────────────────
 //
-
 exports.list = (req, res, next) => Press.find((err, press) => {
-  if (err) return next(err);
-  let selectedTag;
-  return res.render('../templates/press.ejs', { press: press, selectedTag: selectedTag });
+  Landing
+      .findOne({ tag: 'press' })
+      .exec((pErr, landing) => {
+        if (pErr) return next(pErr);
+        if (!landing) return next();
+        let selectedTag;
+        return res.render('../templates/press.ejs', { press: press, selectedTag: selectedTag, landing: landing });
+      });
 });
 
 exports.post = (req, res) => {
@@ -16,6 +22,11 @@ exports.post = (req, res) => {
     res.send(press);
   });
 };
+
+exports.jsonlist = (req, res, next) => Press.find((err, press) => {
+  if (err) return next(err);
+  return res.json(press);
+});
 
 exports.show = (req, res, next) => {
   Press.findById(req.params.id, (err, press) => {

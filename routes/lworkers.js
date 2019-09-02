@@ -9,6 +9,8 @@ const lworker_controller = require("../controllers/lworkerController");
 
 router.get("/", lworker_controller.list);
 
+router.get("/list", lworker_controller.jsonlist);
+
 router.post("/", lworker_controller.post);
 
 router.get("/:id", lworker_controller.show);

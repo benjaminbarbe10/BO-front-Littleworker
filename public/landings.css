@@ -752,7 +752,7 @@ body .satisfaction-container {
 
 body .satisfaction-container .satisfaction-content {
   width: 220px !important;
-  height: 280px !important;
+  height: 270px !important;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -783,7 +783,7 @@ body .satisfaction-container .satisfaction-content {
 }
 
 body .satisfaction-container .satisfaction-content svg {
-  max-width: 100%;
+  max-width: 80%;
   overflow: visible;
   -webkit-transition: -webkit-transform 0.333s ease;
   transition: -webkit-transform 0.333s ease;

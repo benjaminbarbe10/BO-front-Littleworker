@@ -7,7 +7,6 @@ const path = require('path');
 const navigation = require('./templates/partials/header/navigation.json');
 
 
-
 //AUTH
 const jwt = require('jsonwebtoken');
 

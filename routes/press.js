@@ -9,6 +9,8 @@ const press_controller = require("../controllers/pressController");
 
 router.get("/", press_controller.list);
 
+router.get("/list", press_controller.jsonlist);
+
 router.post("/", press_controller.post);
 
 router.get("/:id", press_controller.show);
