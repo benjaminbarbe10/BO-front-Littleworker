@@ -9,6 +9,8 @@ const shaper_controller = require("../controllers/shaperController");
 
 router.get("/", shaper_controller.list);
 
+router.get("/list", shaper_controller.jsonlist);
+
 router.post("/", shaper_controller.post);
 
 router.get("/:id", shaper_controller.show);

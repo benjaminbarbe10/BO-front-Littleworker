@@ -9,20 +9,20 @@
     </div>
     <div class="custom-header-container">
         <div class="header-titles">
-            <h1 class="header-title">Nos shapers <span class="gold-star-large">*</span></h1>
+            <h1 class="header-title"><%=landing.title%><span class="gold-star-large">*</span></h1>
             <button class="header-btn">Demander un devis</button>
-            <p class="header-htag"><span class="gold-star">*</span>architectes ou entrepreneurs passionnés</p>
+            <p class="header-htag"><span class="gold-star">*</span><%=landing.htag%></p>
         </div>
         <div class="header-img">
 
-            <img src="/images/projects-background.png" alt="">
+            <img src="/<%=landing.background.url%>" alt="">
         </div>
     </div>
     <%}else {%>
     <div class="mobile-custom-header">
-        <img class="background" src="/images/projects-background.png" alt="">
+        <img class="background" src="/<%=landing.background.url%>" alt="">
         <div class="header-content">
-            <h1 class="title">Nos shapers </h1>
+            <h1 class="title"><%=landing.title%></h1>
             <i class="fas fa-arrow-down down-arrow-mobile bounce"></i>
         </div>
     </div>

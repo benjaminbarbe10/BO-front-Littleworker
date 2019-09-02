@@ -3,6 +3,7 @@ const Shaper = require("../models/shaper");
 const mongoose = require("mongoose");
 const Project = require('../models/project');
 const ObjectId = require('mongodb').ObjectID;
+const Landing = require("../models/landing");
 
 //
 // ─── SHAPER_CONTROLLER ──────────────────────────────────────────────────────────
@@ -40,10 +41,22 @@ exports.findBySlug = async (req, res, next) => {
             );
         });
 };
+
 exports.list = (req, res) => Shaper.find((err, shapers) => {
+    Landing
+        .findOne({ tag: 'shapers' })
+        .exec((pErr, landing) => {
+            if (pErr) return next(pErr);
+            if (!landing) return next();
+            let selectedTag;
+            return res.render('../templates/shapers.ejs', { shapers: shapers, selectedTag: selectedTag, landing: landing  });
+        });
+});
+
+
+exports.jsonlist = (req, res) => Shaper.find((err, shapers) => {
     if (err) return next(err);
-    let selectedTag;
-    return res.render('../templates/shapers.ejs', { shapers: shapers, selectedTag: selectedTag  });
+    return res.json(shapers);
 });
 
 exports.post = (req, res) => {

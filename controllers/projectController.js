@@ -20,7 +20,7 @@ exports.findBySlug = (req, res, next) => {
 
 exports.list = (req, res) => Project.find((err, projects) => {
     Landing
-        .findOne({ tag: 'realisation' })
+        .findOne({ tag: 'projects' })
         .exec((pErr, landing) => {
             if (pErr) return next(pErr);
             if (!landing) return next();
