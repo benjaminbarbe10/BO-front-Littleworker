@@ -16,7 +16,7 @@ exports.findBySlug = (req, res, next) => {
       });
 };
 
-exports.list = (req, res) => Lworker.find((err, lworkers) => {
+exports.list = (req, res, next) => Lworker.find((err, lworkers) => {
   Landing
       .findOne({ tag: 'lworkers' })
       .exec((pErr, landing) => {
@@ -27,7 +27,7 @@ exports.list = (req, res) => Lworker.find((err, lworkers) => {
       });
   });
 
-exports.jsonlist = (req, res) => Lworker.find((err, lworkers) => {
+exports.jsonlist = (req, res, next) => Lworker.find((err, lworkers) => {
   if (err) return next(err);
   return res.json(lworkers);
 });

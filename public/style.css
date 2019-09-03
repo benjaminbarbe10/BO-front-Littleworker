@@ -6,6 +6,7 @@ body, button {
 }
 a{
     text-decoration: blink!important;
+    object-fit: cover;
     color: inherit;
 }
 .body{
@@ -1446,7 +1447,7 @@ a{
         line-height: 48px;
         font-weight: 900;
         text-align: center;
-        margin: auto;
+        margin: 0 20%;
     }
     .homepage-header-container {
         height: 750px;
@@ -1815,21 +1816,50 @@ a{
     .hometour-container .hometour-video-content{
         display: flex;
         flex-direction: column;
-        min-width: 560px;
+        min-width: 540px;
     }
     .hometour-container .hometour-text-content{
         display: flex;
     }
     .hometour-container .hometour-video iframe, .hometour-container .hometour-video{
-        width: 100%;
+        width: 110%;
         height: 789.52px;
+        overflow: hidden;
     }
+    .hometour-container .hometour-video iframe, .hometour-container .hometour-video .hometour-video-image{
+        width: 660px;
+        height: 100%;
+        object-fit: cover;
+    }
+    .hometour-container .hometour-video iframe, .hometour-container .hometour-video .video-play-btn{
+        position: absolute;
+        left: 200px;
+        width: 150px;
+        height: 150px;
+        top: -500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        color: white;
+        border-radius: 50%;
+        border: 4px white solid;
+        transition: ease 0.5s;
+    }
+    .hometour-container .hometour-video iframe, .hometour-container .hometour-video .video-play-btn:hover{
+        font-size: 50px;
+    }
+    .hometour-container .hometour-video iframe, .hometour-container .hometour-video a{
+        position: relative;
+    }
+
+
     .hometour-container .hometour-video-title-container{
         height: 215px;
         padding: 10px 25px;
         margin-top: -50px;
         z-index: 1;
-        width: 80%;
+        width: 90%;
         border-radius: 2.85px;
         background-color: #FFFFFF;
         margin-bottom: 100px;

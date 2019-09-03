@@ -42,7 +42,7 @@ exports.findBySlug = async (req, res, next) => {
         });
 };
 
-exports.list = (req, res) => Shaper.find((err, shapers) => {
+exports.list = (req, res, next) => Shaper.find((err, shapers) => {
     Landing
         .findOne({ tag: 'shapers' })
         .exec((pErr, landing) => {
@@ -54,7 +54,7 @@ exports.list = (req, res) => Shaper.find((err, shapers) => {
 });
 
 
-exports.jsonlist = (req, res) => Shaper.find((err, shapers) => {
+exports.jsonlist = (req, res, next) => Shaper.find((err, shapers) => {
     if (err) return next(err);
     return res.json(shapers);
 });

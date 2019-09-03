@@ -1,6 +1,8 @@
 <link type="text/css" rel="stylesheet" href="/style.css"/>
 <%- include('partials/header/main_nav.ejs'); %>
-
+<link href="dist/lity.css" rel="stylesheet">
+<script src="vendor/jquery.js"></script>
+<script src="dist/lity.js"></script>
 <div class="body">
     <div class="homepage-header-container">
         <%if (isMobile) {%>
@@ -217,9 +219,10 @@
             <div class="line"></div>
             <div class="hometour-content">
                 <div class="hometour-video-content">
+
                     <div class="hometour-video">
-                        <iframe width="960" height="540" src="https://www.youtube.com/embed/TrmQd2Mv0uY" frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <img class="hometour-video-image" src="/images/videohome.jpg" alt="">
+                        <a href="https://youtu.be/TrmQd2Mv0uY" data-lity><div class="video-play-btn"><i class="fas fa-play"></i></div></a>
                     </div>
                     <div class="hometour-video-title-container">
                         <h2>Rénovation d’un appartement parisien.</h2>

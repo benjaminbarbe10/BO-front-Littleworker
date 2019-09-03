@@ -1,12 +1,12 @@
 {
   "elements": [
     {
-      "title": "Les guides",
+      "title": "Travaux de rénovation",
       "lvl2": {
-        "id": "sidenav-guides-lv2",
+        "id": "sidenav-renovations-lv2",
         "items": [
           {
-            "title": "Tous nos guides",
+            "title": "Accompagnement travaux",
             "url": "/guides"
           },
           {
@@ -195,12 +195,12 @@
       }
     },
     {
-      "title": "Travaux de rénovation",
+      "title": "Les guides",
       "lvl2": {
-        "id": "sidenav-renovations-lv2",
+        "id": "sidenav-guides-lv2",
         "items": [
           {
-            "title": "Accompagnement travaux",
+            "title": "Tous nos guides",
             "url": "/guides"
           },
           {

@@ -18,7 +18,7 @@ exports.findBySlug = (req, res, next) => {
       });
 };
 
-exports.list = (req, res) => Project.find((err, projects) => {
+exports.list = (req, res, next) => Project.find((err, projects) => {
     Landing
         .findOne({ tag: 'projects' })
         .exec((pErr, landing) => {
@@ -29,7 +29,7 @@ exports.list = (req, res) => Project.find((err, projects) => {
         });
 });
 
-exports.jsonlist = (req, res) => Project.find((err, projects) => {
+exports.jsonlist = (req, res, next) => Project.find((err, projects) => {
     if (err) return next(err);
     return res.json(projects);
 });
