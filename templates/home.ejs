@@ -3,6 +3,7 @@
 <link href="dist/lity.css" rel="stylesheet">
 <script src="vendor/jquery.js"></script>
 <script src="dist/lity.js"></script>
+
 <div class="body">
     <div class="homepage-header-container">
         <%if (isMobile) {%>
@@ -18,7 +19,7 @@
                 <p class="quotation-btn-content">Demander un devis</p>
             </div>
             <%if (isMobile) { %>
-                <i class="fas fa-arrow-down down-arrow-mobile bounce"></i>
+                <a class="down-arrow" href="#pourquoi-nous-faire-confiance"><i class="fas fa-arrow-down down-arrow-mobile bounce"></i></a>
             <%}%>
             <div class="tv-talk">
                 <p class="tv-talk-title">Ils parlent de nous</p>
@@ -30,11 +31,11 @@
                 </div>
             </div>
             <%if (!isMobile) { %>
-                <i class="fas fa-arrow-down down-arrow bounce"></i>
+                <a class="down-arrow" href="#pourquoi-nous-faire-confiance"><i class="fas fa-arrow-down down-arrow bounce"></i></a>
             <%}%>
         </div>
     </div>
-    <div class="homepage-body-container">
+    <div class="homepage-body-container" id="pourquoi-nous-faire-confiance">
         <div class="why-trust">
             <h2 class="title section-title">
                 Pourquoi nous faire confiance ?

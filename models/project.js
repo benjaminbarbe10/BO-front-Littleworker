@@ -19,6 +19,10 @@ const ProjectSchema = new Schema(
             required: true,
             unique: true
         },
+        date: {
+            type: Date,
+            required: true,
+        },
         slug: {
             type: String,
             unique: true,

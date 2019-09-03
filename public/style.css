@@ -4,6 +4,18 @@ body, button {
     font-family: "Lato", "Arial" !important;
     margin: unset;
 }
+html {
+    scroll-behavior: smooth;
+}
+
+html{
+    overflow: hidden;
+    height: 100%;
+}
+body{
+    overflow: auto;
+    height: 100%;
+}
 a{
     text-decoration: blink!important;
     object-fit: cover;
@@ -56,6 +68,9 @@ a{
 }
 
 /*NAVBAR*/
+.right-btn{
+    display: flex;
+}
 .right-btn button{
     background: unset;
     border: unset;
@@ -93,12 +108,14 @@ a{
     align-items: flex-start;
     background-color: #ffffff !important;
     padding: 16px 0;
+    box-shadow: 0 -2px 7px 0 rgba(0,0,0,0.7);
     justify-content: space-between;
 }
 @media screen and (min-width: 800px){
     .navbar{
     padding: unset;
     align-items: center;
+    box-shadow: 0 -2px 7px 0 rgba(0,0,0,0.7);
     }
 }
 
@@ -107,7 +124,7 @@ a{
     padding-left: 10px;
     cursor: pointer;
 }
-@media screen and (min-width: 1250px){
+@media screen and (min-width: 1380px){
     .logo {
         margin-left: 75px !important;
     }
@@ -159,7 +176,10 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 3px;
+    border-bottom: 4px solid transparent;
+}
+.desktop-nav-list a:hover{
+    border-bottom: 4px solid #2D8B95;
 }
 
 .collapsed-menu {
@@ -281,6 +301,7 @@ a{
     background-color: #ffffff;
     width: 100%;
 }
+
 
 
 /*HEADER*/
@@ -753,8 +774,9 @@ a{
     color: #fff;
     align-self: center;
     justify-self: center;
-    padding: 40px;
     font-size: 50px;
+    cursor: pointer;
+    margin-top: 20px;
 }
 .homepage-header-container .header-content .bounce {
     animation: bounce 3s infinite;
@@ -937,7 +959,7 @@ a{
 .homepage-body-container .soon-container .soon-content .soon-item {
     text-transform: capitalize;
     color: #2d8b95;
-    font-size: 25px;
+    font-size: 22px;
     border: 4px #2d8b95 solid;
     border-radius: 100%;
     width: 130px;
@@ -1447,14 +1469,14 @@ a{
         line-height: 48px;
         font-weight: 900;
         text-align: center;
-        margin: 0 20%;
+        /* margin: 0 20%; */
     }
     .homepage-header-container {
-        height: 750px;
-        /* padding-top: 70px; */
+        height: 730px;
+        overflow: hidden;
     }
     .homepage-header-container .background {
-        height: unset;
+        height: auto;
     }
     .homepage-header-container .header-content {
         padding: 130px 40px 0 150px;
@@ -1501,7 +1523,7 @@ a{
     }
     .homepage-header-container .header-content .tv-talk {
         flex-direction: row;
-        padding-top: 40px;
+        margin-top: 40px;
     }
     .homepage-header-container .header-content .tv-talk .tv-talk-title {
         font-size: 18px;
@@ -1571,6 +1593,7 @@ a{
     .homepage-body-container .why-trust .why-trust-content .trust-group .trust-title {
         width: 215px;
         padding-bottom: 70px;
+        padding-top: 20px;
     }
     .homepage-body-container .intervention-zone {
     padding-top: 100px;
@@ -1615,6 +1638,7 @@ a{
     }
     .homepage-body-container .soon-container {
         display: flex;
+        /* flex-direction: column; */
     }
     .homepage-body-container .soon-container .soon-content {
         justify-content: center;
@@ -1622,12 +1646,12 @@ a{
         padding: 0 0 0 65px;
     }
     .homepage-body-container .soon-container .soon-content .soon-item {
-        width: 160px;
-        height: 160px;
+        width: 130px;
+        height: 130px;
         margin: 30px;
     }
     .homepage-body-container .renovation-container {
-        padding-top: 50px;
+        padding-top: 100px;
         flex-direction: column;
     }
     .homepage-body-container .renovation-container .renovation-item {
@@ -1778,6 +1802,7 @@ a{
         justify-content: center;
         align-items: center;
         padding-bottom: 70px;
+        flex-direction: row;
     }
     .home-satisfaction-container .satisfaction-buttons .trustpilot-btn, .home-satisfaction-container .satisfaction-buttons .google-btn{
         height: 60px;
@@ -1800,6 +1825,7 @@ a{
     .home-satisfaction-container .satisfaction-buttons .trustpilot-btn{
         background-color: #FFBC47;
         border: solid 2px #FFBC47;
+        margin-left: unset;
     }
 
     .home-home-satisfaction-container .satisfaction-buttons .google-btn{
@@ -1931,14 +1957,14 @@ a{
     }
     .body-content .body-tags .tags-btn{
         border: 3px solid black;
-        font-size: 22.44px;
+        font-size: 16px;
         line-height: 27px;
         background-color: transparent;
         letter-spacing: 0.56px;
         height: 60px;
         cursor: pointer;
-        width: 200px;
-        margin: 10px;
+        width: 170px;
+        margin: 15px;
         transition: all 0.3s ease;
         outline: none !important;
         font-weight: 600;
@@ -1964,7 +1990,8 @@ a{
         padding-bottom: 70px;
     }
     .items-container .items-content .item-title{
-        font-size: 23px;
+        letter-spacing: 0.4px;
+        font-size: 18px;
         text-transform: uppercase;
         font-weight: 300;
         margin: 30px 0 0 0;
@@ -2213,7 +2240,7 @@ a{
     display: flex;
     padding: 30px 0;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
 }
 .footer-contact-mail{
     font-weight: 600;
@@ -2283,6 +2310,9 @@ a{
     .footer-content-column-title{
         text-transform: uppercase;
         margin-top: unset;
+        padding-bottom: 20px;
+        font-size: 16px;
+        font-weight: 900;
     }
     .footer-content-column-sectitle{
         padding-top: 15px;
@@ -2292,6 +2322,7 @@ a{
         margin-top: 20px;
         padding: unset;
         list-style: unset;
+        padding-bottom: 30px;
     }
 
     .footer-content-column-links ul{
@@ -2314,7 +2345,7 @@ a{
     .footer-contact{
         align-items: center;
         display: flex;
-        padding: 30px 0;
+        padding: 30px 0 60px 0;
     }
     .footer-contact-mail{
         font-weight: 600;
@@ -2323,6 +2354,7 @@ a{
     }
     .footer-contact-phone{
         font-weight: 600;
+        PADDING-RIGHT: 3%;
         font-size: 20px;
     }
 
