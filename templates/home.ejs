@@ -19,7 +19,7 @@
                 <p class="quotation-btn-content">Demander un devis</p>
             </div>
             <%if (isMobile) { %>
-                <a class="down-arrow" href="#pourquoi-nous-faire-confiance"><i class="fas fa-arrow-down down-arrow-mobile bounce"></i></a>
+                <a class="down-arrow js-scrollTo" href="#pourquoi-nous-faire-confiance"><i class="fas fa-arrow-down down-arrow-mobile bounce"></i></a>
             <%}%>
             <div class="tv-talk">
                 <p class="tv-talk-title">Ils parlent de nous</p>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <%if (!isMobile) { %>
-                <a class="down-arrow" href="#pourquoi-nous-faire-confiance"><i class="fas fa-arrow-down down-arrow bounce"></i></a>
+                <a class="down-arrow js-scrollTo" href="#pourquoi-nous-faire-confiance"><i class="fas fa-arrow-down down-arrow bounce"></i></a>
             <%}%>
         </div>
     </div>
@@ -424,4 +424,14 @@
 
 
 </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.js-scrollTo').on('click', function() { // Au clic sur un élément
+            var page = $(this).attr('href'); // Page cible
+            var speed = 750; // Durée de l'animation (en ms)
+            $('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
+            return false;
+        });
+    });
+</script>
