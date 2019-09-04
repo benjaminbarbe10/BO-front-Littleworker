@@ -6,7 +6,6 @@ body, button {
 }
 
 html{
-    overflow: hidden;
     height: 100%;
 }
 body{
@@ -2022,7 +2021,7 @@ a{
         flex-direction: column;
         background-color: rgba(0,0,0,0.2);
         opacity: 0;
-        display: none;
+        display: n;
         transition: all 0.3s ease;
         cursor: pointer;
     }
