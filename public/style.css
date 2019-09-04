@@ -4,9 +4,6 @@ body, button {
     font-family: "Lato", "Arial" !important;
     margin: unset;
 }
-html {
-    scroll-behavior: smooth!important;
-}
 
 html{
     overflow: hidden;
@@ -1619,6 +1616,7 @@ a{
         height: 360px;
         width: 535px;
         cursor: pointer;
+        object-fit: cover;
     }
     .homepage-body-container .intervention-zone .intervention-zone-content .intervention-zone-item .item-text {
         position: absolute;
