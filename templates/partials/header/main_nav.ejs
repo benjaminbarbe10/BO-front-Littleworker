@@ -56,9 +56,13 @@
     <%}%>
 
     <div class="right-btn">
-        <button>
-            <img src="/images/icons/map-marker.png">
+        <button class="geoloc-area" onclick="openAndGeoloc()">
+            <img class="geoloc-area" src="/images/icons/map-marker.png">
         </button>
+        <div id="geoloc" class="geoloc-area geoloc-container">
+            <p class="geoloc-area geoloc-text"> Entrez le code postal de votre projet : </p>
+            <input type="number" class="geoloc-area geoloc-input"  minlength="5" maxlength="5">
+        </div>
 
         <button class="user-btn">
             <a href="https://auth.littleworker.fr/"><img src="/images/icons/user.png"></a>
@@ -178,4 +182,14 @@
             }
         }
     }
+    function openAndGeoloc() {
+        let geoloc = document.getElementById('geoloc')
+        if (geoloc.classList.contains('show-flex')) {
+            geoloc.classList.remove('show-flex')
+        } else{
+            geoloc.classList.add('show-flex')
+        }
+
+    }
+
 </script>

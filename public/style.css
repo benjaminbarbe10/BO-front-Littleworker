@@ -31,6 +31,9 @@ a{
 .show{
     display: block!important;
 }
+.show-flex{
+    display: flex!important;
+}
 .hide{
     display: none!important;
 }
@@ -298,6 +301,54 @@ a{
     width: 100%;
 }
 
+/*GEOLOC*/
+.geoloc-container{
+    display: none;
+    position: absolute;
+    height: 70px;
+    width: 242px;
+    border: 1.1px solid #2D8B95;
+    border-radius: 0 2.2px 2.2px 0;
+    background-color: #2D8B95;
+    box-shadow: 0 24px 30px -11px rgba(10,105,112,0.36);
+    top: 100px;
+    padding: 8px 12px 8px 12px;
+}
+.geoloc-container:after, .geoloc-container:before {
+    bottom: 100%;
+    left: 16%;
+    border: solid transparent;
+    content: " ";
+    height: 0px;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.geoloc-container:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #2D8B95;
+    border-width: 10px;
+    margin-left: -30px;
+}
+.geoloc-container:before {
+    margin-left: -38px;
+}
+.geoloc-container .geoloc-text{
+    color: #ffffff;
+    line-height: 25px;
+    letter-spacing: 0.45px;
+    font-size: 14px;
+    text-shadow: 0 2px 17px rgba(0,0,0,0.09);
+}
+.geoloc-container .geoloc-input{
+    height: 23px;
+    width: 134px;
+    position: absolute;
+    right: 35px;
+    bottom: 9px;
+    border: unset;
+}
 
 
 /*HEADER*/

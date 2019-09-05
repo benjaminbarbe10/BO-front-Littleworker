@@ -335,13 +335,10 @@
         document.getElementById(id).classList.add('display-tag-selected')
         selectedTag = tag;
         selectedTag = tag;
-        console.log(selectedTag);
         var main = document.getElementById('item-display');
         main.innerHTML = '';
-        console.log(projects);
         projects.forEach(el => {
             if (el.tags.includes(selectedTag)) {
-                console.log(el)
                 //create div
                 const itemsContent = document.createElement('div');
                 const itemImg = document.createElement('img');
@@ -377,7 +374,6 @@
                 //add event listener
                 itemsContent.addEventListener("mouseenter", function () {
                     itemHoverContent.classList.add('display-item-hover');
-                    console.log('hover')
                     itemTitles.classList.add('display-bold')  ;
                 });
                 itemHoverContent.addEventListener("mouseleave", function () {
