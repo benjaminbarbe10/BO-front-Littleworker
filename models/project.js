@@ -34,7 +34,8 @@ const ProjectSchema = new Schema(
         },
         title: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         description: {
             type: String,
@@ -75,7 +76,7 @@ const ProjectSchema = new Schema(
 );
 
 ProjectSchema.pre('save', function (next) {
-    this.slug = slugify(this.name, {
+    this.slug = slugify(this.title, {
         replacement: '-',
         remove: /[$*_+~()'"!\-:@]/g,
         lower: true
