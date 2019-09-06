@@ -17,7 +17,6 @@ const ProjectSchema = new Schema(
         name: {
             type: String,
             required: true,
-            unique: true
         },
         date: {
             type: Date,
