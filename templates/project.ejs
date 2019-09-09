@@ -25,7 +25,12 @@
                 <i class="fas fa-arrow-down down-arrow-mobile bounce"></i>
             </div>
         </div>
-
+    <div class="custom-header-container">
+        <div class="header-titles">
+            <button class="header-btn">Demander un devis</button>
+            <p class="header-htag">#<%=project.htag%></p>
+        </div>
+    </div>
     <%}%>
     <div class="item-container">
         <div class="item-header">
@@ -61,31 +66,29 @@
                 <img src="/<%=project.images.secondary_left.url%>" alt="<%=project.images.secondary_left.alt%>">
                 <img src="/<%=project.images.secondary_right.url%>" alt="<%=project.images.secondary_right.alt%>">
             </div>
+            <%if (!isMobile) {%>
+                <%if (project.othersimages.length > 0) {%>
+                    <div class="slideshow-container">
+                        <div class="slideshow-title">Voir toutes les photos</div>
+                            <% for(let i = 1; i < (project.othersimages.length / 3)+1; i++) { %>
 
-            <%if (project.othersimages.length > 0) {%>
-                <div class="slideshow-container">
-                    <div class="slideshow-title">Voir toutes les photos</div>
-                        <% for(let i = 1; i < (project.othersimages.length / 3)+1; i++) { %>
+                                <div class="mySlides fade">
+                                    <% for(let x = 0; x < 3; x++) {
 
-                            <div class="mySlides fade">
-                                <% for(let x = 0; x < 3; x++) {
+                                        if( project.othersimages[ (((i*3) - 3 ) + x) ]) { %>
+                                    <img src="/<%= project.othersimages[ (((i*3) - 3 ) + x) ] %>">
+                                    <% } %>
 
-                                    if( project.othersimages[ (((i*3) - 3 ) + x) ]) { %>
-                                <img src="/<%= project.othersimages[ (((i*3) - 3 ) + x) ] %>">
-                                <% } %>
+                                    <% } %>
+                                </div>
 
-                                <% } %>
-                            </div>
+                                <a class="prev" onclick="plusSlides(-1)"><i class="fas fa-angle-left"></i></a>
+                                <a class="next" onclick="plusSlides(1)"><i class="fas fa-angle-right"></i></a>
+                            <%}%>
 
-                            <a class="prev" onclick="plusSlides(-1)"><i class="fas fa-angle-left"></i></a>
-                            <a class="next" onclick="plusSlides(1)"><i class="fas fa-angle-right"></i></a>
-                        <%}%>
+                    </div>
 
-                </div>
-
-            <%}%>
-
-
+                <%}%>
                 <div class=" more-projects-container">
                     <div class="more-projects-title">Découvrir d'autres projets : </div>
                     <div class="items-container">
@@ -107,9 +110,35 @@
                     </div>
 
                 </div>
+            <%} else {%>
+                <%if (project.othersimages.length > 0) {%>
+                    <div class="slideshow-container">
+                        <div class="slideshow-title">Voir toutes les photos</div>
+                        <% for(let i = 1; i < (project.othersimages.length / 1)+1; i++) { %>
+
+                            <div class="mySlides fade">
+                                <% for(let x = 0; x < 1; x++) {
+
+                                if( project.othersimages[ (((i*1) - 1 ) + x) ]) { %>
+                                    <img src="/<%= project.othersimages[ (((i*1) - 1 ) + x) ] %>">
+                                <% } %>
+
+                                <% } %>
+                            </div>
+
+                            <a class="prev" onclick="plusSlides(-1)"><i class="fas fa-angle-left"></i></a>
+                            <a class="next" onclick="plusSlides(1)"><i class="fas fa-angle-right"></i></a>
+                        <%}%>
+
+                    </div>
+
+                <%}%>
+            <%}%>
 
 
-    </div>
+
+
+         </div>
     </div>
 </div>
 
