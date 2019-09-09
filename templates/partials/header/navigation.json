@@ -7,45 +7,63 @@
         "items": [
           {
             "title": "Accompagnement travaux",
-            "url": "/guides"
-          },
-          {
-            "title": "Inspiration",
-            "id": "sidenav-guides-inspiration",
+            "url": "/travaux-de-renovation/",
+            "id": "sidenav-worsites-help",
             "subItems": [
               {
-                "title": "Aménagement de la cuisine",
-                "url": "/guides/amenagement-cuisine/"
+                "title": "Rénovation d'appartement",
+                "url": "/renovation-appartement/"
               },
               {
-                "title": "Aménagement de la chambre",
-                "url": "/guides/amenagement-chambre/"
+                "title": "Rénovation à Paris",
+                "url": "/renovation-appartement-paris/"
               },
               {
-                "title": "Aménagement de la salle de bain",
-                "url": "/guides/amenagement-salle-de-bain/"
+                "title": "Rénovation à Bordeaux",
+                "url": "/renovation-appartement-bordeaux/"
+              },
+              {
+                "title": "Rénovation d'échoppe à Bordeaux",
+                "url": "/renovation-echoppe-bordeaux/"
+              },
+              {
+                "title": "Rénovation de maison à Bordeaux",
+                "url": "/renovation-maison-bordeaux/"
               }
             ]
           },
           {
-            "title": "Matériaux",
-            "id": "sidenav-guides-materials",
+            "title": "10 raisons de choisir l'accompagnement Little Worker",
+            "id": "sidenav-guides-inspiration",
+            "url": "/blog/top-10-des-raisons-pour-lesquelles-passer-par-little-worker/"
+          },
+          {
+            "title": "Les rénovations dans vos quartiers",
+            "id": "sidenav-location-renovation",
             "subItems": [
               {
-                "title": "Le guide du carrelage",
-                "url": "/guides/carrelage/"
+                "title": "Rénovation Bordeaux : Chartrons",
+                "url": "/renovation-appartement-chartrons/"
               },
               {
-                "title": "Le guide de la peinture",
-                "url": "/guides/guide-peinture/"
+                "title": "Rénovation Bordeaux : Gambetta",
+                "url": "/renovation-appartement-gambetta/"
               },
               {
-                "title": "Le guide du parquet",
-                "url": "/guides/parquet"
+                "title": "Rénovation Bordeaux : Quinconces",
+                "url": "/renovation-appartement-quinconces/"
               },
               {
-                "title": "L'achat des fournitures'",
-                "url": "/guides/fournitures-materiaux"
+                "title": "Rénovation Paris : 10e arrondissement",
+                "url": "/renovation-appartement-paris-10/"
+              },
+              {
+                "title": "Rénovation Paris : 18e arrondissement",
+                "url": "/renovation-appartement-paris-18/"
+              },
+              {
+                "title": "Rénovation Paris : 11e arrondissement",
+                "url": "/renovation-appartement-paris-11/"
               }
             ]
           }

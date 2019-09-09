@@ -32,7 +32,7 @@
                     <%for(let item of el.lvl2.items){%>
 
                     <div class="content-row" >
-                        <a  class="title" <%if (!item.subItems) {%> href="<%=item.url%>" <%}%>><%=item.title%></a>
+                        <a  class="title" <%if (item.url) {%> href="<%=item.url%>" <%}%>><%=item.title%></a>
                         <%if (item.subItems) {%>
                             <div  class="links">
                                 <%for(let subEl of item.subItems){%>

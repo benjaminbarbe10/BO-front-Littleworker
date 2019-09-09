@@ -199,9 +199,13 @@ a{
     display: flex;
     flex-direction: column;
     border-right: lightgrey solid 1px;
-    max-width: 250px;
+    max-width: 300px;
     min-width: 200px;
 }
+.collapsed-menu .collapsed-menu-content .content-row:last-child {
+    border-right: unset!important;
+}
+
 .collapsed-menu .collapsed-menu-content .content-row .title {
     font-size: 14px;
     font-weight: 600;
