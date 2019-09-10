@@ -543,6 +543,7 @@ a{
     width: 100%;
     height: 320px;
     object-fit: cover;
+    object-position: top;
     cursor: pointer;
     transition: all 0.3s ease;
 }

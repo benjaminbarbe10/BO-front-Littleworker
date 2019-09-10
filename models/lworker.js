@@ -16,7 +16,6 @@ const LworkerSchema = new Schema(
         },
         slug: {
             type: String,
-            unique: true,
             index: true
         },
         surname: {
