@@ -21,6 +21,16 @@ a{
     padding-top: 65px;
 }
 
+.parallax-homepage{
+    background-image: url('/images/backgrounds/parallax.png');
+    height: 500px;
+    margin-top: 120px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .section-title{
     width: 80%;
     font-size: 30px;

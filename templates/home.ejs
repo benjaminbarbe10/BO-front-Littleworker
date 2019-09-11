@@ -64,6 +64,7 @@
                 </div>
             </div>
         </div>
+        <div class="parallax-homepage"></div>
 
         <div class="intervention-zone">
             <h2 class="title section-title">Nos zones d'interventions</h2>
@@ -262,11 +263,11 @@
     let isFromBordeaux = false;
     let active = false;
 
-    function detectLocalisation(postcode) {
+    function detectLocalisation() {
         const geolocInput = document.getElementById("geoloc-input");
         const value = geolocInput.value;
         console.log(value);
-        if (bdxCode.includes(postcode)) {
+        if (bdxCode.includes(value)) {
             console.log('true')
         } else {
             console.log('false')
