@@ -61,7 +61,7 @@
         </button>
         <div id="geoloc" class="geoloc-area geoloc-container">
             <p class="geoloc-area geoloc-text"> Entrez le code postal de votre projet : </p>
-            <input type="number" class="geoloc-area geoloc-input"  minlength="5" maxlength="5">
+            <input id="geoloc-input" type="number" class="geoloc-area geoloc-input"  minlength="5" maxlength="5" onkeypress="detectLocalisation()">
         </div>
 
         <button class="user-btn">
@@ -116,6 +116,7 @@
 </nav>
 
 <script>
+
     function showNextLevel(lvlToHide, lvlToShow) {
         const toHide = document.getElementById(lvlToHide);
         const toShow = document.getElementById(lvlToShow);

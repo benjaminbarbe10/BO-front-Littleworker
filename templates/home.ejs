@@ -4,7 +4,7 @@
 <script src="vendor/jquery.js"></script>
 <script src="dist/lity.js"></script>
 
-<div class="body">
+<div class="body-home">
     <div class="homepage-header-container">
         <%if (isMobile) {%>
             <img class="background" src="/images/backgrounds/home-page-mobile.png" alt="">
@@ -230,7 +230,7 @@
                         <div class="hometour-subtitles">
                             <p>Découvrir la vidéo</p>
                             <div class="satisfaction-line"></div>
-                            <a href="https://youtu.be/TrmQd2Mv0uY"><i class="fas hometour-player fa-play"></i></a>
+                            <a href="https://youtu.be/TrmQd2Mv0uY" data-lity><i class="fas hometour-player fa-play"></i></a>
                         </div>
 
                     </div>
@@ -256,20 +256,29 @@
 <%- include partials/footer/footer.ejs %>
 
 <script>
-    // I hope this over-commenting helps. Let's do this!
-    // Let's use the 'active' variable to let us know when we're using it
+    let bdxCode = ['33000', '33100']
+    let parisCode = ['92000', '93000']
+    let isFromParis = false;
+    let isFromBordeaux = false;
     let active = false;
 
-    // First we'll have to set up our event listeners
-    // We want to watch for clicks on our scroller
+    function detectLocalisation(postcode) {
+        const geolocInput = document.getElementById("geoloc-input");
+        const value = geolocInput.value;
+        console.log(value);
+        if (bdxCode.includes(postcode)) {
+            console.log('true')
+        } else {
+            console.log('false')
+        }
+    }
+
     document.querySelector('.scroller').addEventListener('mousedown',function(){
         active = true;
-        // Add our scrolling class so the scroller has full opacity while active
+
         document.querySelector('.scroller').classList.add('scrolling');
     });
-    // We also want to watch the body for changes to the state,
-    // like moving around and releasing the click
-    // so let's set up our event listeners
+
     document.body.addEventListener('mouseup',function(){
         active = false;
         document.querySelector('.scroller').classList.remove('scrolling');
@@ -279,30 +288,22 @@
         document.querySelector('.scroller').classList.remove('scrolling');
     });
 
-    // Let's figure out where their mouse is at
     document.body.addEventListener('mousemove',function(e){
         if (!active) return;
-        // Their mouse is here...
         let x = e.pageX;
-        // but we want it relative to our wrapper
         x -= document.querySelector('.wrapper').getBoundingClientRect().left;
-        // Okay let's change our state
         scrollIt(x);
     });
 
-    // Let's use this function
     function scrollIt(x){
         let transform = Math.max(0,(Math.min(x,document.querySelector('.wrapper').offsetWidth)));
         document.querySelector('.after').style.width = transform+"px";
         document.querySelector('.scroller').style.left = transform-25+"px";
     }
 
-    // Let's set our opening state based off the width,
-    // we want to show a bit of both images so the user can see what's going on
+
     scrollIt(150);
 
-    // And finally let's repeat the process for touch events
-    // first our middle scroller...
     document.querySelector('.scroller').addEventListener('touchstart',function(){
         active = true;
         document.querySelector('.scroller').classList.add('scrolling');
@@ -339,7 +340,7 @@
         main.innerHTML = '';
         projects.forEach(el => {
             if (el.tags.includes(selectedTag)) {
-                //create div
+
                 const itemsContent = document.createElement('div');
                 const itemImg = document.createElement('img');
                 const itemHoverContent = document.createElement('div');
