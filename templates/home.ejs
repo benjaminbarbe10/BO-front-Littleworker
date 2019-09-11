@@ -416,7 +416,7 @@
         selectedTag = tag;
         var main = document.getElementById('item-display');
         main.innerHTML = '';
-        projects.forEach(el => {
+        projects.slice(-9).forEach(el => {
             if (el.tags.includes(selectedTag)) {
 
                 const itemsContent = document.createElement('div');
