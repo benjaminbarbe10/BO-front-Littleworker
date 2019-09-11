@@ -1194,7 +1194,7 @@ a{
     align-items: center;
     flex-direction: column;
     padding-bottom: 70px;
-    padding-top: 40px;
+    padding-top: 10px;
 }
 .home-satisfaction-container .satisfaction-buttons .trustpilot-btn, .home-satisfaction-container .satisfaction-buttons .google-btn{
     height: 60px;

@@ -264,15 +264,21 @@
     let isFromBordeaux = false;
     let active = false;
 
-    function detectLocalisation() {
+    function detectLocalisation(e) {
         const geolocInput = document.getElementById("geoloc-input");
         const value = geolocInput.value;
-        console.log(value);
-        if (bdxCode.includes(value)) {
-            console.log('true')
-        } else {
-            console.log('false')
+        let geoloc = document.getElementById('geoloc')
+        if (e.keyCode === 13){
+            if (bdxCode.includes(value)) {
+                document.getElementById('bordeaux').click();
+            } else if (parisCode.includes(value)) {
+                document.getElementById('paris').click();
+            } else {
+                console.log('error');
+            }
+            geoloc.classList.remove('show-flex')
         }
+
     }
 
     document.querySelector('.scroller').addEventListener('mousedown',function(){
