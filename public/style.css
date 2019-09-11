@@ -1670,7 +1670,7 @@ a{
     }
 
     .homepage-body-container .why-trust .why-trust-content {
-        justify-content: space-evenly;
+        justify-content: center;
         flex-direction: row;
         width: 100%;
     }
@@ -1678,9 +1678,10 @@ a{
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 0 30px;
     }
     .homepage-body-container .why-trust .why-trust-content .trust-group img {
-        height: 100px;
+        height: 90px;
     }
     .homepage-body-container .why-trust .why-trust-content .trust-group a {
         height: 36px;
@@ -1703,7 +1704,7 @@ a{
     .homepage-body-container .why-trust .why-trust-content .trust-group .trust-title {
         width: 215px;
         padding-bottom: 70px;
-        padding-top: 20px;
+        padding-top: 30px;
     }
     .homepage-body-container .intervention-zone {
     padding-top: 100px;

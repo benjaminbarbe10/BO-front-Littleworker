@@ -110,7 +110,7 @@
         </div>
 
         <div class="renovation-container d-flex-align">
-            <h2 class="section-title">Nos dernières rénovations</h2>
+            <h2 id="realisation-title" class="section-title">Nos dernières rénovations</h2>
             <div class="line"></div>
                 <div class="body-content">
                     <%if (isMobile) {%>
@@ -279,7 +279,7 @@
     let isFromParis = false;
     let isFromBordeaux = false;
     let active = false;
-
+    let realisationTitle = document.getElementById('realisation-title')
     function detectLocalisation(e) {
         const geolocInput = document.getElementById("geoloc-input");
         const value = geolocInput.value;
@@ -287,7 +287,9 @@
         if (e.keyCode === 13){
             if (value.match(/^33[0-9]{3}/)) {
                 document.getElementById('bordeaux').click();
+                realisationTitle.innerText = 'Nos dernières rénovations à Bordeaux';
             } else if (parisCode.includes(value)) {
+                realisationTitle.innerText = 'Nos dernières rénovations à Paris';
                 document.getElementById('paris').click();
             } else {
                 console.log('error');
