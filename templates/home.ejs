@@ -67,7 +67,7 @@
         <%if (!isMobile) { %>
             <div class="parallax-homepage"></div>
         <%}%>
-        <div class="intervention-zone">
+        <div class="intervention-zone" id="intervention-zone-primary">
             <h2 class="title section-title">Nos zones d'interventions</h2>
             <div class="line"></div>
             <div class="intervention-zone-content">
@@ -249,7 +249,47 @@
                 </div>
             </div>
         </div>
+        <div class="intervention-zone intervention-zone-custom hide" id="intervention-zone">
+            <h2 class="title section-title">Nos autres zones d'interventions</h2>
+            <div class="line"></div>
+            <div class="intervention-zone-content">
+                <div class="intervention-zone-item hide" id="intervention-paris">
+                    <img src="/images/paris.png" alt="Tendances 2019">
+                    <div class="filter"></div>
+                    <div class="item-text">
+                        <p class="item-title">Paris </p>
+                        <p class="item-desc">et sa petite couronne</p>
+                    </div>
+                </div>
+                <div class="intervention-zone-item hide" id="intervention-bordeaux">
+                    <div class="filter"></div>
+                    <img src="/images/bordeaux.jpg" alt="Tendances 2019">
+                    <div class="item-text">
+                        <p class="item-title">Bordeaux</p>
+                        <p class="item-desc">et sa communauté urbaine</p>
+                    </div>
+                </div>
+            </div>
+            <div class="soon-container">
+                <h2 class="section-title">et bientôt : </h2>
+                <div class="soon-content">
+                <span class="soon-item">
+                    Nantes
+                </span>
+                    <span class="soon-item">
+                    Toulouse
+                </span>
+                    <span class="soon-item">
+                    Lille
+                </span>
+                    <span class="soon-item">
+                    Lyon
+                </span>
+                </div>
+            </div>
 
+
+        </div>
 
 
     </div>
@@ -283,14 +323,26 @@
     function detectLocalisation(e) {
         const geolocInput = document.getElementById("geoloc-input");
         const value = geolocInput.value;
-        let geoloc = document.getElementById('geoloc')
+        let geoloc = document.getElementById('geoloc');
+        let interventionZonePrimary = document.getElementById('intervention-zone-primary')
+        let interventionZone = document.getElementById('intervention-zone');
+        let interventionBordeaux = document.getElementById('intervention-bordeaux');
+        let interventionParis = document.getElementById('intervention-paris');
         if (e.keyCode === 13){
             if (value.match(/^33[0-9]{3}/)) {
                 document.getElementById('bordeaux').click();
                 realisationTitle.innerText = 'Nos dernières rénovations à Bordeaux';
+                interventionZone.classList.remove('hide');
+                interventionZonePrimary.classList.add('hide');
+                interventionBordeaux.classList.remove('hide')
+
             } else if (parisCode.includes(value)) {
                 realisationTitle.innerText = 'Nos dernières rénovations à Paris';
                 document.getElementById('paris').click();
+                interventionZone.classList.remove('hide');
+                interventionZonePrimary.classList.add('hide')
+                interventionParis.classList.remove('hide')
+
             } else {
                 console.log('error');
             }
