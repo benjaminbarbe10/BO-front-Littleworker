@@ -987,6 +987,54 @@ a{
 .intervention-zone-custom{
     padding: 50px 0 100px 0;
 }
+.geoloc-modal{
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+.modal-content p{
+    padding: 20px 50px;
+    line-height: 24px;
+    text-align: center;
+}
+.close {
+    color: #2d8b95;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #2d8b95;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-content .networks {
+    display: flex;
+    justify-content: center;
+}
+.modal-content a {
+    font-size: 30px;
+    padding: 10px;
+    color: #2d8b95;
+    margin: 0 25px;
+}
 .homepage-body-container .intervention-zone .intervention-zone-content .intervention-zone-item {
     position: relative;
     text-align: center;
@@ -2098,6 +2146,8 @@ a{
         width: 100%;
         justify-content: space-evenly;
         flex-wrap: wrap;
+        max-height: 1480px;
+        overflow: hidden;
     }
     .items-container .items-content{
         width: 350px;

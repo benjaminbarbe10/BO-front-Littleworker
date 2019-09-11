@@ -9,4 +9,4 @@ exports.home = (req, res, next) => Project.find({}, (err, projects) => {
     projects,
     selectedTag: req.query.selectedTag
   });
-});
+}).sort('+date');

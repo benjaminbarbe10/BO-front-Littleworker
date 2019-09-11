@@ -319,7 +319,12 @@
     let isFromParis = false;
     let isFromBordeaux = false;
     let active = false;
+    let geolocModal = document.getElementById('geolocModal');
+    let closeBtn = document.getElementsByClassName("close")[0];
     let realisationTitle = document.getElementById('realisation-title')
+    closeBtn.onclick = function() {
+        geolocModal.classList.remove('show')
+    }
     function detectLocalisation(e) {
         const geolocInput = document.getElementById("geoloc-input");
         const value = geolocInput.value;
@@ -344,7 +349,7 @@
                 interventionParis.classList.remove('hide')
 
             } else {
-                console.log('error');
+                geolocModal.classList.add('show');
             }
             geoloc.classList.remove('show-flex')
         }
@@ -416,7 +421,7 @@
         selectedTag = tag;
         var main = document.getElementById('item-display');
         main.innerHTML = '';
-        projects.slice(-9).forEach(el => {
+        projects.forEach(el => {
             if (el.tags.includes(selectedTag)) {
 
                 const itemsContent = document.createElement('div');
