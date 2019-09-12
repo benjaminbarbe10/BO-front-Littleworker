@@ -2,22 +2,17 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const expressJWT = require('express-jwt');
 const path = require('path');
 const navigation = require('./templates/partials/header/navigation.json');
 
-
 //AUTH
-const jwt = require('jsonwebtoken');
-
-const expressJwt = require('express-jwt');
+const request = require('request');
 const multer = require('multer');
 const MobileDetect = require('mobile-detect');
-
 const staticPathPublic = path.join(process.cwd(), 'public');
 const staticPathUploads = path.join(process.cwd(), 'uploads');
 
-
+const API_URL = 'https://api.littleworker.fr/1.0/';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -97,11 +92,42 @@ app.use(function (req, res, next) {
 app.post('/auth', function(req, res) {
     const body = req.body;
 
-    const user = USERS.find(user => user.username === body.username);
-    if (!user || body.password !== '9{bj3V)F,r~>uj{m') return res.sendStatus(401);
+    return request.post({
+        url: `${API_URL}/account/login`,
+        form: {
+            login: body.username,
+            password: body.password
+        },
+        json: true
+    }, function (err, response, body) {
+        if (err) {
+            console.error(err);
+            return res.status(500).send(err);
+        }
 
-    const token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
-    res.send({token});
+        if (response.statusCode === 200 && body.token) {
+            return request.get({
+                url: `${API_URL}/account/`,
+                headers: {
+                    'Authorization': `Bearer ${body.token}`
+                },
+                json: true
+            }, function (err2, res2, b2) {
+                if (err2) {
+                    console.error(err2);
+                    return res.status(500).send(err2);
+                }
+
+                if (res2.statusCode === 200 && b2.roles.indexOf('admin') !== -1) {
+                    return res.send({ token: body.token });
+                }
+
+                return res.status(401).send({ error: 'Unauthorized' });
+            });
+        }
+
+        return res.status(401).send({ error: 'Unauthorized' });
+    });
 });
 
 
