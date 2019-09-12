@@ -316,6 +316,15 @@
         '93230', '94240', '92500', '75010', '92600', '94230', '94270',
         '78240', '92320', '92140', '94700', '94800', '75009', '78150',
         '75006', '92200', '75014', '92100']
+    let bordeauxCode = [
+        '33440', '33810', '33370', '33530', '33130', '33290', '33800',
+        '33100', '33000', '33200', '33300', '33270', '33520', '33140',
+        '33880', '33610', '33560', '33360', '33150', '33610', '33240',
+        '33320', '33210', '33370', '33270', '33170', '33360', '33110',
+        '33185', '33290', '33320', '33850', '33310', '33460', '33127',
+        '33700', '33290', '33600', '33370', '33160', '33127', '33440',
+        '33160', '33440', '33560', '33400', '33370', '33140', '33370'
+    ];
     let isFromParis = false;
     let isFromBordeaux = false;
     let active = false;
@@ -334,7 +343,7 @@
         let interventionBordeaux = document.getElementById('intervention-bordeaux');
         let interventionParis = document.getElementById('intervention-paris');
         if (e.keyCode === 13){
-            if (value.match(/^33[0-9]{3}/)) {
+            if (bordeauxCode.includes(value)) {
                 document.getElementById('bordeaux').click();
                 realisationTitle.innerText = 'Nos dernières rénovations à Bordeaux';
                 interventionZone.classList.remove('hide');
