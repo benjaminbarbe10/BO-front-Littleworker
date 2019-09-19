@@ -59,11 +59,18 @@
         <button class="geoloc-area" onclick="openAndGeoloc()">
             <img class="geoloc-area" src="/images/icons/map-marker.png">
         </button>
+        <%if (!isMobile) { %>
         <div id="geoloc" class="geoloc-area geoloc-container">
             <p class="geoloc-area geoloc-text"> Entrez le code postal de votre projet : </p>
             <input id="geoloc-input" type="number" class="geoloc-area geoloc-input"  minlength="5" maxlength="5" onkeypress="detectLocalisation(event)">
         </div>
-        <div id="geolocModal" class="geoloc-modal">
+        <%} else { %>
+            <div id="geoloc" class="geoloc-area geoloc-container geoloc-container-mobile">
+                <p class="geoloc-area geoloc-text"> Entrez le code postal de votre projet : </p>
+                <input id="geoloc-input" type="number" class="geoloc-area geoloc-input"  minlength="5" maxlength="5" onkeypress="detectLocalisation(event)">
+            </div>
+        <% }%>
+        <div id="geolocModal" class="geoloc-modal<%if (isMobile) { %> geoloc-modal-mobile <% }%> ">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <p> Malheureusement nous n’intervenons pas encore dans cette zone, néanmoins nous vous invitons à nous suivre sur les réseaux sociaux afin d’être les premiers informés !</p>
@@ -80,7 +87,7 @@
         </button>
         <%if (isMobile) { %>
         <button onclick="openAndCloseNav()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
-            <img id="mobile-menu" src="/images/icons/menu.png" >
+            <img id="mobile-menu" src="/images/icons/menu.svg" >
             <img id="mobile-cross" class="hide" src="/images/icons/croix.svg" >
 
         </button>

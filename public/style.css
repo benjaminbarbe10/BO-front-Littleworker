@@ -334,6 +334,13 @@ a{
     top: 100px;
     padding: 8px 12px 8px 12px;
 }
+.geoloc-container-mobile{
+    top: 80px;
+    right: 10px;
+}
+.geoloc-container-mobile:after, .geoloc-container-mobile:before {
+    left: 65%!important;
+}
 .geoloc-container:after, .geoloc-container:before {
     bottom: 100%;
     left: 16%;
@@ -1000,6 +1007,14 @@ a{
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
+.geoloc-modal-mobile .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 85%;
+}
+
 .modal-content {
     background-color: #fefefe;
     margin: auto;
