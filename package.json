@@ -21,7 +21,7 @@
     "jsdom": "^15.1.1",
     "jsonwebtoken": "^8.5.1",
     "mobile-detect": "^1.4.3",
-    "mongodb": "^3.1.0-beta4",
+    "mongodb": "^3.1.13",
     "mongoose": "^5.1.2",
     "multer": "^1.4.2",
     "nodemon": "^1.19.1",
